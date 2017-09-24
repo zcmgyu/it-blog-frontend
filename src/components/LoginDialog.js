@@ -5,7 +5,7 @@ import Button from 'material-ui/Button';
 // import Avatar from 'material-ui/Avatar';
 // import List, { ListItem, ListItemAvatar, ListItemText } from 'material-ui/List';
 import Dialog, { DialogTitle, DialogContent, DialogActions } from 'material-ui/Dialog';
-import { FormControl, FormHelperText } from 'material-ui/Form';
+import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 
 // import PersonIcon from 'material-ui-icons/Person';
