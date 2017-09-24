@@ -1,0 +1,1 @@
+export const TOGLE_LOGIN_DIALOG = 'dialog/TOGGLE_LOGIN'
