@@ -1,12 +1,12 @@
 import axios from 'axios'
 
 export const doLogin = (username, password) => {
-    console.log(username)
-    console.log(password)
+    // console.log(username)
+    // console.log(password)
 
     return axios.request({
-        // baseURL: "http://localhost:8080/oauth/token",
-        baseURL: "https://it-blog-backend.herokuapp.com/oauth/token",
+        baseURL: "http://localhost:8080/oauth/token",
+        // baseURL: "https://it-blog-backend.herokuapp.com/oauth/token",
         method: "post",
         auth: {
             'username': 'clientapp',
@@ -17,8 +17,8 @@ export const doLogin = (username, password) => {
         },
         params: {
             'grant_type': 'password',
-            'username': 'admin',
-            'password': 'admin'
+            'username': username,
+            'password': password
         }
     })
     .then(response => response)

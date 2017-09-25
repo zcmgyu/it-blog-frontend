@@ -30,16 +30,16 @@ const authReducer = (state = initialState, action) => {
             }
         }
         case ActionsTypes.LOGIN_USER_FAILURE: {
-            console.log(action.error)
-            // let {error, error_description} = data
+            console.log(action.error.response)
+            let {status} = action.error.response
+            let {error_description} = action.error.response.data
             return {
                 ...state,
                 isAuthenticating:false,
                 isAuthenticated: false,
                 accessToken: null,
                 refreshToken: null,
-                // statusText: `Authentication error: ${status} ${statusText}' (${data.error} ${data.error_description})`
-                // statusText: `Authentication error: ${status} ${statusText}`
+                statusText: `Authentication error: ${status} ${error_description}`
             }
         }
         case ActionsTypes.LOGOUT_USER_REQUEST: {

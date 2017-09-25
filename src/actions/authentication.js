@@ -1,6 +1,6 @@
 import * as ActionsTypes from '../actiontypes/authentication'
 
-export const loginUserRequest = (username, password) => {
+export const loginUserRequest = ({username, password}) => {
     return {
         type: ActionsTypes.LOGIN_USER_REQUEST,
         payload: {username, password}

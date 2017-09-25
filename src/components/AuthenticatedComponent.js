@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom'
 import { push } from 'react-router-redux'
+
+// ACTIONS
+import { toggleLoginDialog } from '../actions/dialog'
 
 export function requireAuth(Component) {
 
@@ -15,24 +17,20 @@ export function requireAuth(Component) {
             this.checkAuth(nextProps);
         }
 
-        checkAuth({isAuthenticated, location, dispatch}) {
+        checkAuth({isAuthenticated, dispatch}) {
             if (!isAuthenticated) {
-                let redirectAfterLogin = location.pathname;
-                dispatch(push({pathname: "/login", search:`?redirect=${redirectAfterLogin}`}))
-                // this.props.dispatch(push({pathname: "/login"}))
+                dispatch(toggleLoginDialog())
             }
         }
 
         render() {
-            return (
-                <div>
-                    {this.props.isAuthenticated === true
-                        ? <Component {...this.props} />
-                        : <Redirect to={{ path: "/login" }} />
-                    }
-                </div>
-            )
-
+            if(this.props.isAuthenticated === true) {
+                return (
+                    <Component {...this.props} />
+                )
+            } else {
+                return null
+            }
         }
     }
 

@@ -1,62 +1,108 @@
+// REACT-REDUX
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
-// import { withStyles } from 'material-ui/styles';
+import compose from 'recompose/compose';
+import { connect } from 'react-redux'
+
+// MATERIAL UI
+import { withStyles } from 'material-ui/styles';
+
 import Button from 'material-ui/Button';
-// import Avatar from 'material-ui/Avatar';
-// import List, { ListItem, ListItemAvatar, ListItemText } from 'material-ui/List';
-import Dialog, { DialogTitle, DialogContent, DialogActions } from 'material-ui/Dialog';
-import { FormControl } from 'material-ui/Form';
-import Input, { InputLabel } from 'material-ui/Input';
+import Dialog, { DialogTitle, DialogContent, DialogContentText, DialogActions } from 'material-ui/Dialog';
+import TextField from 'material-ui/TextField';
 
-// import PersonIcon from 'material-ui-icons/Person';
-// import AddIcon from 'material-ui-icons/Add';
-// import Typography from 'material-ui/Typography';
-// import blue from 'material-ui/colors/blue';
+// REDUX-FORM
+import validate from '../validation/login'
+import { Field, reduxForm } from 'redux-form'
+
+// ACTIONS
+import { toggleLoginDialog } from '../actions/dialog'
+import { loginUserRequest } from '../actions/authentication'
 
 
-export default class LoginDialog extends Component {
-    state = {
-        name: 'Composed TextField',
-    }
+const styles = theme => ({
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 200,
+    },
+});
 
-    handleRequestClose = () => {
-        this.props.onRequestClose();
+const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => {
+    return (
+        <TextField
+            label={label}
+            helperText={touched && error}
+            error={touched && error != null}
+            fullWidth
+            {...input}
+            {...custom}
+        />
+    )
+
+};
+
+const LoginDialog = (props) => {
+
+    const { classes, pristine, reset, submitting, handleSubmit, dispatch, ...other } = props
+    const handleRequestClose = (props) => {
+        dispatch(toggleLoginDialog())
     };
-
-    handleLogin = () => {
-        this.props.onRequestLogin();
+    
+    const handleLogin = (data) => {
+        dispatch(loginUserRequest(data))
     };
-
-    handleRegister = () => {
-        
+    
+    const handleRegister = () => {
+    
     }
-
-    render() {
-        const { ...other } = this.props
-        return (
-            <Dialog onRequestClose={this.handleRequestClose} {...other}>
+    return (
+        <Dialog onRequestClose={handleRequestClose} {...other} >
+            <form onSubmit={handleSubmit(handleLogin)}>
                 <DialogTitle>Login</DialogTitle>
                 <DialogContent>
-                    <FormControl error={false} fullWidth={true}>
-                        <InputLabel htmlFor="username">Username</InputLabel>
-                        <Input id="username" value={this.state.username} onChange={this.handleChange} />
-                        {/* <FormHelperText>{error}</FormHelperText> */}
-                    </FormControl>
-                    <FormControl error={false} fullWidth={true}>
-                        <InputLabel htmlFor="password">Password</InputLabel>
-                        <Input id="password" type="password" value={this.state.password} onChange={this.handleChange} />
-                        {/*<FormHelperText>Password</FormHelperText>*/}
-                    </FormControl>
+                    <Field
+                        name="username"
+                        component={renderTextField}
+                        label="Username"
+                        required={true}
+                    />
+                    <Field
+                        name="password"
+                        component={renderTextField}
+                        label="Password"
+                        type="password"
+                        required={true}
+                    />
+                    <DialogContentText>
+                        {props.statusText}
+                    </DialogContentText>
                 </DialogContent>
+
                 <DialogActions>
-                    <Button onClick={this.handleRegister} color="primary">
-                        Register
-                </Button>
-                    <Button onClick={this.handleLogin} color="primary">
-                        Login
-                </Button>
+                    <Button onClick={handleRegister} color="primary" disabled={pristine || submitting} >Register</Button>
+                    <Button type="submit" label="login" className="button-submit" color="primary" disabled={pristine || submitting} >Login</Button>
                 </DialogActions>
-            </Dialog>
-        );
-    }
+            </form>
+
+        </Dialog >
+
+    );
 }
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.authReducer.isAuthenticated,
+    statusText: state.authReducer.statusText
+})
+
+export default compose(
+    withStyles(styles),
+    reduxForm({
+        form: 'simple',
+        validate
+    }),
+    connect(mapStateToProps)
+)(LoginDialog);
