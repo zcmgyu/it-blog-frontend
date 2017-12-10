@@ -1,5 +1,5 @@
 // REACT-REDUX
-import React, { Component } from 'react';
+import React from 'react';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux'
 
@@ -42,13 +42,11 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
             {...custom}
         />
     )
-
 };
 
 const LoginDialog = (props) => {
-
-    const { classes, pristine, reset, submitting, handleSubmit, dispatch, ...other } = props
-    const handleRequestClose = (props) => {
+    const { pristine, submitting, handleSubmit, dispatch, open } = props
+    const handleRequestClose = () => {
         dispatch(toggleLoginDialog())
     };
     
@@ -60,7 +58,7 @@ const LoginDialog = (props) => {
     
     }
     return (
-        <Dialog onRequestClose={handleRequestClose} {...other} >
+        <Dialog onRequestClose={handleRequestClose} open={open} >
             <form onSubmit={handleSubmit(handleLogin)}>
                 <DialogTitle>Login</DialogTitle>
                 <DialogContent>

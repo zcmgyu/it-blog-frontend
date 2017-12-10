@@ -3,7 +3,7 @@ import * as AuthActionsTypes from '../actiontypes/authentication'
 import * as AuthActions from '../actions/authentication'
 import * as DialogActions from '../actions/dialog'
 import * as API from '../apis'
-import { goBack } from 'react-router-redux'
+import { push } from 'react-router-redux'
 
 // Worker
 export function* loginUserSaga({ payload }) {
@@ -19,10 +19,16 @@ export function* loginUserSaga({ payload }) {
     }
 }
 
+export function* logoutUserSaga() {
+    yield put(push("/"))
+}
+
 // Root Sagas Watcher
 export default function* rootSaga() {
     yield all([
         // Watching loginUserSaga
-        takeEvery(AuthActionsTypes.LOGIN_USER_REQUEST, loginUserSaga)
+        takeEvery(AuthActionsTypes.LOGIN_USER_REQUEST, loginUserSaga),
+        // Watching logoutUserSaga
+        takeEvery(AuthActionsTypes.LOGOUT_USER_REQUEST, logoutUserSaga)
     ])
 }

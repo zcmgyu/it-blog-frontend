@@ -5,8 +5,8 @@ export const doLogin = (username, password) => {
     // console.log(password)
 
     return axios.request({
-        baseURL: "http://localhost:8080/oauth/token",
-        // baseURL: "https://it-blog-backend.herokuapp.com/oauth/token",
+        // baseURL: "http://localhost:8080/oauth/token",
+        baseURL: "https://it-blog-backend.herokuapp.com/oauth/token",
         method: "post",
         auth: {
             'username': 'clientapp',
