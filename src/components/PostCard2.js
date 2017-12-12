@@ -10,7 +10,6 @@ import Avatar from 'material-ui/Avatar'
 import MoreVertIcon from 'material-ui-icons/MoreVert'
 import FavoriteIcon from 'material-ui-icons/Favorite'
 import ShareIcon from 'material-ui-icons/Share'
-import { FacebookButton, FacebookCount } from "react-social"
 
 const styles = theme => ({
     card: {
@@ -111,12 +110,6 @@ class PostCard2 extends Component {
                     </div>
 
                 </Card>
-                {isSharing &
-                    <FacebookButton url={"https://github.com"} appId={"650321628691627"}>
-                        <FacebookCount url={"https://github.com"} />
-                        {"Share https://github.com"}
-                    </FacebookButton>
-                }
             </div>
         )
     }
