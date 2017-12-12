@@ -8,6 +8,7 @@ import HomePage from '../containers/HomePage'
 import MyPage from '../containers/MyPage'
 import PostPage from '../containers/PostPage'
 import TagPage from '../containers/TagPage'
+import SearchPage from '../containers/SearchPage'
 import NotFound from '../components/NotFound'
 
 
@@ -19,6 +20,7 @@ const RootRouter = () => {
             <Route path='/mypage' component={MyPage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/tag" component={TagPage} />
+            <Route path="/search" component={SearchPage} />
             <Route path="/post" component={PostPage} />
             <Route component={NotFound} />
         </Switch>
