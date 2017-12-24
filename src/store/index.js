@@ -7,7 +7,7 @@ import history from './history'
 // FOR react-router-redux
 import { routerMiddleware } from 'react-router-redux'
 import _ from 'lodash'
-import { saveState, loadState } from '../connectivity/localStorage'
+import { saveState, loadState } from '../connectivity/sessionStorage'
 
 
 export default function createStoreWithMiddleware() {

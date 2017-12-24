@@ -9,8 +9,8 @@ export const doLogin = (username, password) => {
         // baseURL: "https://it-blog-backend.herokuapp.com/oauth/token",
         method: "post",
         auth: {
-            'username': 'clientapp',
-            'password': '123456'
+            'username': 'client_app',
+            'password': 'client_secret'
         },
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',

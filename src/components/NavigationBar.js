@@ -22,6 +22,8 @@ import { MenuItem } from 'material-ui/Menu'
 import { FormControl, FormHelperText } from 'material-ui/Form'
 import Input, { InputLabel } from 'material-ui/Input'
 import Publish from './Publish'
+import PopoverMenu from './PopoverMenu'
+import Avatar from 'material-ui/Avatar'
 
 
 const styles = theme => ({
@@ -61,27 +63,39 @@ const styles = theme => ({
 
 
 class NavigationBar extends Component {
-    constructor (props) {
+    constructor(props) {
         super(props)
         this.state = {
-            category: ''
+            isPublish: window.location.pathname === '/post'
         }
     }
-    
+
 
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value });
     };
 
+    showMenu = () => {
+
+    }
+
+    
+    componentDidMount() {
+        console.log("PRINT OUT PATH NAME")
+        console.log(this.context.router)
+    }
+    
+
     render() {
-        const { classes, title, toggleLoginDialog, loginDialogState, isAuthenticated } = this.props
+        const { classes, title, toggleLoginDialog, loginDialogState, isAuthenticated, isPost } = this.props
+        const currentPath = window.location.pathname
         return (
             <div className={classes.root} >
 
                 <AppBar position="static" className={classes.fixedPosition} color="white">
                     <Toolbar>
                         <Typography type="title" color="inherit" className={classes.flex}>{title}</Typography>
-                        <Publish />
+                        {currentPath.includes('/post') &&  <Publish />}
                         <TextField
                             id="search"
                             label="Search"
@@ -91,13 +105,9 @@ class NavigationBar extends Component {
                         <Notification />
                         {
                             isAuthenticated ?
-                                <IconButton
-                                    aria-owns={true ? 'menu-appbar' : null}
-                                    aria-haspopup="true"
-                                    color="inherit"
-                                >
-                                    <AccountCircle />
-                                </IconButton>
+                                <PopoverMenu>
+                                    <Avatar alt="Remy Sharp" src="https://cdn-images-1.medium.com/fit/c/100/100/0*bh4kZqN3bPPuk15J.jpg" className={classes.avatar} />
+                                </PopoverMenu>
                                 :
                                 <Button color="inherit" onClick={(e) => toggleLoginDialog()}>Login</Button>
                         }
@@ -124,7 +134,8 @@ NavigationBar.propTypes = {
 
 const mapStateToProps = state => ({
     loginDialogState: state.dialog.loginDialogState,
-    isAuthenticated: state.authReducer.isAuthenticated
+    isAuthenticated: state.authReducer.isAuthenticated,
+    isPost: state.post.isPost
 })
 
 const mapDispatchToProps = dispatch => ({

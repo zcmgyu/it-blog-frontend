@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <ConnectedRouter history={history}>
         <div>
-          <NavigationBar title="LTP" />
+          <NavigationBar title="LTP - IT Blog" />
           <RootRouter />
         </div>
       </ConnectedRouter >
