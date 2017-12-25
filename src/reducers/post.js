@@ -1,15 +1,25 @@
 import * as ActionsTypes from '../actiontypes/post'
 
 const initialState = {
-    isPost: window.location.pathname === '/post'
+    post_uri: ''
 }
 
-const post = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ActionsTypes.REQUEST_DISPLAY: {
+        case ActionsTypes.POST_SUCCESS: {
             return {
-                isPost: true,
                 ...state
+            }
+        }
+        case ActionsTypes.POST_FAIL: {
+            let { access_token, refresh_token } = action.response.data
+            return {
+                ...state,
+                isAuthenticating: false,
+                isAuthenticated: true,
+                accessToken: access_token,
+                refreshToken: refresh_token,
+                statusText: "You've been successfully logged in."
             }
         }
         default: {
@@ -20,4 +30,4 @@ const post = (state = initialState, action) => {
     }
 }
 
-export default post
+export default authReducer

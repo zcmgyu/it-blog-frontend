@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 import TextField from 'material-ui/TextField'
@@ -8,6 +9,8 @@ import { MenuItem } from 'material-ui/Menu'
 import { FormControl } from 'material-ui/Form'
 import Input, { InputLabel } from 'material-ui/Input'
 import Button from 'material-ui/Button'
+import compose from 'recompose/compose';
+import { postRequest } from '../actions/post'
 
 const styles = theme => ({
     container: {
@@ -48,7 +51,21 @@ class PublishModal extends Component {
 
     handleChange = key => event => {
         this.setState({ [key]: event.target.value });
+        console.log(`key: ${key}: ${event.target.value}`)
     };
+
+    createPost = isPublic => () => {
+        const { category } = this.state
+        console.log('Category -> ' + category)
+        const { accessToken } = this.props
+
+        const tags = ['test1', 'test2']
+        const title = "title"
+        const content = "content"
+        const publicPost = isPublic
+        this.props.dispatch(postRequest({ category, tags, title, content, publicPost, accessToken }))
+    }
+
     render() {
         const { classes } = this.props
 
@@ -78,11 +95,22 @@ class PublishModal extends Component {
                     fullWidth
                 />
                 <ChipsArray />
-                <Button className={classes.button} raised color="primary">Publish</Button>
-                <Button className={classes.button} raised color="default">Save as draft</Button>
+                <Button className={classes.button} raised color="primary" onClick={this.createPost(true)}>Publish</Button>
+                <Button className={classes.button} raised color="default" onClick={this.createPost(false)}>Save as draft</Button>
             </div>
         )
     }
 }
 
-export default withStyles(styles)(PublishModal)
+const mapStateToProps = (state) => {
+    return {
+        accessToken: state.authReducer.accessToken
+    }
+}
+
+export default compose(
+    withStyles(styles, {
+        name: 'PublishModal',
+    }),
+    connect(mapStateToProps),
+)(PublishModal)

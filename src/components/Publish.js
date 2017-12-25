@@ -3,7 +3,6 @@ import { findDOMNode } from 'react-dom'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Popover from 'material-ui/Popover'
-import IconButton from 'material-ui/IconButton'
 import Button from 'material-ui/Button'
 import FileUpload from 'material-ui-icons/FileUpload'
 import PublishModal from './PublishModal'
@@ -27,7 +26,7 @@ class Publish extends Component {
 
     }
 
-    handleClickButton() {
+    handleClickButton = () => {
         console.log('this.button')
         console.log(this.button)
         this.setState({
@@ -56,7 +55,7 @@ class Publish extends Component {
                     ref={node => {
                         this.button = node;
                     }}
-                    onClick={this.handleClickButton.bind(this)}
+                    onClick={this.handleClickButton}
                 >
                     Publish
                 <FileUpload className={classes.rightIcon} />

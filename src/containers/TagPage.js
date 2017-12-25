@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
-import PostEditor from '../components/PostEditor'
 import PostCard from '../components/PostCard'
 import Chip from 'material-ui/Chip';
 import Tabs, { Tab } from 'material-ui/Tabs';

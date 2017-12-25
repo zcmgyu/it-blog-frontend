@@ -7,7 +7,6 @@ import Popover from 'material-ui/Popover'
 import Notifications from 'material-ui-icons/Notifications'
 import IconButton from 'material-ui/IconButton'
 import Badge from 'material-ui/Badge'
-import Button from 'material-ui/Button'
 
 
 const styles = theme => ({

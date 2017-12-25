@@ -21,4 +21,4 @@ export const saveState = (state) => {
         // die
         console.log(err)
     }
-};
+}

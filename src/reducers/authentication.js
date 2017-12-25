@@ -30,7 +30,6 @@ const authReducer = (state = initialState, action) => {
             }
         }
         case ActionsTypes.LOGIN_USER_FAILURE: {
-            console.log(action.error.response)
             let {status} = action.error.response
             let {error_description} = action.error.response.data
             return {
@@ -49,7 +48,6 @@ const authReducer = (state = initialState, action) => {
                 isAuthenticated: false,
                 accessToken: null,
                 refreshToken: null,
-                statusText: "You've been successfully logged out."
             }
         }
         default: {

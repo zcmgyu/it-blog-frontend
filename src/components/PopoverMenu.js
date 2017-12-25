@@ -1,11 +1,9 @@
 import React from 'react';
-import Button from 'material-ui/Button';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import IconButton from 'material-ui/IconButton'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
-import { logoutUserRequest } from "../actions/authentication";
-import { resquestPostDisplay } from "../actions/post";
+
 
 
 const menu = [
@@ -15,7 +13,7 @@ const menu = [
     },
     {
         name: 'Create post',
-        uri: '/post'
+        uri: '/posts'
     },
     {
         name: 'Logout',
@@ -37,14 +35,6 @@ class PopoverMenu extends React.Component {
         this.setState({ open: false });
     };
     handleMenuClick = (uri) => () => {
-        if (uri === '/logout') {
-            localStorage.removeItem('state');
-            this.props.dispatch(logoutUserRequest())
-        } else if (uri == '/post') {
-            this.props.dispatch(resquestPostDisplay())
-        } else {
-
-        }
         this.props.dispatch(push(uri))
         this.handleClose();
     }

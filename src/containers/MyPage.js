@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { withStyles } from 'material-ui/styles';
 
-
 // MATERIAL UI
-import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography';
 import Avatar from 'material-ui/Avatar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 
 
 // ACTIONS
-import { logoutUserRequest } from '../actions/authentication'
 
 const styles = {
     container: {
@@ -58,8 +54,8 @@ class MyPage extends Component {
             <div className={classes.container}>
                 <div className={classes.profile}>
                     <Avatar
-                        alt="Long Nguyen"
-                        src="https://cdn-images-1.medium.com/fit/c/100/100/0*bh4kZqN3bPPuk15J.jpg"
+                        alt='Long Nguyen'
+                        src='https://cdn-images-1.medium.com/fit/c/100/100/0*bh4kZqN3bPPuk15J.jpg'
                         className={classes.avatar}
                     />
                     <div className={classes.hero}>
@@ -71,15 +67,15 @@ class MyPage extends Component {
                     <Tabs
                         value={this.state.value}
                         onChange={this.handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
+                        indicatorColor='primary'
+                        textColor='primary'
                         fullWidth
                     >
-                        <Tab label="Item One" />
-                        <Tab label="Item Two" />
-                        <Tab label="Item Three" />
-                        <Tab label="Item Four" />
-                        <Tab label="Item Three" />
+                        <Tab label='Item One' />
+                        <Tab label='Item Two' />
+                        <Tab label='Item Three' />
+                        <Tab label='Item Four' />
+                        <Tab label='Item Three' />
                     </Tabs>
                 </div>
             </div>
@@ -90,3 +86,4 @@ class MyPage extends Component {
 export default withStyles(styles)(MyPage)
 
 // <Button onClick={(e) => this.props.dispatch(logoutUserRequest())}>Logout</Button>
+

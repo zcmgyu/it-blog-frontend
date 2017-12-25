@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { withStyles } from 'material-ui/styles'
 import {
     ShareButtons,
-    ShareCounts,
+    // ShareCounts,
     generateShareIcon,
-    shareLinks,
+    // shareLinks,
 } from 'react-share'
 import Typography from 'material-ui/Typography'
 import ShareIcon from 'material-ui-icons/Share'
@@ -80,7 +80,7 @@ class SharingButton extends Component {
         const shareUrl = 'http://github.com'
         const title = 'GitHub'
         const { classes } = this.props
-        const { drawer, value, copied } = this.state
+        const { drawer, copied } = this.state
         return (
             <div>
                 <IconButton aria-label="Share" onClick={this.toggleDrawer(true)}>

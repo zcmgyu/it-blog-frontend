@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { withStyles } from 'material-ui/styles'
-import PostCard from '../components/PostCard'
 import PostCard2 from '../components/PostCard2'
 import Typography from 'material-ui/Typography'
 import Tabs, { Tab } from 'material-ui/Tabs'

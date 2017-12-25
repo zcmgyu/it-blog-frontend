@@ -9,21 +9,14 @@ import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
-import IconButton from 'material-ui/IconButton'
-// import MenuIcon from 'material-ui-icons/Menu'
 import LoginDialog from '../components/LoginDialog'
-// import Avatar from 'material-ui/Avatar'
-// import Menu, { MenuItem } from 'material-ui/Menu'
-import AccountCircle from 'material-ui-icons/AccountCircle'
 import TextField from 'material-ui/TextField'
 import Notification from './Nofitication'
-import Select from 'material-ui/Select'
-import { MenuItem } from 'material-ui/Menu'
-import { FormControl, FormHelperText } from 'material-ui/Form'
-import Input, { InputLabel } from 'material-ui/Input'
 import Publish from './Publish'
 import PopoverMenu from './PopoverMenu'
 import Avatar from 'material-ui/Avatar'
+import { Route, Switch, withRouter } from 'react-router-dom'
+
 
 
 const styles = theme => ({
@@ -57,11 +50,6 @@ const styles = theme => ({
     }
 })
 
-// const handleMenu = () => {
-
-// }
-
-
 class NavigationBar extends Component {
     constructor(props) {
         super(props)
@@ -70,7 +58,6 @@ class NavigationBar extends Component {
         }
     }
 
-
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value });
     };
@@ -78,24 +65,18 @@ class NavigationBar extends Component {
     showMenu = () => {
 
     }
-
     
-    componentDidMount() {
-        console.log("PRINT OUT PATH NAME")
-        console.log(this.context.router)
-    }
-    
-
     render() {
-        const { classes, title, toggleLoginDialog, loginDialogState, isAuthenticated, isPost } = this.props
-        const currentPath = window.location.pathname
+        const { classes, title, toggleLoginDialog, loginDialogState, isAuthenticated } = this.props
         return (
             <div className={classes.root} >
 
                 <AppBar position="static" className={classes.fixedPosition} color="white">
                     <Toolbar>
                         <Typography type="title" color="inherit" className={classes.flex}>{title}</Typography>
-                        {currentPath.includes('/post') &&  <Publish />}
+                        <Switch>
+                            <Route path="/post" component={Publish} />
+                        </Switch>
                         <TextField
                             id="search"
                             label="Search"
@@ -143,8 +124,12 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default compose(
+    
     withStyles(styles, {
         name: 'NavigationBar',
     }),
+    // Render Router with Redux
+    // https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/blocked-updates.md
+    withRouter,
     connect(mapStateToProps, mapDispatchToProps),
 )(NavigationBar)

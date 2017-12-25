@@ -8,11 +8,9 @@ const styles = theme => ({
 
 class PostPage extends Component {
     render() {
-        const { classes } = this.props;
-
         return (
             <div>
-                <PostEditor config={{ debug: true, read_only: false }} />
+                <PostEditor config={{ debug: true, read_only: this.props.read_only }} />
             </div>
         )
     }

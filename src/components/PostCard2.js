@@ -7,7 +7,6 @@ import Card, { CardContent, CardMedia, CardHeader, CardActions } from 'material-
 import IconButton from 'material-ui/IconButton'
 import Typography from 'material-ui/Typography'
 import Avatar from 'material-ui/Avatar'
-import MoreVertIcon from 'material-ui-icons/MoreVert'
 import FavoriteIcon from 'material-ui-icons/Favorite'
 import ShareIcon from 'material-ui-icons/Share'
 
@@ -69,8 +68,7 @@ class PostCard2 extends Component {
     }
 
     render() {
-        const { classes, theme } = this.props
-        const { isSharing } = this.state
+        const { classes } = this.props
         return (
             <div>
                 <Card className={classes.card}>

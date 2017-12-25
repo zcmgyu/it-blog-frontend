@@ -6,6 +6,7 @@ import RootRouter from '../router'
 import { ConnectedRouter } from 'react-router-redux'
 import history from '../store/history'
 import { connect } from 'react-redux'
+
 import 'typeface-roboto'
 
 
@@ -17,6 +18,7 @@ class App extends Component {
         <div>
           <NavigationBar title="LTP - IT Blog" />
           <RootRouter />
+          
         </div>
       </ConnectedRouter >
     )
