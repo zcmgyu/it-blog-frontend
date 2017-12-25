@@ -10,7 +10,22 @@ class PostPage extends Component {
     render() {
         return (
             <div>
-                <PostEditor config={{ debug: true, read_only: this.props.read_only }} />
+                <PostEditor config={{
+                    upload_url: "http://localhost:9292/uploads/new",
+                    debug: true,
+                    read_only: this.props.read_only,
+                    data_storage: {
+                        interval: 2000,
+                        url: "/store",
+                        save_handler: function (ctx, content) {
+                            console.log("SAVING DATA!!");
+                            console.info({
+                                editor_content: JSON.stringify(content),
+                                text_content: ctx.getTextFromEditor(content)
+                            });
+                        }
+                    }
+                }} />
             </div>
         )
     }

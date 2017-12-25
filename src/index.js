@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import createStoreWithMiddleware from './store'
 import App from './containers/App';
 
+
 const store = createStoreWithMiddleware()
 
 render(

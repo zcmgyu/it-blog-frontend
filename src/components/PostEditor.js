@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux'
 import { DanteEditor } from "Dante2/es/index.js"//'Dante2'
 import 'Dante2/dist/DanteStyles.css'
 
@@ -12,6 +12,7 @@ import ImageBlock from 'Dante2/es/components/blocks/image.js'
 import EmbedBlock from 'Dante2/es/components/blocks/embed.js'
 import VideoBlock from 'Dante2/es/components/blocks/video.js'
 import PlaceholderBlock from 'Dante2/es/components/blocks/placeholder.js'
+import { convertToRaw } from 'draft-js'
 
 import {
     resetBlockWithType,
@@ -68,7 +69,7 @@ class PostEditor extends Component {
                             return "graf--layoutFillWidth"
                         default:
                             return ''
-                            
+
                     }
                 },
                 handleEnterWithoutText(ctx, block) {
@@ -273,24 +274,34 @@ class PostEditor extends Component {
         return defaultOptions
     }
 
-    componentDidMount() {
-
-        //  // simple implementation, use the js class
-        //
-        //  var article = new Dante({ 
-        //    el: "app", 
-        //    content: demo,
-        //    read_only: true,
-        //    debug: true
-        //  })
-        //  article.render()
-
+    handleOnChange = () => {
+        console.log('Chaging')
+        this.danteEditor.onChange();
     }
+
+    // componentDidMount() {
+    //     console.log("Get current editor state: ");
+    //     const currentContent = this.danteEditor.state.editorState.getCurrentContent();
+    //     console.log(convertToRaw(currentContent));
+    //     console.log("Get first block:")
+    //     console.log(currentContent.getFirstBlock().getText());
+    //     console.log(this.danteEditor)
+    //     console.log(this.danteEditor.onChange)
+    //     this.handleOnChange = this.danteEditor.onChange
+    // }
+
+    myOnSaveHandler = (editorContext, content) => {
+        this.props.onChange(
+            content
+        )
+    }
+
 
     render() {
         return (
             <DanteEditor
                 content={demo}
+                ref={(danteEditor) => { this.handleOnChange = danteEditor.onChange }}
                 config={this.options}
             />
         )

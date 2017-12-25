@@ -18,7 +18,6 @@ class App extends Component {
         <div>
           <NavigationBar title="LTP - IT Blog" />
           <RootRouter />
-          
         </div>
       </ConnectedRouter >
     )

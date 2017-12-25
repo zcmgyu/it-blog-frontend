@@ -11,6 +11,8 @@ import TagPage from '../containers/TagPage'
 import SearchPage from '../containers/SearchPage'
 import Logout from '../components/Logout'
 import NotFound from '../components/NotFound'
+import PostEditor from '../components/PostEditor'
+
 
 
 const RootRouter = () => {
