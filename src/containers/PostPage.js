@@ -34,7 +34,7 @@ class PostPage extends Component {
                     debug: true,
                     read_only: this.props.read_only,
                     data_storage: {
-                        interval: 2000,
+                        interval: 1000,
                         url: "/store",
                         save_handler: this.handleOnSave
                     }
