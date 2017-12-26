@@ -57,13 +57,10 @@ class PublishModal extends Component {
     createPost = isPublic => () => {
         const { category } = this.state
         console.log('Category -> ' + category)
-        const { accessToken } = this.props
-
+        const { accessToken, postState } = this.props
         const tags = ['test1', 'test2']
-        const title = "title"
-        const content = "content"
         const publicPost = isPublic
-        this.props.dispatch(postRequest({ category, tags, title, content, publicPost, accessToken }))
+        this.props.dispatch(postRequest({ category, tags, publicPost, accessToken, ...postState }))
     }
 
     render() {
@@ -104,7 +101,8 @@ class PublishModal extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        accessToken: state.authReducer.accessToken
+        accessToken: state.authReducer.accessToken,
+        postState: state.post
     }
 }
 

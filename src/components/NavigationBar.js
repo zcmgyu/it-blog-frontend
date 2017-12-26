@@ -75,7 +75,7 @@ class NavigationBar extends Component {
                     <Toolbar>
                         <Typography type="title" color="inherit" className={classes.flex}>{title}</Typography>
                         <Switch>
-                            <Route path="/posts" component={Publish} />
+                            <Route exact path="/posts" component={Publish} />
                         </Switch>
                         <TextField
                             id="search"

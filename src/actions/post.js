@@ -16,3 +16,9 @@ export const postFail = (error) => ({
 	type: ActionsTypes.POST_FAIL,
 	error: error
 })
+
+
+export const saveDraft = (payload) => ({
+    type: ActionsTypes.SAVE_DRAFT,
+    payload: payload
+})

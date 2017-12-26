@@ -12,14 +12,17 @@ const authReducer = (state = initialState, action) => {
             }
         }
         case ActionsTypes.POST_FAIL: {
-            let { access_token, refresh_token } = action.response.data
+            return {
+                ...state
+            }
+        }
+        case ActionsTypes.SAVE_DRAFT: {
+            const content = action.payload
+            const title = content.blocks[0].text
             return {
                 ...state,
-                isAuthenticating: false,
-                isAuthenticated: true,
-                accessToken: access_token,
-                refreshToken: refresh_token,
-                statusText: "You've been successfully logged in."
+                title,
+                content
             }
         }
         default: {
