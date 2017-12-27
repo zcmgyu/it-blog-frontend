@@ -25,6 +25,18 @@ const authReducer = (state = initialState, action) => {
                 content
             }
         }
+        case ActionsTypes.GET_POST_SUCCESS: {
+            return {
+                ...state,
+                post_content: action.payload.content
+            }
+        }
+        case ActionsTypes.GET_POST_FAIL: {
+            return {
+                ...state,
+                loading_post: false
+            }
+        }
         default: {
             return {
                 ...state

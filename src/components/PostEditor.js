@@ -292,7 +292,7 @@ class PostEditor extends Component {
     render() {
         return (
             <DanteEditor
-                content={defaultContent}
+                content={this.props.content || defaultContent}
                 config={this.options}
             />
         )

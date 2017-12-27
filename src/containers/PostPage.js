@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import compose from 'recompose/compose'
 import { withStyles } from 'material-ui/styles'
 import PostEditor from '../components/PostEditor'
-import { saveDraft } from '../actions/post'
+import { saveDraft, getPostRequest } from '../actions/post'
 import { connect } from 'react-redux'
 
 const styles = theme => ({
@@ -19,12 +19,23 @@ class PostPage extends Component {
         });
         this.props.dispatch(saveDraft(content))
     }
-    
+
 
     handleImageDelete = (value) => {
         console.log("test delete callback")
         console.log(value)
     }
+
+    componentDidMount() {
+        const pathName = window.location.pathname
+        const postId = pathName.slice(pathName.lastIndexOf('-') + 1, pathName.length)
+        const { accessToken } = this.props
+        if (this.props.read_only) {
+            console.log('INSIDE DEBUG')
+            this.props.dispatch(getPostRequest({postId, accessToken}))
+        }
+    }
+
 
     render() {
         return (
@@ -38,7 +49,9 @@ class PostPage extends Component {
                         url: "/store",
                         save_handler: this.handleOnSave
                     }
-                }} />
+                }}
+                    content={this.props.content}
+                />
             </div>
         )
     }
@@ -48,7 +61,14 @@ PostPage.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
+const mapStateToProps = (state) => (
+    {
+        accessToken: state.authReducer.accessToken,
+        content: state.post.content
+    }
+)
+
 export default compose(
     withStyles(styles),
-    connect()
+    connect(mapStateToProps)
 )(PostPage);

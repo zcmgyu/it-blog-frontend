@@ -17,3 +17,17 @@ export function* createPost(payload) {
         yield put(PostActions.postFail(err))
     }
 }
+
+// Worker
+export function* getPost(payload) {
+    console.log('inside saga get post')
+    try {
+        const response = yield call(API.getPost, payload)
+        yield put(PostActions.postSuccess(response))
+        console.log(response)
+        // const { post_id, transliterated } = response.data.result
+        // yield put(push(`/posts/${transliterated}-${post_id}`))
+    } catch (err) {
+        yield put(PostActions.postFail(err))
+    }
+}

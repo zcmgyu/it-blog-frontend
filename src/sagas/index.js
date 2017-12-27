@@ -6,7 +6,7 @@ import * as PostActionsTypes from '../actiontypes/post'
 // import * as API from '../apis'
 // import { push } from 'react-router-redux'
 import { loginUserSaga } from './auth'
-import { createPost } from './post'
+import { createPost, getPost } from './post'
 
 // Worker
 // export function* loginUserSaga({ payload }) {
@@ -34,6 +34,8 @@ export default function* rootSaga() {
         // Watching logoutUserSaga
         // takeEvery(AuthActionsTypes.LOGOUT_USER_REQUEST, logoutUserSaga)
         // Watching createPost
-        takeEvery(PostActionsTypes.POST_REQUEST, createPost)
+        takeEvery(PostActionsTypes.POST_REQUEST, createPost),
+        // Watching getPost
+        takeEvery(PostActionsTypes.GET_POST_REQUEST, getPost)
     ])
 }

@@ -25,3 +25,21 @@ export const createPost = ({payload}) => {
         });
 
 }
+
+export const getPost = ({payload}) => {
+    console.log('inside get post api')
+    const {postId, accessToken} =   payload
+    return axios.request({
+        baseURL: `http://localhost:9292/api/posts/${postId}`,
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`
+        },
+    })
+        .then(response => response)
+        .catch(function (error) {
+            throw error
+        });
+
+}
