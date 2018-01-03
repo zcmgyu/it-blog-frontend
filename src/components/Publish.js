@@ -27,8 +27,6 @@ class Publish extends Component {
     }
 
     handleClickButton = () => {
-        console.log('this.button')
-        console.log(this.button)
         this.setState({
             open: true,
             anchorEl: findDOMNode(this.button),

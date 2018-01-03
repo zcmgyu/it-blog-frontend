@@ -16,7 +16,7 @@ import { Field, reduxForm } from 'redux-form'
 
 // ACTIONS
 import { toggleLoginDialog } from '../actions/dialog'
-import { loginUserRequest } from '../actions/authentication'
+import { authenticate } from '../actions/authenticate'
 
 
 const styles = theme => ({
@@ -49,15 +49,15 @@ const LoginDialog = (props) => {
     const handleRequestClose = () => {
         dispatch(toggleLoginDialog())
     };
-    
+
     const handleLogin = (data) => {
-        dispatch(loginUserRequest(data))
+        dispatch(authenticate.request(data))
     };
-    
+
     const handleRegister = () => {
-    
+
     }
-    
+
     return (
         <Dialog onRequestClose={handleRequestClose} open={open} >
             <form onSubmit={handleSubmit(handleLogin)}>
@@ -86,15 +86,14 @@ const LoginDialog = (props) => {
                     <Button type="submit" label="login" className="button-submit" color="primary" disabled={pristine || submitting} >Login</Button>
                 </DialogActions>
             </form>
-
         </Dialog >
 
     );
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.authReducer.isAuthenticated,
-    statusText: state.authReducer.statusText
+    isAuthenticated: state.auth.isAuthenticated,
+    statusText: state.auth.statusText
 })
 
 export default compose(

@@ -1,12 +1,15 @@
 import { takeEvery, all } from 'redux-saga/effects'
-import * as AuthActionsTypes from '../actiontypes/authentication'
-import * as PostActionsTypes from '../actiontypes/post'
+// import * as AuthActionsTypes from '../actiontypes/authenticate'
+// import * as PostActionsTypes from '../actiontypes/post'
+import { AUTH, REGISTER } from '../actiontypes/authenticate'
+import { POST, GET_POST } from '../actiontypes/post'
+
 
 // import * as DialogActions from '../actions/dialog'
 // import * as API from '../apis'
 // import { push } from 'react-router-redux'
-import { loginUserSaga } from './auth'
-import { createPost, getPost } from './post'
+import { authenticateWorker, registerWorker } from './auth'
+import { createPostWorker, getPostWorker } from './post'
 
 // Worker
 // export function* loginUserSaga({ payload }) {
@@ -30,12 +33,13 @@ import { createPost, getPost } from './post'
 export default function* rootSaga() {
     yield all([
         // Watching loginUserSaga
-        takeEvery(AuthActionsTypes.LOGIN_USER_REQUEST, loginUserSaga),
+        takeEvery(AUTH.REQUEST, authenticateWorker),
+        takeEvery(REGISTER.REQUEST, registerWorker),
         // Watching logoutUserSaga
         // takeEvery(AuthActionsTypes.LOGOUT_USER_REQUEST, logoutUserSaga)
         // Watching createPost
-        takeEvery(PostActionsTypes.POST_REQUEST, createPost),
+        takeEvery(POST.REQUEST, createPostWorker),
         // Watching getPost
-        takeEvery(PostActionsTypes.GET_POST_REQUEST, getPost)
+        takeEvery(GET_POST.REQUEST, getPostWorker)
     ])
 }

@@ -3,7 +3,8 @@ import { Route, Switch } from 'react-router-dom'
 import { requireAuth } from '../components/AuthenticatedComponent'
 
 // Containers
-import LoginPage from '../containers/LoginPage'
+import SignInPage from '../containers/SignInPage'
+import SignUpPage from '../containers/SignUpPage'
 import HomePage from '../containers/HomePage'
 import MyPage from '../containers/MyPage'
 import PostPage from '../containers/PostPage'
@@ -12,17 +13,26 @@ import SearchPage from '../containers/SearchPage'
 import Logout from '../components/Logout'
 import NotFound from '../components/NotFound'
 
+const PostDetailPage = () => (
+    <PostPage read_only={true} />
+)
+
+const PostEditorPage = () => (
+    <PostPage read_only={false} />
+)
+
 const RootRouter = () => {
     return (
         <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/mypage" component={requireAuth(MyPage)} />
-            <Route path="/login" component={LoginPage} />
+            <Route path="/sign-in" component={SignInPage} />
+            <Route path="/sign-up" component={SignUpPage} />
             <Route path="/tag" component={TagPage} />
             <Route path="/search" component={SearchPage} />
-            <Route exact path="/posts" component={() => <PostPage read_only={false} />} />
-            <Route path="/posts/:post_path" component={() => <PostPage read_only={true} />} />
-            <Route path='/logout' component={Logout} />
+            <Route exact path="/posts" component={requireAuth(PostEditorPage)} />
+            <Route path="/posts/:post_path" component={requireAuth(PostDetailPage)} />
+            <Route path='/logout' component={requireAuth(Logout)} />
             <Route component={NotFound} />
         </Switch>
     )

@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import {push} from 'react-router-redux'
-import { logoutUserRequest } from "../actions/authentication"
+import { push } from 'react-router-redux'
+import { remove_auth } from "../actions/authenticate"
+import { removeAuth } from '../utils/localStorage'
 
 class Logout extends Component {
-      componentDidMount(){
-        localStorage.removeItem('state')
+    componentDidMount() {
+        removeAuth()
+        this.props.dispatch(remove_auth.request())
         this.props.dispatch(push('/'))
-        this.props.dispatch(logoutUserRequest())
-      }
-      render() {
+    }
+    render() {
         return (
-          <h3>
-            Logging out...
+            <h3>
+                Logging out...
           </h3>
         );
-      }
     }
-    
+}
+
 export default connect()(Logout)

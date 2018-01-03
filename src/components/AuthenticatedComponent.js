@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { push } from 'react-router-redux'
+import { push } from 'react-router-redux'
 
 // ACTIONS
-import { toggleLoginDialog } from '../actions/dialog'
+// import { toggleLoginDialog } from '../actions/dialog'
 
 export function requireAuth(Component) {
 
@@ -19,12 +19,14 @@ export function requireAuth(Component) {
 
         checkAuth({isAuthenticated, dispatch}) {
             if (!isAuthenticated) {
-                dispatch(toggleLoginDialog())
+                // dispatch(toggleLoginDialog())
+                dispatch(push('/sign-in'))
             }
         }
 
         render() {
             if(this.props.isAuthenticated === true) {
+                console.log(this.props)
                 return (
                     <Component {...this.props} />
                 )
@@ -35,9 +37,7 @@ export function requireAuth(Component) {
     }
 
     const mapStateToProps = (state) => ({
-        // token: state.auth.token,
-        // userName: state.auth.userName,
-        isAuthenticated: state.authReducer.isAuthenticated
+        isAuthenticated: state.auth.isAuthenticated
     });
 
     return connect(mapStateToProps)(AuthenticatedComponent);

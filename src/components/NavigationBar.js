@@ -16,7 +16,8 @@ import Publish from './Publish'
 import PopoverMenu from './PopoverMenu'
 import Avatar from 'material-ui/Avatar'
 import { Route, Switch, withRouter } from 'react-router-dom'
-
+import { push } from 'react-router-redux'
+import { Link } from 'react-router-dom'
 
 
 const styles = theme => ({
@@ -27,6 +28,7 @@ const styles = theme => ({
     },
     flex: {
         flex: 1,
+        textDecoration: 'none',
     },
     menuButton: {
         marginLeft: -12,
@@ -65,15 +67,15 @@ class NavigationBar extends Component {
     showMenu = () => {
 
     }
-    
+
     render() {
-        const { classes, title, toggleLoginDialog, loginDialogState, isAuthenticated } = this.props
+        const { classes, title, loginDialogState, isAuthenticated } = this.props
         return (
             <div className={classes.root} >
 
                 <AppBar position="static" className={classes.fixedPosition} color="white">
                     <Toolbar>
-                        <Typography type="title" color="inherit" className={classes.flex}>{title}</Typography>
+                        <Typography type="title" color="inherit" className={classes.flex} component={Link} to="/">{title}</Typography>
                         <Switch>
                             <Route exact path="/posts" component={Publish} />
                         </Switch>
@@ -90,9 +92,8 @@ class NavigationBar extends Component {
                                     <Avatar alt="Remy Sharp" src="https://cdn-images-1.medium.com/fit/c/100/100/0*bh4kZqN3bPPuk15J.jpg" className={classes.avatar} />
                                 </PopoverMenu>
                                 :
-                                <Button color="inherit" onClick={(e) => toggleLoginDialog()}>Login</Button>
+                                <Button color="inherit" component={Link} to="/sign-in">Sign In</Button>
                         }
-
                     </Toolbar>
 
                 </AppBar>
@@ -115,16 +116,17 @@ NavigationBar.propTypes = {
 
 const mapStateToProps = state => ({
     loginDialogState: state.dialog.loginDialogState,
-    isAuthenticated: state.authReducer.isAuthenticated,
+    isAuthenticated: state.auth.isAuthenticated,
     isPost: state.post.isPost
 })
 
 const mapDispatchToProps = dispatch => ({
     toggleLoginDialog: bindActionCreators(toggleLoginDialog, dispatch),
+    pushLocation: bindActionCreators(push, dispatchEvent)
 })
 
 export default compose(
-    
+
     withStyles(styles, {
         name: 'NavigationBar',
     }),

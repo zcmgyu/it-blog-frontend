@@ -22,3 +22,8 @@ export const saveState = (state) => {
         console.log(err)
     }
 }
+
+export const getAuth = () => {
+    const serializedState = JSON.parse(localStorage.getItem('state'));
+    return serializedState.auth
+}

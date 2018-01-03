@@ -10,7 +10,7 @@ import { FormControl } from 'material-ui/Form'
 import Input, { InputLabel } from 'material-ui/Input'
 import Button from 'material-ui/Button'
 import compose from 'recompose/compose';
-import { postRequest } from '../actions/post'
+import { post } from '../actions/post'
 
 const styles = theme => ({
     container: {
@@ -54,13 +54,13 @@ class PublishModal extends Component {
         console.log(`key: ${key}: ${event.target.value}`)
     };
 
-    createPost = isPublic => () => {
+    createPost = publicPost => () => {
         const { category } = this.state
         console.log('Category -> ' + category)
-        const { accessToken, postState } = this.props
+        const {content} = this.props.post
+        const title = content.blocks[0].text
         const tags = ['test1', 'test2']
-        const publicPost = isPublic
-        this.props.dispatch(postRequest({ category, tags, publicPost, accessToken, ...postState }))
+        this.props.dispatch(post.request({ category, tags, publicPost, title, content }))
     }
 
     render() {
@@ -101,8 +101,8 @@ class PublishModal extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        accessToken: state.authReducer.accessToken,
-        postState: state.post
+        accessToken: state.auth.accessToken,
+        post: state.post
     }
 }
 

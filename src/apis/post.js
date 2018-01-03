@@ -1,17 +1,13 @@
 import axios from 'axios'
 
-export const createPost = ({payload}) => {
-    console.log('inside post api')
-    const { title, content, category, tags, accessToken } = payload
+export const createPost = (payload, headers) => {
+    const { title, content, category, tags } = payload
+    console.log('INSIDE apis/createPost')
     console.log(payload)
-    console.log('accessToken: ' + accessToken)
     return axios.request({
         baseURL: 'http://localhost:9292/api/posts',
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
-        },
+        headers,
         data: {
             'title': title,
             'content': content,
@@ -26,16 +22,12 @@ export const createPost = ({payload}) => {
 
 }
 
-export const getPost = ({payload}) => {
-    console.log('inside get post api')
-    const {postId, accessToken} =   payload
+export const getPost = (payload, headers) => {
+    const { postId } = payload
     return axios.request({
         baseURL: `http://localhost:9292/api/posts/${postId}`,
         method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
-        },
+        headers,
     })
         .then(response => response)
         .catch(function (error) {

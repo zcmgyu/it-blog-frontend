@@ -17,7 +17,7 @@ import {
     addNewBlockAt
 } from 'Dante2/es/model/index.js'
 
-const defaultContent =  {"entityMap":{},"blocks":[{"key":"lcva","text":"Title here","type":"header-one","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"4vtvm","text":"Write your post here.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]}
+const defaultContent = { "entityMap": {}, "blocks": [{ "key": "lcva", "text": "Title here", "type": "header-one", "depth": 0, "inlineStyleRanges": [], "entityRanges": [], "data": {} }, { "key": "4vtvm", "text": "Write your post here.", "type": "unstyled", "depth": 0, "inlineStyleRanges": [], "entityRanges": [], "data": {} }] }
 
 // component implementation
 class PostEditor extends Component {
@@ -285,21 +285,20 @@ class PostEditor extends Component {
     //     console.log(this.danteEditor.onChange)
     //     this.handleOnChange = this.danteEditor.onChange
     // }
-
-    
-
-
     render() {
         return (
-            <DanteEditor
-                content={this.props.content || defaultContent}
-                config={this.options}
-            />
+            <div>
+                <DanteEditor
+                    content={this.props.content || defaultContent}
+                    config={this.options}
+                />
+            </div>
+
         )
     }
-
-    // ref={(danteEditor) => { this.handleOnChange = danteEditor.onChange }}
-
 }
+
+// ref={(editor) => { this.editor = editor }}
+
 
 export default PostEditor

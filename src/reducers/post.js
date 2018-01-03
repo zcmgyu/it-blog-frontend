@@ -1,22 +1,26 @@
-import * as ActionsTypes from '../actiontypes/post'
+// import * as ActionsTypes from '../actiontypes/post'
+import { POST, GET_POST, SAVE_DRAFT } from '../actiontypes/post'
 
 const initialState = {
-    post_uri: ''
+    current_post: {
+        content: null
+    }
 }
 
-const authReducer = (state = initialState, action) => {
+const auth = (state = initialState, action) => {
     switch (action.type) {
-        case ActionsTypes.POST_SUCCESS: {
+        case POST.SUCCESS: {
+            return {
+                ...state,
+                content: action.payload
+            }
+        }
+        case POST.FAILURE: {
             return {
                 ...state
             }
         }
-        case ActionsTypes.POST_FAIL: {
-            return {
-                ...state
-            }
-        }
-        case ActionsTypes.SAVE_DRAFT: {
+        case SAVE_DRAFT.REQUEST: {
             const content = action.payload
             const title = content.blocks[0].text
             return {
@@ -25,13 +29,13 @@ const authReducer = (state = initialState, action) => {
                 content
             }
         }
-        case ActionsTypes.GET_POST_SUCCESS: {
+        case GET_POST.SUCCESS: {
             return {
                 ...state,
-                post_content: action.payload.content
+                current_post: action.response.data
             }
         }
-        case ActionsTypes.GET_POST_FAIL: {
+        case GET_POST.FAILURE: {
             return {
                 ...state,
                 loading_post: false
@@ -45,4 +49,4 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export default authReducer
+export default auth

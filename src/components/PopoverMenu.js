@@ -34,12 +34,11 @@ class PopoverMenu extends React.Component {
     handleClose = () => {
         this.setState({ open: false });
     };
-    handleMenuClick = (uri) => () => {
+
+    handleMenuClick = uri => () => {
         this.props.dispatch(push(uri))
         this.handleClose();
     }
-
-
 
     renderMenuList = () => (
         menu.map((item, index) =>
