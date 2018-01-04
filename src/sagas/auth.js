@@ -1,8 +1,7 @@
 import { put, call } from 'redux-saga/effects'
 import * as API from '../apis/auth'
-// import * as AuthActions from '../actions/authenticate'
+import { getCurrentUserWorker } from './user'
 import { authenticate, register } from '../actions/authenticate'
-// import * as DialogActions from '../actions/dialog'
 import { getAuth, setAuth, removeAuth } from '../utils/localStorage'
 // import { refreshToken, register } from '../apis/auth'
 import { push } from 'react-router-redux'
@@ -13,12 +12,13 @@ export function* authenticateWorker({ credentials }) {
         console.log('COME TO authenticateWorker')
         console.log(credentials)
         const response = yield call(API.doLogin, credentials)
-        console.log('response')
+        console.log('RESPONSE')
         console.log(response)
         yield put(authenticate.success(response))
-        console.log('SUCCESS')
         const { access_token, refresh_token } = response.data
         yield setAuth({ access_token, refresh_token })
+        // Get user info
+        yield getCurrentUserWorker();
         // Back to previous page
         yield put(push('/'))
     } catch (err) {

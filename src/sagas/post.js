@@ -26,7 +26,9 @@ export function* createPostWorker({payload}) {
 // Worker
 export function* getPostWorker({payload}) {
     try {
+        console.log('getPostWorker')
         const response = yield authenticatedRequest(API.getPost, payload)
+        console.log(response)
         yield put(getPost.success(response))
         // const { post_id, transliterated } = response.data.result
         // yield put(push(`/posts/${transliterated}-${post_id}`))

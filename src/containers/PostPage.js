@@ -38,8 +38,6 @@ class PostPage extends Component {
         console.log('componentDidMount')
         const pathName = window.location.pathname
         const postId = pathName.slice(pathName.lastIndexOf('-') + 1, pathName.length)
-        console.log('this.props')
-        console.log(this.props)
         if (this.props.read_only) {
             this.props.dispatch(getPost.request({ postId }))
         }
@@ -59,7 +57,7 @@ class PostPage extends Component {
         return (
             <PostEditor config={{
                 debug: true,
-                read_only: true
+                read_only: this.props.isEdit
             }}
                 content={this.props.current_post.content}
             />
@@ -85,10 +83,7 @@ class PostPage extends Component {
     )
 
     render() {
-        console.log('INSIDE RENDER >>>>>>>')
-        console.log(this.props)
-        const { isLoaded, current_post } = this.props
-        const { content } = current_post
+        const { isLoaded } = this.props
         if (!this.props.read_only) {
             console.log("RENDER POST")
             return this.renderPost()
@@ -128,7 +123,8 @@ PostPage.propTypes = {
 const mapStateToProps = (state) => (
     {
         current_post: state.post.current_post,
-        isLoaded: state.post.isLoaded
+        isLoaded: state.post.isLoaded,
+        isEdit: state.post.isEdit
     }
 )
 

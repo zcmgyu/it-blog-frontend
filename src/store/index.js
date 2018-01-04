@@ -36,8 +36,10 @@ export default function createStoreWithMiddleware() {
 
 
     store.subscribe(_.throttle(() => {
+        const {auth, user} = store.getState()
         saveState({
-            auth: store.getState().auth
+            auth,
+            user
         })
     }, 1000))
 
