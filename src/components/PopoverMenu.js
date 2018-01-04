@@ -61,7 +61,7 @@ class PopoverMenu extends React.Component {
                     id="simple-menu"
                     anchorEl={this.state.anchorEl}
                     open={this.state.open}
-                    onRequestClose={this.handleClose}
+                    onClose={this.handleClose}
                 >
                     {this.renderMenuList()}
                 </Menu>

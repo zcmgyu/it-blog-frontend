@@ -89,7 +89,7 @@ class SharingButton extends Component {
                 <Drawer
                     anchor="bottom"
                     open={drawer}
-                    onRequestClose={this.toggleDrawer(false)}
+                    onClose={this.toggleDrawer(false)}
                 >
                     <div
                         tabIndex={0}
@@ -155,7 +155,7 @@ class SharingButton extends Component {
                     }}
                     open={copied}
                     autoHideDuration={6000}
-                    onRequestClose={this.handleRequestClose}
+                    onClose={this.handleRequestClose}
                     SnackbarContentProps={{
                         'aria-describedby': 'message-id',
                     }}

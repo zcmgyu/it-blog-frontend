@@ -12,3 +12,5 @@ import createRequestTypes from './'
 export const POST = createRequestTypes('POST')
 export const GET_POST = createRequestTypes('GET_POST')
 export const SAVE_DRAFT = createRequestTypes('SAVE_DRAFT')
+
+export const CLEAN_CURRENT_POST = 'CLEAN_CURRENT_POST'

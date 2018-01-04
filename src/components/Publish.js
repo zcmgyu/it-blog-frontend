@@ -63,12 +63,8 @@ class Publish extends Component {
                     open={open}
                     anchorEl={anchorEl}
                     anchorPosition={{ top: 400, left: 400 }}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'top',
-                    }}
                     anchorReference={'anchorEl'}
-                    onRequestClose={this.handleRequestClose}
+                    onClose={this.handleRequestClose}
                 >
                     <PublishModal />
                 </Popover>

@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
-import TextField from 'material-ui/TextField'
-import ChipsArray from './ChipsArray'
 import Select from 'material-ui/Select'
 import { MenuItem } from 'material-ui/Menu'
 import { FormControl } from 'material-ui/Form'
@@ -11,6 +9,7 @@ import Input, { InputLabel } from 'material-ui/Input'
 import Button from 'material-ui/Button'
 import compose from 'recompose/compose';
 import { post } from '../actions/post'
+import ControlledChipInput from './ControlledChipInput'
 
 const styles = theme => ({
     container: {
@@ -20,7 +19,8 @@ const styles = theme => ({
         overflow: true
     },
     chip: {
-        margin: theme.spacing.unit,
+        marginTop: theme.spacing.unit * 2,
+        marginBottom: theme.spacing.unit * 2,
     },
     row: {
         display: 'flex',
@@ -83,21 +83,24 @@ class PublishModal extends Component {
                     </Select>
                 </FormControl>
                 <Typography type='body1'>Add or change tags (up to 5) so readers know what your post is about:</Typography>
-                <TextField
-                    id="tags"
-                    label="Tags"
-                    className={classes.textField}
-                    value={this.state.tag}
-                    onChange={this.handleChange('tag')}
-                    fullWidth
-                />
-                <ChipsArray />
+                <ControlledChipInput className={classes.chip}/>
                 <Button className={classes.button} raised color="primary" onClick={this.createPost(true)}>Publish</Button>
                 <Button className={classes.button} raised color="default" onClick={this.createPost(false)}>Save as draft</Button>
             </div>
         )
     }
 }
+
+
+// <TextField
+// id="tags"
+// label="Tags"
+// className={classes.textField}
+// value={this.state.tag}
+// onChange={this.handleChange('tag')}
+// fullWidth
+// />
+// <ChipsArray />
 
 const mapStateToProps = (state) => {
     return {

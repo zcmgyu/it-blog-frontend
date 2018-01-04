@@ -4,8 +4,9 @@ import compose from 'recompose/compose'
 import { withStyles } from 'material-ui/styles'
 import PostEditor from '../components/PostEditor'
 import { connect } from 'react-redux'
-import { getPost, saveDraft } from '../actions/post';
+import { getPost, saveDraft, cleanCurrentPost } from '../actions/post';
 import { withRouter } from 'react-router-dom'
+import Loading from '../components/Loading'
 
 const styles = theme => ({
 });
@@ -28,65 +29,96 @@ class PostPage extends Component {
 
     componentWillMount() {
         console.log('INSIDE COMPONENT WILL MOUNT')
-        console.log(this.props.current_post)
-        // this.data = {"entityMap":{},"blocks":[{"key":"761n6","text":"11111","type":"header-one","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]}
+        console.log(this.props)
+        this.props.dispatch(cleanCurrentPost())
     }
 
 
     componentDidMount() {
         console.log('componentDidMount')
-        // console.log(this.props)
         const pathName = window.location.pathname
         const postId = pathName.slice(pathName.lastIndexOf('-') + 1, pathName.length)
-        console.log('this.props.read_only')
-        console.log(this.props.read_only)
+        console.log('this.props')
+        console.log(this.props)
         if (this.props.read_only) {
             this.props.dispatch(getPost.request({ postId }))
         }
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return !nextProps.current_post === this.props.current_post
-    // }
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log("shouldComponentUpdate")
+        const result = nextProps.current_post !== this.props.current_post
+        return result
+    }
 
     componentWillUpdate(nextProps, nextState) {
         console.log('componentWillUpdate')
     }
 
-    // renderPost = (content) => (
-    //     {
-    //         if(content !== null) {
+    renderViewer = () => {
+        return (
+            <PostEditor config={{
+                debug: true,
+                read_only: true
+            }}
+                content={this.props.current_post.content}
+            />
+        )
+    }
 
-    //         } else {
-    //         < div > LOADING...</div>
-    //     }}
-    // )
+    renderPost = () => (
+        <PostEditor config={{
+            upload_url: "http://localhost:9292/uploads/new",
+            debug: true,
+            read_only: false,
+            data_storage: {
+                interval: 250,
+                url: "/store",
+                save_handler: this.handleOnSave
+            }
+        }}
+        />
+    )
 
+    renderLoading = (props) => (
+        <Loading />
+    )
 
     render() {
+        console.log('INSIDE RENDER >>>>>>>')
+        console.log(this.props)
+        const { isLoaded, current_post } = this.props
+        const { content } = current_post
+        if (!this.props.read_only) {
+            console.log("RENDER POST")
+            return this.renderPost()
+        }
+        if (isLoaded) {
+            console.log("RENDER VIEWER")
+            return this.renderViewer()
+        } else {
+            console.log("RENDER LOADING")
+            return this.renderLoading()
+        }
 
-        console.log('Inside render')
-        const { content } = this.props.current_post
-        return (
-            content !== null || !this.props.read_only ?
-                <PostEditor config={{
-                    upload_url: "http://localhost:9292/uploads/new",
-                    debug: true,
-                    read_only: this.props.read_only,
-                    data_storage: {
-                        interval: 1000,
-                        url: "/store",
-                        save_handler: this.handleOnSave
-                    }
-                }}
-                    content={content}
-                />
-                : <div>Loading</div>
-        )
     }
 }
 
-
+// content !== null || !this.props.read_only ?
+// <PostEditor config={{
+//     upload_url: "http://localhost:9292/uploads/new",
+//     debug: true,
+//     read_only: this.props.read_only,
+//     data_storage: {
+//         interval: 1000,
+//         url: "/store",
+//         save_handler: this.handleOnSave
+//     }
+// }}
+//     content={content}
+// />
+// : <div>Loading</div>
+// )
 
 
 PostPage.propTypes = {
@@ -95,7 +127,8 @@ PostPage.propTypes = {
 
 const mapStateToProps = (state) => (
     {
-        current_post: state.post.current_post
+        current_post: state.post.current_post,
+        isLoaded: state.post.isLoaded
     }
 )
 

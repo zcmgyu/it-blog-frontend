@@ -59,7 +59,7 @@ const LoginDialog = (props) => {
     }
 
     return (
-        <Dialog onRequestClose={handleRequestClose} open={open} >
+        <Dialog onClose={handleRequestClose} open={open} >
             <form onSubmit={handleSubmit(handleLogin)}>
                 <DialogTitle>Login</DialogTitle>
                 <DialogContent>

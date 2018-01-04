@@ -73,7 +73,7 @@ class NavigationBar extends Component {
         return (
             <div className={classes.root} >
 
-                <AppBar position="static" className={classes.fixedPosition} color="white">
+                <AppBar position="static" className={classes.fixedPosition} color='inherit'>
                     <Toolbar>
                         <Typography type="title" color="inherit" className={classes.flex} component={Link} to="/">{title}</Typography>
                         <Switch>

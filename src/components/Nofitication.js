@@ -72,12 +72,9 @@ class Notification extends Component {
                     open={open}
                     anchorEl={anchorEl}
                     anchorPosition={{ top: 400, left: 400 }}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'top',
-                      }}
+                    
                     anchorReference={'anchorEl'}
-                    onRequestClose={this.handleRequestClose}
+                    onClose={this.handleRequestClose}
                 >
                     <Typography className={classes.typography}>The content of the Popover 1.</Typography>
                     <Typography className={classes.typography}>The content of the Popover 2.</Typography>
