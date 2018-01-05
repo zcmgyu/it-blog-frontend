@@ -13,6 +13,7 @@ import LoginDialog from '../components/LoginDialog'
 import TextField from 'material-ui/TextField'
 import Notification from './Nofitication'
 import Publish from './Publish'
+import EditButton from './EditButton'
 import PopoverMenu from './PopoverMenu'
 import Avatar from 'material-ui/Avatar'
 import { Route, Switch, withRouter } from 'react-router-dom'
@@ -78,6 +79,7 @@ class NavigationBar extends Component {
                         <Typography type="title" color="inherit" className={classes.flex} component={Link} to="/">{title}</Typography>
                         <Switch>
                             <Route exact path="/posts" component={Publish} />
+                            <Route exact path="/posts/:post_path" component={EditButton} />
                             <Route exact path="/posts/:post_path/edit" component={Publish} />
                         </Switch>
 

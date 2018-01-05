@@ -1,5 +1,5 @@
 // import * as ActionsTypes from '../actiontypes/post'
-import { POST, GET_POST, SAVE_DRAFT, CLEAN_CURRENT_POST } from '../actiontypes/post'
+import { POST, GET_POST, SAVE_DRAFT, CLEAN_CURRENT_POST, EDIT_POST_TRIGGER } from '../actiontypes/post'
 
 const initialState = {
     current_post: {
@@ -32,7 +32,7 @@ const auth = (state = initialState, action) => {
         case GET_POST.SUCCESS: {
             return {
                 ...state,
-                current_post: action.response.data,
+                current_post: action.response.data.result,
                 isLoaded: true
             }
         }
@@ -47,6 +47,12 @@ const auth = (state = initialState, action) => {
                 ...state,
                 current_post: {},
                 isLoaded: false
+            }
+        }
+        case EDIT_POST_TRIGGER: {
+            return {
+                ...state,
+                isEdit: !state.isEdit
             }
         }
         default: {

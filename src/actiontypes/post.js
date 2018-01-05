@@ -14,3 +14,4 @@ export const GET_POST = createRequestTypes('GET_POST')
 export const SAVE_DRAFT = createRequestTypes('SAVE_DRAFT')
 
 export const CLEAN_CURRENT_POST = 'CLEAN_CURRENT_POST'
+export const EDIT_POST_TRIGGER = 'EDIT_POST_TRIGGER'

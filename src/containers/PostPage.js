@@ -28,36 +28,30 @@ class PostPage extends Component {
 
 
     componentWillMount() {
-        console.log('INSIDE COMPONENT WILL MOUNT')
-        console.log(this.props)
         this.props.dispatch(cleanCurrentPost())
     }
 
 
     componentDidMount() {
-        console.log('componentDidMount')
+        const { dispatch, read_only } = this.props
         const pathName = window.location.pathname
-        const postId = pathName.slice(pathName.lastIndexOf('-') + 1, pathName.length)
-        if (this.props.read_only) {
-            this.props.dispatch(getPost.request({ postId }))
+        const lastIndexOfSlash = pathName.lastIndexOf('/edit') > 0 ? pathName.lastIndexOf('/edit') : pathName.length
+        const postId = pathName.slice(pathName.lastIndexOf('-') + 1, lastIndexOfSlash)
+        if (read_only) {
+            dispatch(getPost.request({ postId }))
         }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log("shouldComponentUpdate")
         const result = nextProps.current_post !== this.props.current_post
         return result
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-        console.log('componentWillUpdate')
     }
 
     renderViewer = () => {
         return (
             <PostEditor config={{
                 debug: true,
-                read_only: this.props.isEdit
+                read_only: !this.props.isEdit
             }}
                 content={this.props.current_post.content}
             />
@@ -83,8 +77,8 @@ class PostPage extends Component {
     )
 
     render() {
-        const { isLoaded } = this.props
-        if (!this.props.read_only) {
+        const { isLoaded, read_only } = this.props
+        if (!read_only) {
             console.log("RENDER POST")
             return this.renderPost()
         }

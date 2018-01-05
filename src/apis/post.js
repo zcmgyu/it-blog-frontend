@@ -24,6 +24,8 @@ export const createPost = (payload, headers) => {
 
 export const getPost = (payload, headers) => {
     const { postId } = payload
+    console.log('postId')
+    console.log(postId)
     return axios.request({
         baseURL: `http://localhost:9292/api/posts/${postId}`,
         method: 'GET',

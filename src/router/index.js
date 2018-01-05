@@ -5,6 +5,7 @@ import { requireAuth } from '../components/AuthenticatedComponent'
 // Containers
 import SignInPage from '../containers/SignInPage'
 import SignUpPage from '../containers/SignUpPage'
+import ForgotPasswordPage from '../containers/ForgotPasswordPage'
 import HomePage from '../containers/HomePage'
 import MyPage from '../containers/MyPage'
 import PostPage from '../containers/PostPage'
@@ -26,11 +27,12 @@ const RootRouter = () => {
             <Route path="/mypage" component={requireAuth(MyPage)} />
             <Route path="/sign-in" component={SignInPage} />
             <Route path="/sign-up" component={SignUpPage} />
+            <Route path="/forgot-password" component={ForgotPasswordPage} />
             <Route path="/tag" component={TagPage} />
             <Route path="/search" component={SearchPage} />
             <Route exact path="/posts" component={requireAuth(PostEditorPage)} />
-            <Route path="/posts/:post_path" component={PostDetailPage} />
-            <Route path="/posts/:post_path/edit" component={requireAuth(EditPostPage)} />
+            <Route exact path="/posts/:post_path" component={PostDetailPage} />
+            <Route exact path="/posts/:post_path/edit" component={requireAuth(EditPostPage)} />
             <Route path='/logout' component={requireAuth(Logout)} />
             <Route component={NotFound} />
         </Switch>

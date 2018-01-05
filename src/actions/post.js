@@ -42,7 +42,7 @@
 // })
 
 import action from './'
-import { POST, SAVE_DRAFT, GET_POST, CLEAN_CURRENT_POST } from '../actiontypes/post'
+import { POST, SAVE_DRAFT, GET_POST, CLEAN_CURRENT_POST, EDIT_POST_TRIGGER } from '../actiontypes/post'
 
 export const post = {
     request: payload => action(POST.REQUEST, { payload }),
@@ -57,6 +57,8 @@ export const getPost = {
 }
 
 export const cleanCurrentPost = () => action(CLEAN_CURRENT_POST)
+
+export const editPostTrigger = () => action(EDIT_POST_TRIGGER)
 
 export const saveDraft = {
     request: payload => action(SAVE_DRAFT.REQUEST, { payload }),

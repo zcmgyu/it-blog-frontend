@@ -7,7 +7,7 @@ import { ConnectedRouter } from 'react-router-redux'
 import history from '../store/history'
 import { connect } from 'react-redux'
 
-import 'typeface-roboto'
+// import 'typeface-roboto'
 
 
 class App extends Component {
