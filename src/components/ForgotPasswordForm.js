@@ -12,12 +12,9 @@ import TextField from 'material-ui/TextField';
 import { authenticate } from '../actions/authenticate'
 // compose
 import compose from 'recompose/compose';
-import classnames from 'classnames'
 
 // REDUX-FORM
 import { Field, reduxForm } from 'redux-form'
-// React Router
-import { Link } from 'react-router-dom'
 
 const styles = theme => ({
     container: {
