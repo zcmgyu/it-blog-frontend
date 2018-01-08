@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { ForgotPasswordEmail, ForgotPasswordReset } from '../components/ForgotPasswordForm'
+import ForgotPasswordSendMail from '../components/ForgotPasswordSendMail'
+import ForgotPasswordReset from '../components/ForgotPasswordReset'
 import { Route, Switch } from 'react-router-dom'
 
 // compose
@@ -31,29 +32,19 @@ const styles = theme => ({
 
 class ForgotPasswordPage extends Component {
     render() {
+        const { match, classes } = this.props
         return (
-            <Switch>
-                <Route exact path="/" component={ForgotPasswordEmail} />
-                <Route path="/reset" component={ForgotPasswordReset} />
-            </Switch>
+            <div className={classes.container}>
+                <Route exact path={match.url} component={ForgotPasswordSendMail} />
+                <Route path={`${match.url}/reset`} component={ForgotPasswordReset} />
+            </div>
         )
     }
 }
-
-ForgotPasswordPage.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    statusText: state.auth.statusText
-})
 
 export default compose(
     withStyles(styles),
     reduxForm({
         form: 'forgot-password'
-    }),
-    connect(mapStateToProps)
+    })
 )(ForgotPasswordPage);
-// <ForgotPasswordForm />
