@@ -51,7 +51,7 @@ export const refreshToken = (refresh_token) => {
 export const register = (payload) => {
     const { name, username, email, password } = payload
     return axios.request({
-        baseURL: "http://localhost:9292/api/register",
+        baseURL: "http://localhost:9292/api/users",
         method: "post",
         data: {
             name,
