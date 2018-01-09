@@ -1,12 +1,18 @@
 import { GET_CURRENT_USER, FORGOT_PASSWORD } from '../actiontypes/user'
 
-const user = (state = {}, action) => {
+const initialState = {
+    send_mail: {
+        loading: false
+    }
+}
+
+const user = (state = initialState, action) => {
     switch (action.type) {
         case GET_CURRENT_USER.SUCCESS: {
             console.log("REDUCER >>> GET_CURRENT_USER.SUCCESS")
             return {
                 ...state,
-                current_user_info: action.response.data.result
+                current_user_info: action.response.data.result,
             }
         }
         case GET_CURRENT_USER.FAILURE: {
@@ -15,17 +21,51 @@ const user = (state = {}, action) => {
                 current_user_info: null
             }
         }
-        case FORGOT_PASSWORD.SUCCESS: {
-            console.log('PRINT OUT ACTION')
-            console.log(action)
+        case FORGOT_PASSWORD.REQUEST: {
             return {
                 ...state,
                 send_mail: {
-                    message: action.response.data.result.message
+                    loading: true
                 }
             }
         }
+        case FORGOT_PASSWORD.SUCCESS: {
+            return {
+                ...state,
+                send_mail: {
+                    message: action.response.data.result.message,
+                    loading: false
+                }
+            }
+        }
+        case FORGOT_PASSWORD.FAILURE: {
+            console.log("FORGOT_PASSWORD.FAILURE")
+            console.log(action)
+            console.log(action.error.response.data.result.message)
+            return {
+                ...state,
+                send_mail: {
+                    message: action.error.response.data.result.message,
+                    loading: false
+                }
+            }
+        }
+        // default: {
+        //     return {
+        //         ...initialState,
+        //         current_user_info: {
+        //             ...state.current_user_info
+        //         }
+        //     }
+        // }
         default: {
+            console.log("DEFAULT")
+            const test = {
+                        ...initialState,
+                        current_user_info: {
+                            ...state.current_user_info
+                        }}
+            console.log(test)
             return {
                 ...state
             }

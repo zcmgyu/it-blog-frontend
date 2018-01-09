@@ -14,7 +14,7 @@ const styles = theme => ({
     
 });
 
-function Loading(props) {
+const Loading = (props) => {
     const { classes } = props;
     return (
         <div>

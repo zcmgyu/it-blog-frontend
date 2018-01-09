@@ -12,6 +12,7 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import { forgotPassword } from '../actions/user'
+import Loading from './Loading'
 
 
 // REDUX-FORM
@@ -53,11 +54,14 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
 
 
 export const ForgotPasswordSendEmail = (props) => {
-    const { handleSubmit, classes, dispatch } = props
-    
+    const { handleSubmit, classes, dispatch, loading } = props
+
     const handleSendMail = (data) => {
         dispatch(forgotPassword.request(data))
     };
+
+    console.log("loading");
+    console.log(loading);
 
     return (
         <form onSubmit={props.handleSubmit(handleSendMail)}>
@@ -73,8 +77,10 @@ export const ForgotPasswordSendEmail = (props) => {
                 required={true}
             />
             <div className={classes.actionContainer}>
-                <Button type="submit" raised color="primary" className={classes.button} >Submit</Button>
+                <Button type="submit" raised color="primary" disabled={loading} className={classes.button} >Submit</Button>
             </div>
+            {loading ? <h1>FUCK</h1> : null}
+            {loading && <Loading />}
         </form>
     )
 }
@@ -84,8 +90,7 @@ ForgotPasswordSendEmail.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    statusText: state.auth.statusText
+    loading: state.user.send_mail.loading
 })
 
 export default compose(

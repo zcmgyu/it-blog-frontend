@@ -2,15 +2,11 @@ import React, { Component } from 'react'
 import ForgotPasswordSendMail from '../components/ForgotPasswordSendMail'
 import ForgotPasswordReset from '../components/ForgotPasswordReset'
 import ForgotPasswordSendDone from '../components/ForgotPasswordSendDone'
-import { Route, Switch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 // compose
 import compose from 'recompose/compose'
-import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-
-import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
 
 const styles = theme => ({
     container: {
@@ -46,7 +42,7 @@ class ForgotPasswordPage extends Component {
 
 export default compose(
     withStyles(styles),
-    reduxForm({
-        form: 'forgot-password'
-    })
 )(ForgotPasswordPage);
+
+
+

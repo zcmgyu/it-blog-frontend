@@ -12,6 +12,7 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import { resetPassword } from '../actions/user'
+import PushNotification from './PushNotification'
 
 
 // REDUX-FORM
@@ -51,7 +52,7 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
 };
 
 export const ForgotPasswordReset = (props) => {
-    const { handleSubmit, classes, dispatch } = props
+    const { handleSubmit, classes, dispatch, message } = props
 
     const handleResetPassword = (data) => {
         // Add token
@@ -60,7 +61,7 @@ export const ForgotPasswordReset = (props) => {
         console.log(search)
         const searchParams = new URLSearchParams(search)
         const token = searchParams.get('token')
-        data = {...data, token}
+        data = { ...data, token }
         dispatch(resetPassword.request(data))
     };
 
@@ -84,6 +85,7 @@ export const ForgotPasswordReset = (props) => {
             <div className={classes.actionContainer}>
                 <Button type="submit" raised color="primary" className={classes.button} >Submit</Button>
             </div>
+            {message && <PushNotification open={true} message={message}/> }
         </form>
     )
 }
@@ -92,15 +94,29 @@ ForgotPasswordReset.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
+const validate = (values, props) => {
+    const errors = {};
+    const { password, confirmPassword } = values
+    if (password !== confirmPassword) {
+        errors.confirmPassword = "Password does not match the confirm password."
+    }
+    if (props.message) {
+        errors.confirmPassword = props.message
+    }
+    console.log('errors')
+    console.log(errors)
+    return errors;
+}
+
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    statusText: state.auth.statusText
+    message: state.user.send_mail.message
 })
 
 export default compose(
     withStyles(styles),
     reduxForm({
-        form: 'forgot-password'
+        form: 'forgot-password',
+        validate
     }),
     connect(mapStateToProps)
 )(ForgotPasswordReset);

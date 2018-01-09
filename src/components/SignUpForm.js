@@ -105,6 +105,14 @@ function SignUpForm(props) {
                         required={true}
                     />
 
+                    <Field
+                        name="confirm_password"
+                        component={renderTextField}
+                        label="Confirm Password"
+                        type="password"
+                        required={true}
+                    />
+
 
                     <div className={classes.actionContainer}>
                         <Button type="submit" raised color="primary" className={classes.button} >Sign Up</Button>
@@ -124,6 +132,17 @@ const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
     statusText: state.auth.statusText
 })
+
+const validate = (value) => {
+    const errors = {}
+
+    // Verify confirm password
+    const {confirm_password, password} = value
+    if (confirm_password === password) {
+        errors.confirm_password = 'Password does not match the confirm password.'
+    }
+    return errors;
+}
 
 export default compose(
     withStyles(styles),

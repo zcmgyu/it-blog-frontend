@@ -39,12 +39,15 @@ export function* resetPasswordWorker({ payload }) {
         console.log(payload)
         const response = yield call(API.resetPassword, payload)
         if (response.status === 200) {
+            console.log("COME 1")
             yield put(forgotPassword.success(response))
-            yield put(push('/forgot-password/done'))
         } else {
+            console.log("COME 2")
             yield put(forgotPassword.failure(response))
         }
+        yield put(push('/forgot-password/done'))
     } catch (error) {
+        console.log("COME 3")
         yield put(forgotPassword.failure(error))
     }
 }
