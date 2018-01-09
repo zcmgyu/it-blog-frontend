@@ -11,11 +11,12 @@ import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
-import { forgotPassword } from '../actions/user'
+import { resetPassword } from '../actions/user'
 
 
 // REDUX-FORM
 import { Field, reduxForm } from 'redux-form'
+// import { URLSearchParams } from 'url';
 
 const styles = theme => ({
     container: {
@@ -49,18 +50,22 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
     )
 };
 
-
-
-
 export const ForgotPasswordReset = (props) => {
     const { handleSubmit, classes, dispatch } = props
 
-    const handleSendMail = (data) => {
-        dispatch(forgotPassword.request(data))
+    const handleResetPassword = (data) => {
+        // Add token
+        const { search } = props.location
+        console.log('search')
+        console.log(search)
+        const searchParams = new URLSearchParams(search)
+        const token = searchParams.get('token')
+        data = {...data, token}
+        dispatch(resetPassword.request(data))
     };
-    
+
     return (
-        <form onSubmit={handleSubmit(handleSendMail)}>
+        <form onSubmit={handleSubmit(handleResetPassword)}>
             <Typography type="headline" component="h2">Reset Password</Typography>
             <Field
                 name="password"

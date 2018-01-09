@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ForgotPasswordSendMail from '../components/ForgotPasswordSendMail'
 import ForgotPasswordReset from '../components/ForgotPasswordReset'
+import ForgotPasswordSendDone from '../components/ForgotPasswordSendDone'
 import { Route, Switch } from 'react-router-dom'
 
 // compose
@@ -37,6 +38,7 @@ class ForgotPasswordPage extends Component {
             <div className={classes.container}>
                 <Route exact path={match.url} component={ForgotPasswordSendMail} />
                 <Route path={`${match.url}/reset`} component={ForgotPasswordReset} />
+                <Route path={`${match.url}/done`}  component={ForgotPasswordSendDone} />
             </div>
         )
     }

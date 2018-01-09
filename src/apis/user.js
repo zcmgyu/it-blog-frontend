@@ -12,23 +12,33 @@ export const getCurrentUser = (payload, headers) => {
 
 }
 
-export const forgetPassword = (payload, headers) => {
+
+// FORGOT PASSWORD
+export const sendMail = (payload) => {
     const { email } = payload
     return axios.request({
         baseURL: `http://localhost:9292/api/forgot_password`,
-        headers,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        method: 'POST',
         params: { email }
     })
         .then(response => response)
         .catch(error => { throw error })
 }
 
-export const resetPassword = (payload, headers) => {
-    const { email } = payload
+export const resetPassword = (payload) => {
+    const { password, token } = payload
+    console.log("resetPassword API")
+    console.log(payload)
     return axios.request({
         baseURL: `http://localhost:9292/api/forgot_password/reset`,
-        headers,
-        params: { email }
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        method: 'POST',
+        params: { password, token }
     })
         .then(response => response)
         .catch(error => { throw error })

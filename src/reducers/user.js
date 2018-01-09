@@ -1,4 +1,4 @@
-import { GET_CURRENT_USER } from '../actiontypes/user'
+import { GET_CURRENT_USER, FORGOT_PASSWORD } from '../actiontypes/user'
 
 const user = (state = {}, action) => {
     switch (action.type) {
@@ -13,6 +13,16 @@ const user = (state = {}, action) => {
             return {
                 ...state,
                 current_user_info: null
+            }
+        }
+        case FORGOT_PASSWORD.SUCCESS: {
+            console.log('PRINT OUT ACTION')
+            console.log(action)
+            return {
+                ...state,
+                send_mail: {
+                    message: action.response.data.result.message
+                }
             }
         }
         default: {
