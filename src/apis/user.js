@@ -30,8 +30,6 @@ export const sendMail = (payload) => {
 
 export const resetPassword = (payload) => {
     const { password, token } = payload
-    console.log("resetPassword API")
-    console.log(payload)
     return axios.request({
         baseURL: `http://localhost:9292/api/forgot_password/reset`,
         headers: {

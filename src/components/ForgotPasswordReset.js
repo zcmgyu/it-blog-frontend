@@ -96,8 +96,6 @@ const validate = (values, props) => {
     if (props.message) {
         errors.confirmPassword = props.message
     }
-    console.log('errors')
-    console.log(errors)
     return errors;
 }
 

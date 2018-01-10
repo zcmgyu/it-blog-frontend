@@ -66,8 +66,6 @@ function SignUpForm(props) {
     const { classes, handleSubmit, dispatch } = props;
 
     const handleSignUp = (payload) => {
-        console.log('INSIDE authenticate')
-        console.log(payload)
         dispatch(register.request(payload))
     };
 

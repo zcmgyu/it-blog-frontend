@@ -51,12 +51,10 @@ class PublishModal extends Component {
 
     handleChange = key => event => {
         this.setState({ [key]: event.target.value });
-        console.log(`key: ${key}: ${event.target.value}`)
     };
 
     createPost = publicPost => () => {
         const { category } = this.state
-        console.log('Category -> ' + category)
         const {content} = this.props.post
         const title = content.blocks[0].text
         const tags = ['test1', 'test2']

@@ -2,8 +2,6 @@ import axios from 'axios'
 
 export const createPost = (payload, headers) => {
     const { title, content, category, tags } = payload
-    console.log('INSIDE apis/createPost')
-    console.log(payload)
     return axios.request({
         baseURL: 'http://localhost:9292/api/posts',
         method: 'POST',
@@ -24,8 +22,6 @@ export const createPost = (payload, headers) => {
 
 export const getPost = (payload, headers) => {
     const { postId } = payload
-    console.log('postId')
-    console.log(postId)
     return axios.request({
         baseURL: `http://localhost:9292/api/posts/${postId}`,
         method: 'GET',

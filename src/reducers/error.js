@@ -13,11 +13,6 @@ const error = (state = initialState, action) => {
         console.log("RESET_ERROR_MESSAGE")
         return initialState
     } else if (error) {
-        console.log("DEBUG ERROR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.")
-        // const { response } = error
-        // if (typeof response !== 'undefined' || typeof response.data.result.message !== 'undefined') {
-            
-        // }
         try {
             const { message } = error.response.data.result
             console.log(message)
@@ -27,11 +22,12 @@ const error = (state = initialState, action) => {
             }
         } catch (error) {
             console.log("CONME TO ERROR LIKE EXPECTED")
+            return {
+                open: true,
+                message: 'Something went wrong!'
+            }
         }
-        return {
-            open: true,
-            message: 'Something went wrong!'
-        }
+        
 
     }
 

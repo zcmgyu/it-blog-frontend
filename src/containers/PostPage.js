@@ -14,7 +14,6 @@ const styles = theme => ({
 class PostPage extends Component {
 
     handleOnSave = (editorContext, content) => {
-        console.log("SAVING DATA!!");
         console.info({
             editor_content: JSON.stringify(content),
             text_content: editorContext.getTextFromEditor(content)

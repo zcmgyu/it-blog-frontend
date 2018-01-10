@@ -26,7 +26,6 @@ export function requireAuth(Component) {
 
         render() {
             if(this.props.isAuthenticated === true) {
-                console.log(this.props)
                 return (
                     <Component {...this.props} />
                 )
