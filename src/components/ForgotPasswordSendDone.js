@@ -3,19 +3,14 @@ import React from 'react';
 // React-Redux
 import { connect } from 'react-redux'
 // React Router
-import { Route, Switch } from 'react-router-dom'
 import compose from 'recompose/compose'
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-import TextField from 'material-ui/TextField';
-import { forgotPassword } from '../actions/user'
 
 
 // REDUX-FORM
-import { Field, reduxForm } from 'redux-form'
 import { push } from 'react-router-redux';
 
 const styles = theme => ({
@@ -34,7 +29,7 @@ const styles = theme => ({
 });
 
 export const ForgotPasswordSendDone = (props) => {
-    const { handleSubmit, classes, dispatch } = props
+    const { classes } = props
 
     const handleClick = (data) => {
         props.dispatch(push('/sign-in'))

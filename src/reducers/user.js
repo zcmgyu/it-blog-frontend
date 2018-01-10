@@ -60,12 +60,6 @@ const user = (state = initialState, action) => {
         // }
         default: {
             console.log("DEFAULT")
-            const test = {
-                        ...initialState,
-                        current_user_info: {
-                            ...state.current_user_info
-                        }}
-            console.log(test)
             return {
                 ...state
             }

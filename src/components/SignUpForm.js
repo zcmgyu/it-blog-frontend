@@ -135,7 +135,6 @@ const mapStateToProps = state => ({
 
 const validate = (value) => {
     const errors = {}
-
     // Verify confirm password
     const {confirm_password, password} = value
     if (confirm_password === password) {
@@ -147,6 +146,7 @@ const validate = (value) => {
 export default compose(
     withStyles(styles),
     reduxForm({
+        validate,
         form: 'simple'
     }),
     connect(mapStateToProps)

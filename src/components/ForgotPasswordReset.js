@@ -3,16 +3,13 @@ import React from 'react';
 // React-Redux
 import { connect } from 'react-redux'
 // React Router
-import { Route, Switch } from 'react-router-dom'
 import compose from 'recompose/compose'
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import { resetPassword } from '../actions/user'
-import PushNotification from './PushNotification'
 
 
 // REDUX-FORM
@@ -52,14 +49,11 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
 };
 
 export const ForgotPasswordReset = (props) => {
-    const { handleSubmit, classes, dispatch, message } = props
+    const { handleSubmit, classes, dispatch } = props
 
     const handleResetPassword = (data) => {
         // Add token
-        const { search } = props.location
-        console.log('search')
-        console.log(search)
-        const searchParams = new URLSearchParams(search)
+        const searchParams = new URLSearchParams(props.location.search)
         const token = searchParams.get('token')
         data = { ...data, token }
         dispatch(resetPassword.request(data))
@@ -85,7 +79,6 @@ export const ForgotPasswordReset = (props) => {
             <div className={classes.actionContainer}>
                 <Button type="submit" raised color="primary" className={classes.button} >Submit</Button>
             </div>
-            {message && <PushNotification open={true} message={message}/> }
         </form>
     )
 }
@@ -108,15 +101,11 @@ const validate = (values, props) => {
     return errors;
 }
 
-const mapStateToProps = state => ({
-    message: state.user.send_mail.message
-})
-
 export default compose(
     withStyles(styles),
     reduxForm({
         form: 'forgot-password',
         validate
     }),
-    connect(mapStateToProps)
+    connect()
 )(ForgotPasswordReset);

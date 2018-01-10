@@ -3,11 +3,9 @@ import React from 'react';
 // React-Redux
 import { connect } from 'react-redux'
 // React Router
-import { Route, Switch } from 'react-router-dom'
 import compose from 'recompose/compose'
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
@@ -50,18 +48,12 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
     )
 };
 
-
-
-
 export const ForgotPasswordSendEmail = (props) => {
-    const { handleSubmit, classes, dispatch, loading } = props
+    const { classes, dispatch, loading } = props
 
     const handleSendMail = (data) => {
         dispatch(forgotPassword.request(data))
     };
-
-    console.log("loading");
-    console.log(loading);
 
     return (
         <form onSubmit={props.handleSubmit(handleSendMail)}>
@@ -79,7 +71,6 @@ export const ForgotPasswordSendEmail = (props) => {
             <div className={classes.actionContainer}>
                 <Button type="submit" raised color="primary" disabled={loading} className={classes.button} >Submit</Button>
             </div>
-            {loading ? <h1>FUCK</h1> : null}
             {loading && <Loading />}
         </form>
     )
