@@ -21,7 +21,7 @@ const error = (state = initialState, action) => {
                 message: message || 'Something went wrong!'
             }
         } catch (error) {
-            console.log("CONME TO ERROR LIKE EXPECTED")
+            console.log("COME TO ERROR LIKE EXPECTED")
             return {
                 open: true,
                 message: 'Something went wrong!'

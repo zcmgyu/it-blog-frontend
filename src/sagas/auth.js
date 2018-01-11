@@ -9,11 +9,7 @@ import { push } from 'react-router-redux'
 // Worker
 export function* authenticateWorker({ credentials }) {
     try {
-        console.log('COME TO authenticateWorker')
-        console.log(credentials)
         const response = yield call(API.doLogin, credentials)
-        console.log('RESPONSE')
-        console.log(response)
         yield put(authenticate.success(response))
         const { access_token, refresh_token } = response.data
         yield setAuth({ access_token, refresh_token })
@@ -21,9 +17,28 @@ export function* authenticateWorker({ credentials }) {
         yield getCurrentUserWorker();
         // Back to previous page
         yield put(push('/'))
-    } catch (err) {
-        console.log('FAILURE')
-        yield put(authenticate.failure(err))
+    } catch (error) {
+        console.log('FAILURE DEBUG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..')
+        console.log(error.response)
+        const { status, data } = error.response
+
+        if (status === 400 && data.error === 'invalid_grant') {
+            let newError = {
+                ...error,
+                response: {
+                    ...error.response,
+                    data: {
+                        ...error.response.data,
+                        result: {
+                            message: "The username or password is incorrect."
+                        }
+                    }
+                }
+            }
+            yield put(authenticate.failure(newError))
+        } else {
+            yield put(authenticate.failure(error))
+        }
     }
 }
 

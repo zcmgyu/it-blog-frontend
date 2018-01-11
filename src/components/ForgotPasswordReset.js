@@ -93,9 +93,6 @@ const validate = (values, props) => {
     if (password !== confirmPassword) {
         errors.confirmPassword = "Password does not match the confirm password."
     }
-    if (props.message) {
-        errors.confirmPassword = props.message
-    }
     return errors;
 }
 

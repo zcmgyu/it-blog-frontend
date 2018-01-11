@@ -104,7 +104,7 @@ function SignUpForm(props) {
                     />
 
                     <Field
-                        name="confirm_password"
+                        name="confirmPassword"
                         component={renderTextField}
                         label="Confirm Password"
                         type="password"
@@ -131,12 +131,13 @@ const mapStateToProps = state => ({
     statusText: state.auth.statusText
 })
 
-const validate = (value) => {
-    const errors = {}
-    // Verify confirm password
-    const {confirm_password, password} = value
-    if (confirm_password === password) {
-        errors.confirm_password = 'Password does not match the confirm password.'
+const validate = (values) => {
+    console.log("COME TO VALIDATE SIGN-UP")
+    console.log(values)
+    const errors = {};
+    const { password, confirmPassword } = values
+    if (password !== confirmPassword) {
+        errors.confirmPassword = "Password does not match the confirm password."
     }
     return errors;
 }
@@ -144,8 +145,8 @@ const validate = (value) => {
 export default compose(
     withStyles(styles),
     reduxForm({
-        validate,
-        form: 'simple'
+        form: 'sign-up',
+        validate        
     }),
     connect(mapStateToProps)
 )(SignUpForm);

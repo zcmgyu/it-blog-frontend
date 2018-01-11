@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { requireAuth } from '../components/AuthenticatedComponent'
-
+import withTracker from '../HOCs/withTracker'
 // Containers
 import SignInPage from '../containers/SignInPage'
 import SignUpPage from '../containers/SignUpPage'
@@ -31,7 +31,7 @@ const RootRouter = () => {
             <Route path="/tag" component={TagPage} />
             <Route path="/search" component={SearchPage} />
             <Route exact path="/posts" component={requireAuth(PostEditorPage)} />
-            <Route exact path="/posts/:post_path" component={PostDetailPage} />
+            <Route exact path="/posts/:post_path" component={withTracker(PostDetailPage)} />
             <Route exact path="/posts/:post_path/edit" component={requireAuth(EditPostPage)} />
             <Route path='/logout' component={requireAuth(Logout)} />
             <Route component={NotFound} />

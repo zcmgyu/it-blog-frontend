@@ -21,12 +21,8 @@ export function* sendMailRequestWorker({ payload }) {
     try {
         console.log(payload)
         const response = yield call(API.sendMail, payload)
-        if (response.status === 200) {
-            yield put(forgotPassword.success(response))
-            yield put(push('/forgot-password/done'))
-        }
-        console.log(response)
         yield put(forgotPassword.success(response))
+        yield put(push('/forgot-password/done'))
     } catch (error) {
         yield put(forgotPassword.failure(error))
     }
