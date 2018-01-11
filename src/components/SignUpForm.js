@@ -132,8 +132,6 @@ const mapStateToProps = state => ({
 })
 
 const validate = (values) => {
-    console.log("COME TO VALIDATE SIGN-UP")
-    console.log(values)
     const errors = {};
     const { password, confirmPassword } = values
     if (password !== confirmPassword) {

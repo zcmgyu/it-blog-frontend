@@ -9,7 +9,6 @@ const initialState = {
 const user = (state = initialState, action) => {
     switch (action.type) {
         case GET_CURRENT_USER.SUCCESS: {
-            console.log("REDUCER >>> GET_CURRENT_USER.SUCCESS")
             return {
                 ...state,
                 current_user_info: action.response.data.result,
@@ -39,9 +38,6 @@ const user = (state = initialState, action) => {
             }
         }
         case FORGOT_PASSWORD.FAILURE: {
-            console.log("FORGOT_PASSWORD.FAILURE")
-            console.log(action)
-            console.log(action.error.response.data.result.message)
             return {
                 ...state,
                 send_mail: {
@@ -59,7 +55,6 @@ const user = (state = initialState, action) => {
         //     }
         // }
         default: {
-            console.log("DEFAULT")
             return {
                 ...state
             }

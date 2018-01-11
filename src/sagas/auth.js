@@ -18,8 +18,6 @@ export function* authenticateWorker({ credentials }) {
         // Back to previous page
         yield put(push('/'))
     } catch (error) {
-        console.log('FAILURE DEBUG >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..')
-        console.log(error.response)
         const { status, data } = error.response
 
         if (status === 400 && data.error === 'invalid_grant') {
@@ -74,7 +72,6 @@ export function* authenticatedRequest(...args) {
                     yield authenticatedRequest(...args)
                 } catch (error) {
                     yield removeAuth()
-                    console.log('Cannot refresh access token')
                 }
             } else {
                 throw error;
