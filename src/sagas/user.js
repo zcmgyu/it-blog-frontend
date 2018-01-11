@@ -19,7 +19,6 @@ export function* getCurrentUserWorker() {
 // Worker
 export function* sendMailRequestWorker({ payload }) {
     try {
-        console.log(payload)
         const response = yield call(API.sendMail, payload)
         yield put(forgotPassword.success(response))
         yield put(push('/forgot-password/done'))
@@ -30,13 +29,10 @@ export function* sendMailRequestWorker({ payload }) {
 
 export function* resetPasswordWorker({ payload }) {
     try {
-        console.log("resetPassword API")
-        console.log(payload)
         const response = yield call(API.resetPassword, payload)
         yield put(forgotPassword.success(response))
         yield put(push('/forgot-password/done'))
     } catch (error) {
-        console.log("COME 3")
         yield put(forgotPassword.failure(error))
     }
 }
