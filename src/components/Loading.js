@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import { CircularProgress } from 'material-ui/Progress';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import { CircularProgress } from 'material-ui/Progress'
 
 const styles = theme => ({
     progress: {
@@ -12,19 +12,19 @@ const styles = theme => ({
         transform: 'translate(-50%, -50%) !important'
     },
     
-});
+})
 
 const Loading = (props) => {
-    const { classes } = props;
+    const { classes } = props
     return (
         <div>
             <CircularProgress className={classes.progress} color="accent" thickness={7} />
         </div>
-    );
+    )
 }
 
 Loading.propTypes = {
     classes: PropTypes.object.isRequired,
-};
+}
 
-export default withStyles(styles)(Loading);
+export default withStyles(styles)(Loading)

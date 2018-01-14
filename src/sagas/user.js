@@ -2,7 +2,7 @@ import { put, call } from 'redux-saga/effects'
 import * as API from '../apis/user'
 import { getCurrentUser, forgotPassword } from '../actions/user'
 import { authenticatedRequest } from './auth'
-import { push } from 'react-router-redux';
+import { push } from 'react-router-redux'
 
 // Worker
 export function* getCurrentUserWorker() {

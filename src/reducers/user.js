@@ -11,7 +11,7 @@ const user = (state = initialState, action) => {
         case GET_CURRENT_USER.SUCCESS: {
             return {
                 ...state,
-                current_user_info: action.response.data.result,
+                current_user_info: action.response.data.result.data,
             }
         }
         case GET_CURRENT_USER.FAILURE: {

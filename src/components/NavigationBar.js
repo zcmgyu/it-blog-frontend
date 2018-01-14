@@ -4,22 +4,23 @@ import compose from 'recompose/compose'
 import { withStyles } from 'material-ui/styles'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { toggleLoginDialog } from '../actions/dialog'
+
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
-import LoginDialog from '../components/LoginDialog'
 import TextField from 'material-ui/TextField'
 import Notification from './Nofitication'
-import Publish from './Publish'
-import EditButton from './EditButton'
-import PopoverMenu from './PopoverMenu'
 import Avatar from 'material-ui/Avatar'
-import { Route, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch, Link, withRouter } from 'react-router-dom'
 import { push } from 'react-router-redux'
-import { Link } from 'react-router-dom'
+// Actions
+import { toggleLoginDialog } from '../actions/dialog'
 
+// Components
+import PopoverMenu from './PopoverMenu'
+import EditButton from './Post/EditButton'
+import Publish from './Post/Publish'
 
 const styles = theme => ({
     root: {
@@ -37,7 +38,7 @@ const styles = theme => ({
     },
     fixedPosition: {
         left: 0,
-        position: "fixed",
+        position: 'fixed',
         top: 0
     },
     textField: {
@@ -53,65 +54,52 @@ const styles = theme => ({
     }
 })
 
+
 class NavigationBar extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            isPublish: window.location.pathname === '/post'
-        }
-    }
-
     handleChange = event => {
-        this.setState({ [event.target.name]: event.target.value });
-    };
-
-    showMenu = () => {
-
+        this.setState({ [event.target.name]: event.target.value })
     }
 
     render() {
-        const { classes, title, loginDialogState, isAuthenticated } = this.props
+        const { classes, title, isAuthenticated } = this.props
         return (
             <div className={classes.root} >
 
-                <AppBar position="static" className={classes.fixedPosition} color='inherit'>
+                <AppBar position='static' className={classes.fixedPosition} color='inherit'>
                     <Toolbar>
-                        <Typography type="title" color="inherit" className={classes.flex} component={Link} to="/">{title}</Typography>
+                        <Typography type='title' color='inherit' className={classes.flex} component={Link} to='/'>{title}</Typography>
                         <Switch>
-                            <Route exact path="/posts" component={Publish} />
-                            <Route exact path="/posts/:post_path" component={EditButton} />
-                            <Route exact path="/posts/:post_path/edit" component={Publish} />
+                            <Route path='/posts/create' render={() => <Publish name='Publish' />} />
+                            <Route path='/posts/:postId/:transliterated/edit' render={() => <Publish name='Update' />} />
+                            <Route path='/posts/:postId/:transliterated' component={EditButton} />
                         </Switch>
-
                         <TextField
-                            id="search"
-                            label="Search"
-                            type="search"
+                            id='search'
+                            label='Search'
+                            type='search'
                             className={classes.textField}
                         />
                         <Notification />
                         {
                             isAuthenticated ?
                                 <PopoverMenu>
-                                    <Avatar alt="Remy Sharp" src="https://cdn-images-1.medium.com/fit/c/100/100/0*bh4kZqN3bPPuk15J.jpg" className={classes.avatar} />
+                                    <Avatar alt='Remy Sharp' src='https://cdn-images-1.medium.com/fit/c/100/100/0*bh4kZqN3bPPuk15J.jpg' className={classes.avatar} />
                                 </PopoverMenu>
                                 :
-                                <Button color="inherit" component={Link} to="/sign-in">Sign In</Button>
+                                <Button color='inherit' component={Link} to='/sign-in'>Sign In</Button>
                         }
                     </Toolbar>
 
                 </AppBar>
-
-                <LoginDialog open={loginDialogState} />
             </div>
         )
     }
 
 
 }
-// <Button color="contrast" href="/mypage">My Page</Button> 
+// <Button color='contrast' href='/mypage'>My Page</Button> 
 // <IconButton>
-// <Avatar alt="Remy Sharp" src="https://material-ui-1dab0.firebaseapp.com/static/images/remy.jpg" className={classes.avatar} />
+// <Avatar alt='Remy Sharp' src='https://material-ui-1dab0.firebaseapp.com/static/images/remy.jpg' className={classes.avatar} />
 // </IconButton>
 NavigationBar.propTypes = {
     classes: PropTypes.object.isRequired,

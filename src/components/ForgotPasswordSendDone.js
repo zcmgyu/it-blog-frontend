@@ -1,17 +1,17 @@
 // React
-import React from 'react';
+import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
 // React Router
 import compose from 'recompose/compose'
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import Typography from 'material-ui/Typography'
+import Button from 'material-ui/Button'
 
 
 // REDUX-FORM
-import { push } from 'react-router-redux';
+import { push } from 'react-router-redux'
 
 const styles = theme => ({
     root: {
@@ -26,14 +26,14 @@ const styles = theme => ({
         flexDirection: 'column',
         alignContent: 'center'
     }
-});
+})
 
 export const ForgotPasswordSendDone = (props) => {
     const { classes } = props
 
     const handleClick = (data) => {
         props.dispatch(push('/sign-in'))
-    };
+    }
 
     return (
         <div>
@@ -50,7 +50,7 @@ export const ForgotPasswordSendDone = (props) => {
 
 ForgotPasswordSendDone.propTypes = {
     classes: PropTypes.object.isRequired,
-};
+}
 
 const mapStateToProps = state => ({
     message: state.user.send_mail.message
@@ -59,4 +59,4 @@ const mapStateToProps = state => ({
 export default compose(
     withStyles(styles),
     connect(mapStateToProps)
-)(ForgotPasswordSendDone);
+)(ForgotPasswordSendDone)

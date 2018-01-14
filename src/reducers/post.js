@@ -1,5 +1,5 @@
 // import * as ActionsTypes from '../actiontypes/post'
-import { POST, GET_POST, SAVE_DRAFT, CLEAN_CURRENT_POST, EDIT_POST_TRIGGER } from '../actiontypes/post'
+import { CREATE_POST, UPDATE_POST, GET_POST, SAVE_DRAFT, CLEAN_CURRENT_POST, EDIT_POST_TRIGGER } from '../actiontypes/post'
 
 const initialState = {
     current_post: {
@@ -9,31 +9,37 @@ const initialState = {
 
 const auth = (state = initialState, action) => {
     switch (action.type) {
-        case POST.SUCCESS: {
-            return {
-                ...state,
-                content: action.payload
-            }
-        }
-        case POST.FAILURE: {
-            return {
-                ...state
-            }
-        }
+        // case CREATE_POST.SUCCESS: {
+        // console.log('CREATE_POST.SUCCESS')
+        // case UPDATE_POST.SUCCESS: {
+        // return {
+        // ...state,
+        // content: action.response.data.result
+        // }
+        // }
+        // case CREATE_POST.FAILURE: {
+        // // case UPDATE_POST.FAILURE: {
+        //     return {
+        //         ...state
+        //     }
+        // }
         case SAVE_DRAFT.REQUEST: {
             const content = action.payload
-            const title = content.blocks[0].text
+            // const title = content.blocks[0] && content.blocks[0].text
             return {
                 ...state,
-                title,
-                content
+                current_post: {
+                    ...state.current_post,
+                    content
+                }
+
             }
         }
         case GET_POST.SUCCESS: {
             return {
                 ...state,
                 current_post: action.response.data.result,
-                isLoaded: true
+                is_loaded: true
             }
         }
         case GET_POST.FAILURE: {
@@ -46,13 +52,14 @@ const auth = (state = initialState, action) => {
             return {
                 ...state,
                 current_post: {},
-                isLoaded: false
+                is_loaded: false,
+                is_edit: false
             }
         }
         case EDIT_POST_TRIGGER: {
             return {
                 ...state,
-                isEdit: !state.isEdit
+                is_edit: !state.is_edit
             }
         }
         default: {

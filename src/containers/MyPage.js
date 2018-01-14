@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles'
 
 // MATERIAL UI
-import Typography from 'material-ui/Typography';
-import Avatar from 'material-ui/Avatar';
-import Tabs, { Tab } from 'material-ui/Tabs';
+import Typography from 'material-ui/Typography'
+import Avatar from 'material-ui/Avatar'
+import Tabs, { Tab } from 'material-ui/Tabs'
 
 
 // ACTIONS
@@ -36,20 +36,20 @@ const styles = {
         width: 100,
         height: 100,
     }
-};
+}
 
 class MyPage extends Component {
     state = {
         value: 0,
-    };
+    }
 
     handleChange = (event, value) => {
-        this.setState({ value });
-    };
+        this.setState({ value })
+    }
 
 
     render() {
-        const { classes } = this.props;
+        const { classes } = this.props
         return (
             <div className={classes.container}>
                 <div className={classes.profile}>

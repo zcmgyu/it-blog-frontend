@@ -13,10 +13,10 @@ const styles = theme => ({
     wrapper: {
         maxWidth: 500
     }
-});
+})
 
 const NotFound = (props) => {
-    const { classes } = props;
+    const { classes } = props
     return (
         <div className={classes.root}>
             <div className={classes.wrapper} >
@@ -29,7 +29,7 @@ const NotFound = (props) => {
             </div>
         </div>
     )
-};
+}
 
 
-export default withStyles(styles)(NotFound);
+export default withStyles(styles)(NotFound)

@@ -21,7 +21,7 @@ export const doLogin = (credentials) => {
         .then(response => response)
         .catch(function (error) {
             throw error
-        });
+        })
 
 }
 
@@ -44,7 +44,7 @@ export const refreshToken = (refresh_token) => {
         .then(response => response)
         .catch(function (error) {
             throw error
-        });
+        })
 
 }
 
@@ -64,6 +64,6 @@ export const register = (payload) => {
         .then(response => response)
         .catch(function (error) {
             throw error
-        });
+        })
 
 }

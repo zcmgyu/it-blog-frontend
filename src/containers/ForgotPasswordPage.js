@@ -6,7 +6,7 @@ import { Route } from 'react-router-dom'
 
 // compose
 import compose from 'recompose/compose'
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
     container: {
@@ -25,7 +25,7 @@ const styles = theme => ({
         flexDirection: 'column',
         alignContent: 'center'
     }
-});
+})
 
 class ForgotPasswordPage extends Component {
     render() {
@@ -42,7 +42,7 @@ class ForgotPasswordPage extends Component {
 
 export default compose(
     withStyles(styles),
-)(ForgotPasswordPage);
+)(ForgotPasswordPage)
 
 
 

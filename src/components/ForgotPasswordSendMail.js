@@ -1,14 +1,14 @@
 // React
-import React from 'react';
+import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
 // React Router
 import compose from 'recompose/compose'
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
-import TextField from 'material-ui/TextField';
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import Typography from 'material-ui/Typography'
+import Button from 'material-ui/Button'
+import TextField from 'material-ui/TextField'
 import { forgotPassword } from '../actions/user'
 import Loading from './Loading'
 
@@ -33,7 +33,7 @@ const styles = theme => ({
         flexDirection: 'column',
         alignContent: 'center'
     }
-});
+})
 
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => {
     return (
@@ -46,14 +46,14 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
             {...custom}
         />
     )
-};
+}
 
 export const ForgotPasswordSendEmail = (props) => {
     const { classes, dispatch, loading } = props
 
     const handleSendMail = (data) => {
         dispatch(forgotPassword.request(data))
-    };
+    }
 
     return (
         <form onSubmit={props.handleSubmit(handleSendMail)}>
@@ -78,7 +78,7 @@ export const ForgotPasswordSendEmail = (props) => {
 
 ForgotPasswordSendEmail.propTypes = {
     classes: PropTypes.object.isRequired,
-};
+}
 
 const mapStateToProps = state => ({
     loading: state.user.send_mail.loading
@@ -90,4 +90,4 @@ export default compose(
         form: 'forgot-password'
     }),
     connect(mapStateToProps)
-)(ForgotPasswordSendEmail);
+)(ForgotPasswordSendEmail)

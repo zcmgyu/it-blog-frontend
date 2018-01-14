@@ -67,8 +67,8 @@ class SharingButton extends Component {
 
 
     handleRequestClose = () => {
-        this.setState({ copied: false });
-    };
+        this.setState({ copied: false })
+    }
 
     toggleDrawer = open => () => {
         this.setState({

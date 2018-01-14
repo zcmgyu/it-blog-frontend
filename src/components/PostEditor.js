@@ -270,17 +270,13 @@ class PostEditor extends Component {
         return defaultOptions
     }
 
-    // handleOnChange = () => {
-    //     console.log('Chaging')
-    //     this.danteEditor.onChange();
-    // }
 
     // componentDidMount() {
-    //     console.log("Get current editor state: ");
-    //     const currentContent = this.danteEditor.state.editorState.getCurrentContent();
-    //     console.log(convertToRaw(currentContent));
+    //     console.log("Get current editor state: ")
+    //     const currentContent = this.danteEditor.state.editorState.getCurrentContent()
+    //     console.log(convertToRaw(currentContent))
     //     console.log("Get first block:")
-    //     console.log(currentContent.getFirstBlock().getText());
+    //     console.log(currentContent.getFirstBlock().getText())
     //     console.log(this.danteEditor)
     //     console.log(this.danteEditor.onChange)
     //     this.handleOnChange = this.danteEditor.onChange

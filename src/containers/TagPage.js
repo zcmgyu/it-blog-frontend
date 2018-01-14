@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Typography from 'material-ui/Typography'
 import PostCard from '../components/PostCard'
-import Chip from 'material-ui/Chip';
-import Tabs, { Tab } from 'material-ui/Tabs';
+import Chip from 'material-ui/Chip'
+import Tabs, { Tab } from 'material-ui/Tabs'
 
 
 const styles = theme => ({
@@ -38,25 +38,25 @@ const styles = theme => ({
     chip: {
         margin: theme.spacing.unit,
     }
-});
+})
 
 const handleClick = () => {
-    alert('You clicked the Chip.'); // eslint-disable-line no-alert
+    alert('You clicked the Chip.') // eslint-disable-line no-alert
 }
 
 class TagPage extends Component {
 
     state = {
         value: 0,
-    };
+    }
 
     handleChange = (event, value) => {
-        this.setState({ value });
-    };
+        this.setState({ value })
+    }
 
 
     render() {
-        const { classes } = this.props;
+        const { classes } = this.props
         return (
             <div className={classes.container}>
                 <div className={classes.wrapper}>
@@ -115,6 +115,6 @@ class TagPage extends Component {
 
 TagPage.propTypes = {
     classes: PropTypes.object.isRequired,
-};
+}
 
-export default withStyles(styles)(TagPage);
+export default withStyles(styles)(TagPage)

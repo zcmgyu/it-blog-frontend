@@ -1,20 +1,20 @@
 // React
-import React from 'react';
+import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
 // React Router
 import compose from 'recompose/compose'
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
-import TextField from 'material-ui/TextField';
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import Typography from 'material-ui/Typography'
+import Button from 'material-ui/Button'
+import TextField from 'material-ui/TextField'
 import { resetPassword } from '../actions/user'
 
 
 // REDUX-FORM
 import { Field, reduxForm } from 'redux-form'
-// import { URLSearchParams } from 'url';
+// import { URLSearchParams } from 'url'
 
 const styles = theme => ({
     container: {
@@ -33,7 +33,7 @@ const styles = theme => ({
         flexDirection: 'column',
         alignContent: 'center'
     }
-});
+})
 
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => {
     return (
@@ -46,7 +46,7 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
             {...custom}
         />
     )
-};
+}
 
 export const ForgotPasswordReset = (props) => {
     const { handleSubmit, classes, dispatch } = props
@@ -57,7 +57,7 @@ export const ForgotPasswordReset = (props) => {
         const token = searchParams.get('token')
         data = { ...data, token }
         dispatch(resetPassword.request(data))
-    };
+    }
 
     return (
         <form onSubmit={handleSubmit(handleResetPassword)}>
@@ -85,15 +85,15 @@ export const ForgotPasswordReset = (props) => {
 
 ForgotPasswordReset.propTypes = {
     classes: PropTypes.object.isRequired,
-};
+}
 
 const validate = (values, props) => {
-    const errors = {};
+    const errors = {}
     const { password, confirmPassword } = values
     if (password !== confirmPassword) {
         errors.confirmPassword = "Password does not match the confirm password."
     }
-    return errors;
+    return errors
 }
 
 export default compose(
@@ -103,4 +103,4 @@ export default compose(
         validate
     }),
     connect()
-)(ForgotPasswordReset);
+)(ForgotPasswordReset)

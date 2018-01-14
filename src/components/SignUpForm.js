@@ -1,17 +1,17 @@
 // React
-import React from 'react';
+import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
 
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
-import TextField from 'material-ui/TextField';
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import Paper from 'material-ui/Paper'
+import Typography from 'material-ui/Typography'
+import Button from 'material-ui/Button'
+import TextField from 'material-ui/TextField'
 import { register } from '../actions/authenticate'
 // compose
-import compose from 'recompose/compose';
+import compose from 'recompose/compose'
 
 // REDUX-FORM
 import { Field, reduxForm } from 'redux-form'
@@ -46,7 +46,7 @@ const styles = theme => ({
     }
 
 
-});
+})
 
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => {
     return (
@@ -59,15 +59,15 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
             {...custom}
         />
     )
-};
+}
 
 function SignUpForm(props) {
     // const { pristine, submitting, handleSubmit, dispatch, open } = props
-    const { classes, handleSubmit, dispatch } = props;
+    const { classes, handleSubmit, dispatch } = props
 
     const handleSignUp = (payload) => {
         dispatch(register.request(payload))
-    };
+    }
 
 
     return (
@@ -119,12 +119,12 @@ function SignUpForm(props) {
                 </form>
             </Paper>
         </div>
-    );
+    )
 }
 
 SignUpForm.propTypes = {
     classes: PropTypes.object.isRequired,
-};
+}
 
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
@@ -132,12 +132,12 @@ const mapStateToProps = state => ({
 })
 
 const validate = (values) => {
-    const errors = {};
+    const errors = {}
     const { password, confirmPassword } = values
     if (password !== confirmPassword) {
         errors.confirmPassword = "Password does not match the confirm password."
     }
-    return errors;
+    return errors
 }
 
 export default compose(
@@ -147,4 +147,4 @@ export default compose(
         validate        
     }),
     connect(mapStateToProps)
-)(SignUpForm);
+)(SignUpForm)

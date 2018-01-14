@@ -1,13 +1,13 @@
 import axios from 'axios'
 
 export const createPost = (payload, headers) => {
-    const { title, content, category, tags } = payload
+    const { content, category, tags } = payload
     return axios.request({
         baseURL: 'http://localhost:9292/api/posts',
         method: 'POST',
         headers,
         data: {
-            'title': title,
+            // 'title': title,
             'content': content,
             'categoryId': category,
             'tags': tags
@@ -16,7 +16,27 @@ export const createPost = (payload, headers) => {
         .then(response => response)
         .catch(function (error) {
             throw error
-        });
+        })
+}
+
+export const updatePost = (payload, headers) => {
+    const { id, content, category, tags, authorId } = payload
+    return axios.request({
+        baseURL: `http://localhost:9292/api/posts/${id}`,
+        method: 'PUT',
+        headers,
+        data: {
+            // 'title': title,
+            'content': content,
+            'categoryId': category,
+            'tags': tags,
+            'authorId': authorId
+        }
+    })
+        .then(response => response)
+        .catch(function (error) {
+            throw error
+        })
 
 }
 
@@ -30,6 +50,6 @@ export const getPost = (payload, headers) => {
         .then(response => response)
         .catch(function (error) {
             throw error
-        });
+        })
 
 }

@@ -1,14 +1,14 @@
 // REACT-REDUX
-import React from 'react';
-import compose from 'recompose/compose';
+import React from 'react'
+import compose from 'recompose/compose'
 import { connect } from 'react-redux'
 
 // MATERIAL UI
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles'
 
-import Button from 'material-ui/Button';
-import Dialog, { DialogTitle, DialogContent, DialogContentText, DialogActions } from 'material-ui/Dialog';
-import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button'
+import Dialog, { DialogTitle, DialogContent, DialogContentText, DialogActions } from 'material-ui/Dialog'
+import TextField from 'material-ui/TextField'
 
 // REDUX-FORM
 import validate from '../validation/login'
@@ -29,7 +29,7 @@ const styles = theme => ({
         marginRight: theme.spacing.unit,
         width: 200,
     },
-});
+})
 
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => {
     return (
@@ -42,17 +42,17 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
             {...custom}
         />
     )
-};
+}
 
 const LoginDialog = (props) => {
     const { pristine, submitting, handleSubmit, dispatch, open } = props
     const handleRequestClose = () => {
         dispatch(toggleLoginDialog())
-    };
+    }
 
     const handleLogin = (data) => {
         dispatch(authenticate.request(data))
-    };
+    }
 
     const handleRegister = () => {
 
@@ -88,7 +88,7 @@ const LoginDialog = (props) => {
             </form>
         </Dialog >
 
-    );
+    )
 }
 
 const mapStateToProps = state => ({
@@ -103,4 +103,4 @@ export default compose(
         validate
     }),
     connect(mapStateToProps)
-)(LoginDialog);
+)(LoginDialog)

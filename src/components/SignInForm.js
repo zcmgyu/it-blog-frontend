@@ -1,17 +1,17 @@
 // React
-import React from 'react';
+import React from 'react'
 // React-Redux
 import { connect } from 'react-redux'
 
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
-import TextField from 'material-ui/TextField';
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import Paper from 'material-ui/Paper'
+import Typography from 'material-ui/Typography'
+import Button from 'material-ui/Button'
+import TextField from 'material-ui/TextField'
 import { authenticate } from '../actions/authenticate'
 // compose
-import compose from 'recompose/compose';
+import compose from 'recompose/compose'
 import classnames from 'classnames'
 
 // REDUX-FORM
@@ -47,7 +47,7 @@ const styles = theme => ({
     }
 
 
-});
+})
 
 const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => {
     return (
@@ -60,15 +60,15 @@ const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) 
             {...custom}
         />
     )
-};
+}
 
 function SignInForm(props) {
     // const { pristine, submitting, handleSubmit, dispatch, open } = props
-    const { classes, handleSubmit, dispatch } = props;
+    const { classes, handleSubmit, dispatch } = props
 
     const handleSignIn = (data) => {
         dispatch(authenticate.request(data))
-    };
+    }
 
     return (
         <div className={classes.container}>
@@ -98,12 +98,12 @@ function SignInForm(props) {
                 </form>
             </Paper>
         </div>
-    );
+    )
 }
 
 SignInForm.propTypes = {
     classes: PropTypes.object.isRequired,
-};
+}
 
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
@@ -116,4 +116,4 @@ export default compose(
         form: 'simple'
     }),
     connect(mapStateToProps)
-)(SignInForm);
+)(SignInForm)

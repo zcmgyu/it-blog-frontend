@@ -14,7 +14,7 @@ export function* authenticateWorker({ credentials }) {
         const { access_token, refresh_token } = response.data
         yield setAuth({ access_token, refresh_token })
         // Get user info
-        yield getCurrentUserWorker();
+        yield getCurrentUserWorker()
         // Back to previous page
         yield put(push('/'))
     } catch (error) {
@@ -56,29 +56,29 @@ export function* registerWorker({ payload }) {
 // finally the function you’ll use inside your sagas to make requests 
 export function* authenticatedRequest(...args) {
     // get the current access token, wait for it if it needs refreshing 
-    const { access_token, refresh_token } = yield getAuth();
+    const { access_token, refresh_token } = yield getAuth()
     if (access_token) {
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${access_token}`
-        };
+        }
         try {
-            return yield call(...args, headers);
+            return yield call(...args, headers)
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 try {
-                    const response = yield call(API.refreshToken, refresh_token);
+                    const response = yield call(API.refreshToken, refresh_token)
                     yield setAuth(response.data)
                     yield authenticatedRequest(...args)
                 } catch (error) {
                     yield removeAuth()
                 }
             } else {
-                throw error;
+                throw error
             }
         }
     } else {
         // Required Login
-        // throw new AuthenticationSagaError("No access token");
+        // throw new AuthenticationSagaError("No access token")
     }
 }

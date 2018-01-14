@@ -1,5 +1,5 @@
-import React from 'react';
-import Menu, { MenuItem } from 'material-ui/Menu';
+import React from 'react'
+import Menu, { MenuItem } from 'material-ui/Menu'
 import IconButton from 'material-ui/IconButton'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
@@ -13,7 +13,7 @@ const menu = [
     },
     {
         name: 'Create post',
-        uri: '/posts'
+        uri: '/posts/create'
     },
     {
         name: 'Logout',
@@ -25,19 +25,19 @@ class PopoverMenu extends React.Component {
     state = {
         anchorEl: null,
         open: false,
-    };
+    }
 
     handleClick = event => {
-        this.setState({ open: true, anchorEl: event.currentTarget });
-    };
+        this.setState({ open: true, anchorEl: event.currentTarget })
+    }
 
     handleClose = () => {
-        this.setState({ open: false });
-    };
+        this.setState({ open: false })
+    }
 
     handleMenuClick = uri => () => {
         this.props.dispatch(push(uri))
-        this.handleClose();
+        this.handleClose()
     }
 
     renderMenuList = () => (
@@ -66,7 +66,7 @@ class PopoverMenu extends React.Component {
                     {this.renderMenuList()}
                 </Menu>
             </div>
-        );
+        )
     }
 }
 

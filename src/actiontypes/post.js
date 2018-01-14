@@ -9,7 +9,8 @@
 
 import createRequestTypes from './'
 
-export const POST = createRequestTypes('POST')
+export const CREATE_POST = createRequestTypes('CREATE_POST')
+export const UPDATE_POST = createRequestTypes('UPDATE_POST')
 export const GET_POST = createRequestTypes('GET_POST')
 export const SAVE_DRAFT = createRequestTypes('SAVE_DRAFT')
 

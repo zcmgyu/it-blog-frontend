@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Chip from 'material-ui/Chip';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import Chip from 'material-ui/Chip'
 
 const styles = theme => ({
   chip: {
@@ -11,7 +11,7 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
-});
+})
 
 class ChipsArray extends React.Component {
     state = {
@@ -23,7 +23,7 @@ class ChipsArray extends React.Component {
         { key: 4, label: 'Vue.js' },
         { key: 5, label: 'Node.js' },
       ],
-    };
+    }
   
     styles = {
       chip: {
@@ -33,17 +33,17 @@ class ChipsArray extends React.Component {
         display: 'flex',
         flexWrap: 'wrap',
       },
-    };
+    }
   
     handleRequestDelete = data => () => {
-      const chipData = [...this.state.chipData];
-      const chipToDelete = chipData.indexOf(data);
-      chipData.splice(chipToDelete, 1);
-      this.setState({ chipData });
-    };
+      const chipData = [...this.state.chipData]
+      const chipToDelete = chipData.indexOf(data)
+      chipData.splice(chipToDelete, 1)
+      this.setState({ chipData })
+    }
   
     render() {
-      const { classes } = this.props;
+      const { classes } = this.props
   
       return (
         <div className={classes.row}>
@@ -55,15 +55,15 @@ class ChipsArray extends React.Component {
                 onRequestDelete={this.handleRequestDelete(data)}
                 className={classes.chip}
               />
-            );
+            )
           })}
         </div>
-      );
+      )
     }
   }
   
   ChipsArray.propTypes = {
     classes: PropTypes.object.isRequired,
-  };
+  }
   
-  export default withStyles(styles)(ChipsArray);
+  export default withStyles(styles)(ChipsArray)

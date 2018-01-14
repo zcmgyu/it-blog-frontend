@@ -15,14 +15,14 @@ const styles = theme => ({
 
 class Publish extends Component {
     constructor(props) {
-        super(props);
+        super(props)
 
         this.state = {
             open: false,
             anchorEl: null,
-        };
+        }
 
-        this.button = 'abc';
+        this.button = 'abc'
 
     }
 
@@ -36,26 +36,27 @@ class Publish extends Component {
     handleRequestClose = () => {
         this.setState({
             open: false,
-        });
-    };
+        })
+    }
 
     render() {
-        const { classes } = this.props
+        const { classes, name } = this.props
         const {
             open,
             anchorEl
         } = this.state
+        
         return (
             <div>
                 <Button
                     className={classes.button}
                     color="default"
                     ref={node => {
-                        this.button = node;
+                        this.button = node
                     }}
                     onClick={this.handleClickButton}
                 >
-                    Publish
+                    {name}
                 <FileUpload className={classes.rightIcon} />
                 </Button>
 
@@ -66,7 +67,7 @@ class Publish extends Component {
                     anchorReference={'anchorEl'}
                     onClose={this.handleRequestClose}
                 >
-                    <PublishModal />
+                    <PublishModal name={name}/>
                 </Popover>
             </div>
         )
@@ -75,6 +76,6 @@ class Publish extends Component {
 
 Publish.propTypes = {
     classes: PropTypes.object.isRequired,
-};
+}
 
-export default withStyles(styles)(Publish);
+export default withStyles(styles)(Publish)

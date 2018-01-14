@@ -1,10 +1,16 @@
 import action from './'
-import { POST, SAVE_DRAFT, GET_POST, CLEAN_CURRENT_POST, EDIT_POST_TRIGGER } from '../actiontypes/post'
+import { CREATE_POST, UPDATE_POST, SAVE_DRAFT, GET_POST, CLEAN_CURRENT_POST, EDIT_POST_TRIGGER } from '../actiontypes/post'
 
-export const post = {
-    request: payload => action(POST.REQUEST, { payload }),
-    success: response => action(POST.SUCCESS, { response }),
-    failure: error => action(POST.FAILURE, { error }),
+export const createPost = {
+    request: payload => action(CREATE_POST.REQUEST, { payload }),
+    success: response => action(CREATE_POST.SUCCESS, { response }),
+    failure: error => action(CREATE_POST.FAILURE, { error }),
+}
+
+export const updatePost = {
+    request: payload => action(UPDATE_POST.REQUEST, { payload }),
+    success: response => action(UPDATE_POST.SUCCESS, { response }),
+    failure: error => action(UPDATE_POST.FAILURE, { error }),
 }
 
 export const getPost = {

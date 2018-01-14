@@ -255,4 +255,4 @@ const defaultOptions = (options) => {
     return defaultOptions
 }
 
-export default defaultOptions;
+export default defaultOptions

@@ -6,29 +6,29 @@ export default function withTracker(WrappedComponent, options = {}) {
         ReactGA.set({
             page,
             ...options
-        });
-        ReactGA.pageview(page);
-    };
+        })
+        ReactGA.pageview(page)
+    }
 
     const HOC = class extends Component {
         componentDidMount() {
-            const page = this.props.location.pathname;
-            trackPage(page);
+            const page = this.props.location.pathname
+            trackPage(page)
         }
 
         componentWillReceiveProps(nextProps) {
-            const currentPage = this.props.location.pathname;
-            const nextPage = nextProps.location.pathname;
+            const currentPage = this.props.location.pathname
+            const nextPage = nextProps.location.pathname
 
             if (currentPage !== nextPage) {
-                trackPage(nextPage);
+                trackPage(nextPage)
             }
         }
 
         render() {
-            return <WrappedComponent {...this.props} />;
+            return <WrappedComponent {...this.props} />
         }
-    };
+    }
 
-    return HOC;
+    return HOC
 }

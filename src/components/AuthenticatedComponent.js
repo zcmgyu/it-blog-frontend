@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
 // ACTIONS
@@ -10,11 +10,11 @@ export function requireAuth(Component) {
     class AuthenticatedComponent extends React.Component {
 
         componentWillMount() {
-            this.checkAuth(this.props);
+            this.checkAuth(this.props)
         }
 
         componentWillReceiveProps(nextProps) {
-            this.checkAuth(nextProps);
+            this.checkAuth(nextProps)
         }
 
         checkAuth({isAuthenticated, dispatch}) {
@@ -37,8 +37,8 @@ export function requireAuth(Component) {
 
     const mapStateToProps = (state) => ({
         isAuthenticated: state.auth.isAuthenticated
-    });
+    })
 
-    return connect(mapStateToProps)(AuthenticatedComponent);
+    return connect(mapStateToProps)(AuthenticatedComponent)
 
 }

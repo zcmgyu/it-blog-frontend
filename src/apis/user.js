@@ -8,7 +8,7 @@ export const getCurrentUser = (payload, headers) => {
         method: 'GET'
     })
         .then(response => response)
-        .catch(error => { throw error });
+        .catch(error => { throw error })
 
 }
 

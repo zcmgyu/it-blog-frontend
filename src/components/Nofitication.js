@@ -20,14 +20,14 @@ const styles = theme => ({
 
 class Notification extends Component {
     constructor(props) {
-        super(props);
+        super(props)
 
         this.state = {
             open: false,
             anchorEl: null,
-        };
+        }
 
-        this.button = 'abc';
+        this.button = 'abc'
         
     }
 
@@ -43,8 +43,8 @@ class Notification extends Component {
     handleRequestClose = () => {
         this.setState({
             open: false,
-        });
-    };
+        })
+    }
 
     render() {
         const { classes } = this.props
@@ -56,7 +56,7 @@ class Notification extends Component {
             <div>
                 <IconButton
                     ref={node => {
-                        this.button = node;
+                        this.button = node
                     }}
                     
                     onClick={this.handleClickButton.bind(this)}
@@ -87,6 +87,6 @@ class Notification extends Component {
 
 Notification.propTypes = {
     classes: PropTypes.object.isRequired,
-};
+}
 
-export default withStyles(styles)(Notification);
+export default withStyles(styles)(Notification)

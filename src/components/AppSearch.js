@@ -1,31 +1,31 @@
-import React from 'react';
-import compose from 'recompose/compose';
-import pure from 'recompose/pure';
-import PropTypes from 'prop-types';
-import withWidth, { isWidthUp } from 'material-ui/utils/withWidth';
-import SearchIcon from 'material-ui-icons/Search';
-import { fade } from 'material-ui/styles/colorManipulator';
-import { withStyles } from 'material-ui/styles';
+import React from 'react'
+import compose from 'recompose/compose'
+import pure from 'recompose/pure'
+import PropTypes from 'prop-types'
+import withWidth, { isWidthUp } from 'material-ui/utils/withWidth'
+import SearchIcon from 'material-ui-icons/Search'
+import { fade } from 'material-ui/styles/colorManipulator'
+import { withStyles } from 'material-ui/styles'
 
 
-let searchTimer;
+let searchTimer
 
 function initDocsearch() {
   searchTimer = setInterval(() => {
     if (window.docsearch && document.querySelector('#docsearch-input')) {
-      clearInterval(searchTimer);
+      clearInterval(searchTimer)
       window.docsearch({
         apiKey: '1d8534f83b9b0cfea8f16498d19fbcab',
         indexName: 'material-ui',
         inputSelector: '#docsearch-input',
         debug: false, // Set debug to true if you want to inspect the dropdown
-      });
+      })
     }
-  }, 100);
+  }, 100)
 }
 
 function removeDocsearch() {
-  clearInterval(searchTimer);
+  clearInterval(searchTimer)
 }
 
 const styles = theme => ({
@@ -106,17 +106,17 @@ const styles = theme => ({
       outline: 0,
     },
   },
-});
+})
 
 function AppSearch(props) {
-  const { classes, width } = props;
+  const { classes, width } = props
 
   if (!isWidthUp('sm', width)) {
-    removeDocsearch();
-    return null;
+    removeDocsearch()
+    return null
   }
 
-  initDocsearch();
+  initDocsearch()
 
   return (
     <div className={classes.wrapper}>
@@ -125,13 +125,13 @@ function AppSearch(props) {
       </div>
       <input id="docsearch-input" className={classes.input} />
     </div>
-  );
+  )
 }
 
 AppSearch.propTypes = {
   classes: PropTypes.object.isRequired,
   width: PropTypes.string.isRequired,
-};
+}
 
 export default compose(
   withStyles(styles, {
@@ -139,4 +139,4 @@ export default compose(
   }),
   withWidth(),
   pure,
-)(AppSearch);
+)(AppSearch)

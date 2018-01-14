@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import once from 'lodash.once'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import NavigationBar from '../components/NavigationBar'
@@ -19,18 +19,17 @@ class App extends Component {
     
 
     initReactGA = () => {
-        console.log("INIT REACT GA")
-        ReactGA.initialize('UA-111506394-1');
+        ReactGA.initialize('UA-111506394-1')
         // Send initial test view
-        ReactGA.pageview(window.location.pathname + window.location.search);
-    };
+        ReactGA.pageview(window.location.pathname + window.location.search)
+    }
 
-    tapInitOnce = once(() => injectTapEventPlugin());
+    tapInitOnce = once(() => injectTapEventPlugin())
     render() {
         return (
             <ConnectedRouter history={history}>
                 <div>
-                    <NavigationBar title="LTP - IT Blog" />
+                    <NavigationBar title="IT Blog" />
                     <RootRouter />
                     <PushNotification />
                 </div>
