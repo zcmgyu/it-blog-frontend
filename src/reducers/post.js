@@ -24,15 +24,14 @@ const auth = (state = initialState, action) => {
         //     }
         // }
         case SAVE_DRAFT.REQUEST: {
-            const content = action.payload
-            // const title = content.blocks[0] && content.blocks[0].text
+            const { content, shortContent } = action.payload
             return {
                 ...state,
                 current_post: {
                     ...state.current_post,
-                    content
+                    content,
+                    shortContent
                 }
-
             }
         }
         case GET_POST.SUCCESS: {

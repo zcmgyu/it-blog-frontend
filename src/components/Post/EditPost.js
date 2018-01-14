@@ -12,7 +12,13 @@ const Edit = (props) => {
             editor_content: JSON.stringify(content),
             text_content: editorContext.getTextFromEditor(content)
         })
-        props.dispatch(saveDraft.request(content))
+        // Get short content
+        const rawText = editorContext.getTextFromEditor(content)
+        const removedFirstLine = rawText.substring(rawText.indexOf('\n') + 1)
+        const withoutBreaks = removedFirstLine.replace(/[\n\r]+/g, '\n');
+        const shortContent = withoutBreaks.trim().substring(0, 156);
+
+        this.props.dispatch(saveDraft.request({content, shortContent}))
     }
 
     if (isLoaded && authorId === userId) {
