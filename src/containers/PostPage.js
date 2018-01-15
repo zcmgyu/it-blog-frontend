@@ -31,7 +31,7 @@ class PostPage extends Component {
             <Switch>
                 <Route path={`${match.url}/create`} component={requireAuth(CreatePost)} />
                 <Route path={`${match.url}/:postId/:transliterated/edit`} component={requireAuth(EditPost)} />
-                <Route path={`${match.url}/:postId/:transliterated`} component={withTracker(ViewPost)} />
+                <Route exact path={`${match.url}/:postId/:transliterated`} component={withTracker(ViewPost)} />
             </Switch >
         )
     }

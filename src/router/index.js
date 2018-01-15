@@ -14,10 +14,6 @@ import SearchPage from '../containers/SearchPage'
 import Logout from '../components/Logout'
 import NotFound from '../components/NotFound'
 
-// const ReadOnLyPostPage = () => (<PostPage readOnly={true} />)
-// const EditablePostPage = () => (<PostPage readOnly={false} />)
-
-
 const RootRouter = () => {
     return (
         <Switch>
@@ -34,9 +30,5 @@ const RootRouter = () => {
         </Switch>
     )
 }
-
-// <Route exact path='/posts' component={requireAuth(EditablePostPage)} />
-// <Route path='/posts/:postId/:transliterated' component={withTracker(ReadOnLyPostPage)} />
-// <Route exact path='/posts/:postId/:transliterated/edit' component={requireAuth(EditablePostPage)} />
 
 export default RootRouter

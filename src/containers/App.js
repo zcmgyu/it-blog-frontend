@@ -21,7 +21,7 @@ class App extends Component {
     initReactGA = () => {
         ReactGA.initialize('UA-111506394-1')
         // Send initial test view
-        ReactGA.pageview(window.location.pathname + window.location.search)
+        // ReactGA.pageview(window.location.pathname + window.location.search)
     }
 
     tapInitOnce = once(() => injectTapEventPlugin())
