@@ -3,8 +3,10 @@ import { withStyles } from 'material-ui/styles'
 import PostCard2 from '../components/PostCard2'
 import Typography from 'material-ui/Typography'
 import Tabs, { Tab } from 'material-ui/Tabs'
-
-
+import compose from 'recompose/compose'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import { getTop4ByCategory } from "../actions/post";
 
 const styles = theme => ({
     textField: {
@@ -42,30 +44,42 @@ class HomePage extends Component {
         value: 0,
     }
 
+    
+    componentWillMount() {
+        this.props.dispatch(getTop4ByCategory.request({type: 'latest'}))
+    }
+
     handleChange = (event, value) => {
         this.setState({ value })
+    }
+
+    renderSection(props) {
+        const { classes } = props
+        return (
+            <div className={classes.section}>
+                <Typography type="title" className={classes.sessionTitle}>Category 1</Typography>
+                <PostCard2 />
+                <PostCard2 />
+                <PostCard2 />
+                <PostCard2 />
+            </div>
+        )
     }
 
     render() {
         const { classes } = this.props
         const { value } = this.state
-        
+
         return (
             <div className={classes.container}>
                 <div>
                     <Tabs value={value} onChange={this.handleChange}>
-                        <Tab label="Item One" />
-                        <Tab label="Item Two" />
-                        <Tab label="Item Three" href="#basic-tabs" />
+                        <Tab label="Trend" />
+                        <Tab label="Latest" />
+                        <Tab label="Following" href="#basic-tabs" />
                     </Tabs>
                 </div>
-                <div className={classes.section}>
-                    <Typography type="title" className={classes.sessionTitle}>Category 1</Typography>
-                    <PostCard2 />
-                    <PostCard2 />
-                    <PostCard2 />
-                    <PostCard2 />
-                </div>
+
                 <div className={classes.section}>
                     <Typography type="title" className={classes.sessionTitle}>Category 2</Typography>
                     <PostCard2 />
@@ -78,4 +92,8 @@ class HomePage extends Component {
     }
 }
 
-export default withStyles(styles)(HomePage)
+export default compose(
+    withStyles(styles),
+    withRouter,
+    connect()
+)(HomePage)

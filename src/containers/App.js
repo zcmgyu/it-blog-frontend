@@ -19,7 +19,7 @@ class App extends Component {
     
 
     initReactGA = () => {
-        ReactGA.initialize('UA-111506394-1')
+        ReactGA.initialize('UA-111506394-2')
         // Send initial test view
         // ReactGA.pageview(window.location.pathname + window.location.search)
     }

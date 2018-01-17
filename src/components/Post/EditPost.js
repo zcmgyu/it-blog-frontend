@@ -18,7 +18,7 @@ const Edit = (props) => {
         const withoutBreaks = removedFirstLine.replace(/[\n\r]+/g, '\n');
         const shortContent = withoutBreaks.trim().substring(0, 156);
 
-        this.props.dispatch(saveDraft.request({content, shortContent}))
+        props.dispatch(saveDraft.request({content, shortContent}))
     }
 
     if (isLoaded && authorId === userId) {

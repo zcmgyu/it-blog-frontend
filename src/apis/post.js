@@ -47,11 +47,27 @@ export const getPost = (payload, headers) => {
     return axios.request({
         baseURL: `http://localhost:9292/api/posts/${postId}`,
         method: 'GET',
-        headers,
+        headers: {
+            'Content-Type': 'application/json',
+        }
     })
         .then(response => response)
         .catch(function (error) {
             throw error
         })
+}
 
+export const getTop4PostByCategory = (payload) => {
+    const { type } = payload
+    return axios.request({
+        baseURL: `http://localhost:9292/api/posts/top4/${type}`,
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(response => response)
+        .catch(function (error) {
+            throw error
+        })
 }

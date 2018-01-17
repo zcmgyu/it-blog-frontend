@@ -12,6 +12,7 @@ import createRequestTypes from './'
 export const CREATE_POST = createRequestTypes('CREATE_POST')
 export const UPDATE_POST = createRequestTypes('UPDATE_POST')
 export const GET_POST = createRequestTypes('GET_POST')
+export const GET_TOP_4_BY_CATE = createRequestTypes('GET_TOP_4_BY_CATE')
 export const SAVE_DRAFT = createRequestTypes('SAVE_DRAFT')
 
 export const CLEAN_CURRENT_POST = 'CLEAN_CURRENT_POST'

@@ -1,7 +1,7 @@
 import { put, call } from 'redux-saga/effects'
 import * as API from '../apis/post'
 import { push } from 'react-router-redux'
-import { createPost, updatePost, getPost, cleanCurrentPost } from '../actions/post'
+import { createPost, updatePost, getPost, cleanCurrentPost, getTop4ByCategory } from '../actions/post'
 import { authenticatedRequest } from './auth'
 
 // Worker
@@ -40,5 +40,16 @@ export function* getPostWorker({payload}) {
         yield put(getPost.success(response))
     } catch (error) {
         yield put(getPost.failure(error))
+    }
+}
+
+
+// Worker
+export function* getTop4PostByCategoryWorker({payload}) {
+    try {
+        const response = yield call(API.getTop4PostByCategory, payload)
+        yield put(getTop4ByCategory.success(response))
+    } catch (error) {
+        yield put(getTop4ByCategory.failure(error))
     }
 }

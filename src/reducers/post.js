@@ -1,5 +1,6 @@
 // import * as ActionsTypes from '../actiontypes/post'
-import { CREATE_POST, UPDATE_POST, GET_POST, SAVE_DRAFT, CLEAN_CURRENT_POST, EDIT_POST_TRIGGER } from '../actiontypes/post'
+// import { CREATE_POST, UPDATE_POST, GET_POST, SAVE_DRAFT, CLEAN_CURRENT_POST, EDIT_POST_TRIGGER, GET_TOP_4_BY_CATE } from '../actiontypes/post'
+import * as ACT_TYPES from '../actiontypes/post'
 
 const initialState = {
     current_post: {
@@ -9,6 +10,13 @@ const initialState = {
 
 const auth = (state = initialState, action) => {
     switch (action.type) {
+        case ACT_TYPES.GET_TOP_4_BY_CATE.SUCCESS: {
+            return {
+                ...state,
+                list_post: action.response.data.result.data
+            }
+        }
+
         // case CREATE_POST.SUCCESS: {
         // console.log('CREATE_POST.SUCCESS')
         // case UPDATE_POST.SUCCESS: {
@@ -23,7 +31,7 @@ const auth = (state = initialState, action) => {
         //         ...state
         //     }
         // }
-        case SAVE_DRAFT.REQUEST: {
+        case ACT_TYPES.SAVE_DRAFT.REQUEST: {
             const { content, shortContent } = action.payload
             return {
                 ...state,
@@ -34,20 +42,20 @@ const auth = (state = initialState, action) => {
                 }
             }
         }
-        case GET_POST.SUCCESS: {
+        case ACT_TYPES.GET_POST.SUCCESS: {
             return {
                 ...state,
                 current_post: action.response.data.result,
                 is_loaded: true
             }
         }
-        case GET_POST.FAILURE: {
+        case ACT_TYPES.GET_POST.FAILURE: {
             return {
                 ...state,
                 loading_post: false
             }
         }
-        case CLEAN_CURRENT_POST: {
+        case ACT_TYPES.CLEAN_CURRENT_POST: {
             return {
                 ...state,
                 current_post: {},
@@ -55,7 +63,7 @@ const auth = (state = initialState, action) => {
                 is_edit: false
             }
         }
-        case EDIT_POST_TRIGGER: {
+        case ACT_TYPES.EDIT_POST_TRIGGER: {
             return {
                 ...state,
                 is_edit: !state.is_edit

@@ -1,10 +1,10 @@
 import { takeEvery, all } from 'redux-saga/effects'
 import { AUTH, REGISTER } from '../actiontypes/authenticate'
-import { CREATE_POST, UPDATE_POST, GET_POST } from '../actiontypes/post'
+import { CREATE_POST, UPDATE_POST, GET_POST, GET_TOP_4_BY_CATE } from '../actiontypes/post'
 import { CATEGORY } from '../actiontypes/category'
 import { GET_CURRENT_USER, FORGOT_PASSWORD, RESET_PASSWORD } from '../actiontypes/user'
 import { authenticateWorker, registerWorker } from './auth'
-import { createPostWorker, getPostWorker, updatePostWorker } from './post'
+import { createPostWorker, getPostWorker, updatePostWorker, getTop4PostByCategoryWorker } from './post'
 import { getCurrentUserWorker, sendMailRequestWorker, resetPasswordWorker } from './user'
 import { getCategoryWorker } from './category'
 
@@ -28,6 +28,8 @@ export default function* rootSaga() {
         // Watching resetPasswordWorker
         takeEvery(RESET_PASSWORD.REQUEST, resetPasswordWorker),
         // Watching getCategoryWorker
-        takeEvery(CATEGORY.REQUEST, getCategoryWorker)
+        takeEvery(CATEGORY.REQUEST, getCategoryWorker),
+
+        takeEvery(GET_TOP_4_BY_CATE.REQUEST, getTop4PostByCategoryWorker)
     ])
 }
