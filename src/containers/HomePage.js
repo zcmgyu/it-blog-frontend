@@ -44,25 +44,34 @@ class HomePage extends Component {
         value: 0,
     }
 
-    
+
     componentWillMount() {
-        this.props.dispatch(getTop4ByCategory.request({type: 'latest'}))
+        this.props.dispatch(getTop4ByCategory.request({ type: 'latest' }))
     }
 
     handleChange = (event, value) => {
         this.setState({ value })
     }
 
-    renderSection(props) {
-        const { classes } = props
+    renderSection = () => {
+        const { classes, listPost } = this.props
+        console.log('DEBUG >>>>>>>>>>>>')
+        console.log(listPost)
+        if (typeof listPost === 'undefined') {
+            return (<div>Loading</div>)
+        }
         return (
-            <div className={classes.section}>
-                <Typography type="title" className={classes.sessionTitle}>Category 1</Typography>
-                <PostCard2 />
-                <PostCard2 />
-                <PostCard2 />
-                <PostCard2 />
-            </div>
+            listPost.map(group => (
+                <div className={classes.section}>
+                    <Typography type="title" className={classes.sessionTitle}>{group.id}</Typography>
+                    {
+                        group.top_4.map(post => (
+                            <PostCard2 />
+                        ))
+                    }
+                </div>
+            ))
+
         )
     }
 
@@ -79,7 +88,7 @@ class HomePage extends Component {
                         <Tab label="Following" href="#basic-tabs" />
                     </Tabs>
                 </div>
-
+                {this.renderSection()}
                 <div className={classes.section}>
                     <Typography type="title" className={classes.sessionTitle}>Category 2</Typography>
                     <PostCard2 />
@@ -92,8 +101,14 @@ class HomePage extends Component {
     }
 }
 
+const mapStateToProps = (state) => (
+    {
+        listPost: state.post.list_post
+    }
+)
+
 export default compose(
     withStyles(styles),
     withRouter,
-    connect()
+    connect(mapStateToProps)
 )(HomePage)
