@@ -41,7 +41,7 @@ class PublishModal extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            category: this.props.currentPost.categoryId || ''
+            categoryId: this.props.currentPost.categoryId || ''
         }
     }
 
@@ -58,21 +58,23 @@ class PublishModal extends Component {
     }
 
     createPost = publicPost => () => {
-        const { category } = this.state
+        const { categoryId } = this.state
         let { currentPost, dispatch, name } = this.props
         const { content, shortContent } = currentPost
         const tags = this.chips.state.chips
 
 
-        currentPost = { ...currentPost, category, tags }
+        currentPost = { ...currentPost, categoryId, tags }
+        console.log("CURRENT POST")
+        console.log(currentPost)
         if (name === 'Update') {
             console.log('GO TO EDIT POST')
-            // dispatch(updatePost.request({ id, category, tags, publicPost, authorId, content }))
+            // dispatch(updatePost.request({ id, categoryId, tags, publicPost, authorId, content }))
             dispatch(updatePost.request(currentPost))
 
         } else {
             console.log('GO TO CREATE POST')
-            dispatch(createPost.request({ category, tags, publicPost, content, shortContent }))
+            dispatch(createPost.request({ categoryId, tags, publicPost, content, shortContent }))
         }
     }
 
@@ -92,9 +94,9 @@ class PublishModal extends Component {
                 <FormControl className={classes.formControl} fullWidth>
                     <InputLabel htmlFor="category">Caterogy</InputLabel>
                     <Select
-                        value={this.state.category}
-                        onChange={this.handleChange('category')}
-                        input={<Input name="category" id="category" />}
+                        value={this.state.categoryId}
+                        onChange={this.handleChange('categoryId')}
+                        input={<Input name="categoryId" id="categoryId" />}
                     >
                         {
                             this.renderCategoryList()

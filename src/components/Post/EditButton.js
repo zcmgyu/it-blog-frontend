@@ -1,50 +1,54 @@
-import React from 'react'
-import Button from 'material-ui/Button'
-import { Link, withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import compose from 'recompose/compose'
-import { withStyles } from 'material-ui/styles'
-import { editPostTrigger } from '../../actions/post'
-// import { push } from 'react-router-redux'
-
+import React from "react";
+import Button from "material-ui/Button";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import compose from "recompose/compose";
+import { withStyles } from "material-ui/styles";
+import { editPostTrigger } from "../../actions/post";
 
 const styles = theme => ({
-    button: {
-        margin: `${theme.spacing.unit * 2}px ${theme.spacing.unit}px`
+  button: {
+    margin: `${theme.spacing.unit * 2}px ${theme.spacing.unit}px`
+  }
+});
+
+const EditButton = props => {
+  const { classes, currentPost, currentUser } = props;
+
+  const { pathname } = props.location;
+  const editPath = `${pathname}/edit`;
+
+  const handleClick = e => {
+    props.dispatch(editPostTrigger());
+  };
+
+  const { author } = currentPost;
+  const authorId = author ? author.id : null
+
+  
+    if (authorId === currentUser.id) {
+      return (
+        <Button
+          className={classes.button}
+          onClick={handleClick}
+          component={Link}
+          to={editPath}
+        >
+          Edit
+        </Button>
+      );
     }
-})
+  
+  return null;
+};
 
-const EditButton = (props) => {
-    const { classes, currentPost, currentUser } = props
-
-    const { pathname } = props.location
-    const editPath = `${pathname}/edit`
-
-    const handleClick = (e) => {
-        props.dispatch(editPostTrigger())
-    }
-
-    if (currentPost && currentUser) {
-        if (currentPost.authorId === currentUser.id) {
-            return (
-                <Button className={classes.button} onClick={handleClick} component={Link} to={editPath} >
-                    Edit
-                </Button>
-            )
-        }    
-    }
-    return null
-}
-
-const mapStateToProps = state => (
-    {
-        currentPost: state.post.current_post,
-        currentUser: state.user.current_user_info
-    }
-)
+const mapStateToProps = state => ({
+  currentPost: state.post.current_post,
+  currentUser: state.user.current_user_info
+});
 
 export default compose(
-    withStyles(styles),
-    withRouter,
-    connect(mapStateToProps)
-)(EditButton)
+  withStyles(styles),
+  withRouter,
+  connect(mapStateToProps)
+)(EditButton);

@@ -21,18 +21,18 @@ export const createPost = (payload, headers) => {
 }
 
 export const updatePost = (payload, headers) => {
-    const { id, content, category, tags, authorId, shortContent } = payload
+    const { id, content, categoryId, tags, author, shortContent } = payload
     return axios.request({
         baseURL: `http://localhost:9292/api/posts/${id}`,
         method: 'PUT',
         headers,
         data: {
             // 'title': title,
-            'content': content,
-            'shortContent': shortContent,
-            'categoryId': category,
-            'tags': tags,
-            'authorId': authorId,
+            content,
+            shortContent,
+            categoryId,
+            tags,
+            author
         }
     })
         .then(response => response)

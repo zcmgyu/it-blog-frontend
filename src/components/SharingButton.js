@@ -101,8 +101,6 @@ class SharingButton extends Component {
                             <div className={classes.wrapper}>
                                 <Typography type='headline' gutterBottom>Sharing</Typography>
                                 <div className={classes.snsList}>
-
-
                                     <CopyToClipboard text={shareUrl}
                                         onCopy={() => { this.setState({ copied: true }) }}>
                                         <Button fab aria-label="copy-to-clipboard" className={classes.sns}>

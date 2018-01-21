@@ -4408,6 +4408,12 @@ material-ui-icons@^1.0.0-beta.10:
   dependencies:
     recompose "^0.26.0"
 
+material-ui-toggle-icon@^1.0.0-1:
+  version "1.0.0-1"
+  resolved "https://registry.yarnpkg.com/material-ui-toggle-icon/-/material-ui-toggle-icon-1.0.0-1.tgz#3e99d241e5ecf9747ecc9cdcd95debbf81163ba2"
+  dependencies:
+    prop-types "^15.5.10"
+
 material-ui@^1.0.0-beta.25:
   version "1.0.0-beta.26"
   resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-beta.26.tgz#eab7293b22c474e609636989a83f336866cef00a"

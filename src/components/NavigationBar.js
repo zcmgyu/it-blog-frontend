@@ -97,7 +97,7 @@ class NavigationBar extends Component {
 
 
 }
-// <Button color='contrast' href='/mypage'>My Page</Button> 
+// <Button color='contrast' href='/my-page'>My Page</Button> 
 // <IconButton>
 // <Avatar alt='Remy Sharp' src='https://material-ui-1dab0.firebaseapp.com/static/images/remy.jpg' className={classes.avatar} />
 // </IconButton>

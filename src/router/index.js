@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { requireAuth } from '../components/AuthenticatedComponent'
 
 // Containers
@@ -17,8 +17,10 @@ import NotFound from '../components/NotFound'
 const RootRouter = () => {
     return (
         <Switch>
-            <Route exact path='/' component={HomePage} />
-            <Route path='/mypage' component={requireAuth(MyPage)} />
+            <Redirect exact from='/' to='/home/trend' />
+            <Redirect exact from='/home' to='/home/trend' />
+            <Route exact path='/home/:type' component={HomePage} />
+            <Route path='/my-page' component={requireAuth(MyPage)} />
             <Route path='/sign-in' component={SignInPage} />
             <Route path='/sign-up' component={SignUpPage} />
             <Route path='/forgot-password' component={ForgotPasswordPage} />

@@ -20,8 +20,9 @@ const Edit = (props) => {
 
         props.dispatch(saveDraft.request({content, shortContent}))
     }
-
+    console.log("DEBUG 1 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     if (isLoaded && authorId === userId) {
+        console.log("DEBUG 2 ---------------------------------------------------------------------")
         return (
             <div>
                 <h1>EDIT</h1>
@@ -51,7 +52,7 @@ const mapStateToProps = (state) => (
     {
         currentPost: state.post.current_post,
         isLoaded: state.post.is_loaded,
-        authorId: state.post.current_post.authorId,
+        authorId: state.post.current_post.author.id,
         userId: state.user.current_user_info.id
     }
 )

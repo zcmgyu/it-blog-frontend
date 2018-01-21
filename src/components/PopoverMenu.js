@@ -9,7 +9,7 @@ import { push } from 'react-router-redux'
 const menu = [
     {
         name: 'My page',
-        uri: '/mypage'
+        uri: '/my-page'
     },
     {
         name: 'Create post',
