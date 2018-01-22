@@ -29,7 +29,6 @@ const styles = theme => {
       display: "flex",
       margin: theme.spacing.unit * 1
     },
-
     columnLeft: {
       flexGrow: 1,
       display: "flex"

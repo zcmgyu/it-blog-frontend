@@ -1,4 +1,4 @@
-import { GET_CURRENT_USER, FORGOT_PASSWORD } from '../actiontypes/user'
+import { GET_CURRENT_USER, FORGOT_PASSWORD, GET_POSTS_BY_AUTHOR_ID } from '../actiontypes/user'
 
 const initialState = {
     send_mail: {
@@ -46,14 +46,12 @@ const user = (state = initialState, action) => {
                 }
             }
         }
-        // default: {
-        //     return {
-        //         ...initialState,
-        //         current_user_info: {
-        //             ...state.current_user_info
-        //         }
-        //     }
-        // }
+        case GET_POSTS_BY_AUTHOR_ID.SUCCESS: {
+            return {
+                ...state,
+                posts_by_author: action.response.data.result.data
+            }
+        }
         default: {
             return {
                 ...state

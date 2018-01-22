@@ -3,6 +3,7 @@ import * as API from '../apis/user'
 import { getCurrentUser, forgotPassword } from '../actions/user'
 import { authenticatedRequest } from './auth'
 import { push } from 'react-router-redux'
+import { getPostsByAuthorId } from '../actions/user';
 
 // Worker
 export function* getCurrentUserWorker() {
@@ -37,9 +38,11 @@ export function* resetPasswordWorker({ payload }) {
     }
 }
 
-// export function* getTargetUserInfo({ payload }) {
-//     try {
-//         const response = yield authenticatedRequest(API.getUserInfo, payload)
-//     } catch (error) {
-//     }
-// }
+export function* getPostsByAuthorIdWorker({ payload }) {
+    try {
+        const response = yield call(API.getPostsByAuthorId, payload)
+        yield put(getPostsByAuthorId.success(response))
+    } catch (error) {
+        yield put(getPostsByAuthorId.failure(error))
+    }
+}

@@ -41,3 +41,17 @@ export const resetPassword = (payload) => {
         .then(response => response)
         .catch(error => { throw error })
 }
+
+// Get post
+export const getPostsByAuthorId = (payload) => {
+    const { authorId } = payload
+    return axios.request({
+        baseURL: `http://localhost:9292/api/users/${authorId}/posts`,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        method: 'GET'
+    })
+        .then(response => response)
+        .catch(error => { throw error })
+}

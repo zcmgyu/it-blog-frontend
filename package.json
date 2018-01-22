@@ -27,6 +27,7 @@
     "react-tap-event-plugin": "^3.0.2",
     "recompose": "^0.25.0",
     "redux": "^3.7.2",
+    "redux-auth-wrapper": "^2.0.2",
     "redux-form": "^7.0.4",
     "redux-mock-store": "^1.2.1",
     "redux-saga": "^0.15.6",

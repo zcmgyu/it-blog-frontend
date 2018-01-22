@@ -2,19 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PostEditor from "../PostEditor";
 import { getPost, cleanCurrentPost } from "../../actions/post";
+import Profile from "../User/Profile";
+import compose from "recompose/compose";
+import withStyles from "material-ui/styles/withStyles";
 
 class ViewPost extends Component {
-  // componentWillMount () {
-  //     const { dispatch, match } = this.props
-  //     const { postId } = match.params
-  //     dispatch(getPost.request({ postId }))
-  // }
-  
   componentWillMount() {
     const { dispatch } = this.props;
-    dispatch(cleanCurrentPost())
+    dispatch(cleanCurrentPost());
   }
-  
 
   componentDidMount() {
     const { dispatch, match } = this.props;
@@ -28,11 +24,11 @@ class ViewPost extends Component {
   }
 
   render() {
-    const { isLoaded, currentPost } = this.props;
+    const { isLoaded, currentPost, classes } = this.props;
     if (isLoaded) {
       return (
-        <div>
-          <h1>VIEW</h1>
+        <div className={classes.container}>
+          <Profile />
           <PostEditor
             config={{
               debug: true,
@@ -47,9 +43,20 @@ class ViewPost extends Component {
   }
 }
 
+const styles = theme => ({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  }
+});
+
 const mapStateToProps = state => ({
   currentPost: state.post.current_post,
   isLoaded: state.post.is_loaded
 });
 
-export default connect(mapStateToProps)(ViewPost);
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps)
+)(ViewPost);

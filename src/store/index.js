@@ -21,8 +21,6 @@ export default function createStoreWithMiddleware() {
     // Build the middleware for intercepting and dispatching navigation actions
     const routerMid = routerMiddleware(history)
 
-
-
     const middlewares = [sagaMiddleware, routerMid]
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
     const store = createStore(

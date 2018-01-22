@@ -5,11 +5,10 @@ import Typography from "material-ui/Typography";
 import Tabs, { Tab } from "material-ui/Tabs";
 import compose from "recompose/compose";
 import { connect } from "react-redux";
-import { withRouter, Route } from "react-router";
+import { withRouter } from "react-router";
 import { getTop4ByCategory } from "../actions/post";
 import Loading from "../components/Loading";
 import { Link } from "react-router-dom";
-import CardGrid from "../components/Home/CardGrid";
 
 const styles = theme => ({
   textField: {
@@ -39,20 +38,6 @@ const styles = theme => ({
     flexGrow: 1
   }
 });
-
-// const CardGrid = () => {
-//   const { classes, listPost } = this.props;
-//   if (typeof listPost === "undefined") return <Loading />;
-
-//   return listPost.map(group => (
-//     <div key={group.id} className={classes.section}>
-//       <Typography type="display1" className={classes.sectionTitle}>
-//         {group.category}
-//       </Typography>
-//       {group.top4.map(post => <PostCard2 key={post.id} post={post} />)}
-//     </div>
-//   ));
-// };
 
 class HomePage extends Component {
   state = {
@@ -105,7 +90,7 @@ class HomePage extends Component {
   };
 
   render() {
-    const { classes, match } = this.props;
+    const { classes } = this.props;
     const { value } = this.state;
     return (
       <div className={classes.container}>
