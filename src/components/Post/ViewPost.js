@@ -5,6 +5,7 @@ import { getPost, cleanCurrentPost } from "../../actions/post";
 import Profile from "../User/Profile";
 import compose from "recompose/compose";
 import withStyles from "material-ui/styles/withStyles";
+import Loading from "../Loading";
 
 class ViewPost extends Component {
   componentWillMount() {
@@ -39,7 +40,7 @@ class ViewPost extends Component {
         </div>
       );
     }
-    return <div>Not found</div>;
+    return <Loading />;
   }
 }
 

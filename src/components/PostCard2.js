@@ -76,8 +76,6 @@ class PostCard2 extends Component {
   };
 
   showPost = () => {
-    console.log("@DEBUG");
-    console.log(this.props);
     const { id, transliterated } = this.props.post;
     this.props.dispatch(push(`/posts/${id}/${transliterated}`));
   };

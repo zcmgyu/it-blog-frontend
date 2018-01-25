@@ -48,7 +48,6 @@ class PublishModal extends Component {
     componentWillMount() {
         const { categories, dispatch } = this.props
         if (categories.length === 0) {
-            console.log('GET CATEGORY LIST 2')
             dispatch(getCategory.request())
         }
     }
@@ -65,15 +64,10 @@ class PublishModal extends Component {
 
 
         currentPost = { ...currentPost, categoryId, tags }
-        console.log("CURRENT POST")
         console.log(currentPost)
         if (name === 'Update') {
-            console.log('GO TO EDIT POST')
-            // dispatch(updatePost.request({ id, categoryId, tags, publicPost, authorId, content }))
             dispatch(updatePost.request(currentPost))
-
         } else {
-            console.log('GO TO CREATE POST')
             dispatch(createPost.request({ categoryId, tags, publicPost, content, rawContent }))
         }
     }

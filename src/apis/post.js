@@ -7,11 +7,10 @@ export const createPost = (payload, headers) => {
         method: 'POST',
         headers,
         data: {
-            // 'title': title,
-            'content': content,
-            'rawContent': rawContent,
+            content,
+            rawContent,
             'categoryId': category,
-            'tags': tags
+            tags
         }
     })
         .then(response => response)

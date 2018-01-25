@@ -20,9 +20,7 @@ const Edit = (props) => {
 
         props.dispatch(saveDraft.request({content, rawContent}))
     }
-    console.log("DEBUG 1 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
     if (isLoaded && authorId === userId) {
-        console.log("DEBUG 2 ---------------------------------------------------------------------")
         return (
             <div>
                 <h1>EDIT</h1>

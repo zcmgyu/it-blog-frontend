@@ -3,8 +3,12 @@ import { withStyles } from "material-ui/styles";
 import Avatar from "material-ui/Avatar";
 import Typography from "material-ui/Typography";
 
-const Profile = props => {
-  const { classes } = props;
+
+
+const Profile = (props) => {
+  const { classes, profile } = props;
+  console.log("profile")
+  console.log(props)
   return (
     <div className={classes.profile}>
       <Avatar
@@ -14,7 +18,7 @@ const Profile = props => {
       />
       <div className={classes.hero}>
         <Typography type="headline" gutterBottom>
-          Long Nguyen
+          {profile.name}
         </Typography>
         <Typography type="subheading" gutterBottom>
           University of Foreign Language Studies
