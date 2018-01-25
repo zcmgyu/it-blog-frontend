@@ -109,7 +109,7 @@ class PostCard extends React.Component {
               {addThreeDots(title, 80)}
             </Typography>
             <Typography component="p">
-              {addThreeDots(shortContent, 156)}
+              {addThreeDots(rawContent, 156)}
             </Typography>
           </CardContent>
           <CardActions disableActionSpacing>

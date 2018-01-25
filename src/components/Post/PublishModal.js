@@ -60,7 +60,7 @@ class PublishModal extends Component {
     createPost = publicPost => () => {
         const { categoryId } = this.state
         let { currentPost, dispatch, name } = this.props
-        const { content, shortContent } = currentPost
+        const { content, rawContent } = currentPost
         const tags = this.chips.state.chips
 
 
@@ -74,7 +74,7 @@ class PublishModal extends Component {
 
         } else {
             console.log('GO TO CREATE POST')
-            dispatch(createPost.request({ categoryId, tags, publicPost, content, shortContent }))
+            dispatch(createPost.request({ categoryId, tags, publicPost, content, rawContent }))
         }
     }
 

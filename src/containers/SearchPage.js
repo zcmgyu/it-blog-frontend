@@ -93,9 +93,7 @@ class TagPage extends Component {
 
                             <Typography type='title' gutterBottom>POSTS</Typography>
                             <div className={classes.posts}>
-                                <PostCard />
-                                <PostCard />
-                                <PostCard />
+                                
                             </div>
                         </div>
                         <div className={classes.right}>
@@ -139,3 +137,8 @@ TagPage.propTypes = {
 }
 
 export default withStyles(styles)(TagPage)
+
+
+// <PostCard />
+//                                 <PostCard />
+//                                 <PostCard />

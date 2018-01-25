@@ -87,7 +87,7 @@ class PostCard2 extends Component {
     const {
       id,
       title,
-      shortContent,
+      rawContent,
       image,
       transliterated,
       createAt,
@@ -134,7 +134,7 @@ class PostCard2 extends Component {
                 {addThreeDots(title, 80)}
               </Typography>
               <Typography component="p" className={classes.content}>
-                {addThreeDots(shortContent, 156)}
+                {addThreeDots(rawContent, 156)}
               </Typography>
             </CardContent>
             <CardActions disableActionSpacing>

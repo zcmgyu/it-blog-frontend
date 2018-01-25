@@ -32,13 +32,13 @@ const auth = (state = initialState, action) => {
         //     }
         // }
         case ACT_TYPES.SAVE_DRAFT.REQUEST: {
-            const { content, shortContent } = action.payload
+            const { content, rawContent } = action.payload
             return {
                 ...state,
                 current_post: {
                     ...state.current_post,
                     content,
-                    shortContent
+                    rawContent
                 }
             }
         }
