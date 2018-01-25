@@ -1,9 +1,9 @@
 import { put, call } from 'redux-saga/effects'
 import * as API from '../apis/user'
-import { getCurrentUser, forgotPassword } from '../actions/user'
+import { getCurrentUser, forgotPassword, getFollow } from '../actions/user'
 import { authenticatedRequest } from './auth'
 import { push } from 'react-router-redux'
-import { getPostsByAuthorId } from '../actions/user';
+import { getPostsByAuthorId, getBookmark } from '../actions/user';
 
 // Worker
 export function* getCurrentUserWorker() {
@@ -44,5 +44,36 @@ export function* getPostsByAuthorIdWorker({ payload }) {
         yield put(getPostsByAuthorId.success(response))
     } catch (error) {
         yield put(getPostsByAuthorId.failure(error))
+    }
+}
+
+export function* getBookmarkWorker() {
+    try {
+        const response = yield authenticatedRequest(API.getBookmark)
+        yield put(getBookmark.success(response))
+    } catch (error) {
+        yield put(getBookmark.failure(error))
+    }
+}
+
+export function* getFollowingWorker({payload}) {
+    try {
+        console.log("****`*`*``**")
+        console.log(payload)
+        const response = yield call(API.getFollow, payload)
+        console.log("Response")
+        console.log(response)
+        yield put(getFollow.following.success(response))
+    } catch (error) {
+        yield put(getFollow.following.failure(error))
+    }
+}
+
+export function* getFollowersWorker({payload}) {
+    try {
+        const response = yield call(API.getFollow, payload)
+        yield put(getFollow.followers.success(response))
+    } catch (error) {
+        yield put(getFollow.followers.failure(error))
     }
 }

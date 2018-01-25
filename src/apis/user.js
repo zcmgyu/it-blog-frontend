@@ -55,3 +55,28 @@ export const getPostsByAuthorId = (payload) => {
         .then(response => response)
         .catch(error => { throw error })
 }
+
+// Get bookmarks
+export const getBookmark = (headers) => {
+    return axios.request({
+        baseURL: `http://localhost:9292/api/users/self/bookmark`,
+        headers,
+        method: 'GET'
+    })
+        .then(response => response)
+        .catch(error => { throw error })
+}
+
+// Get Following & Followers
+export const getFollow = (payload) => {
+    const { userId, type } = payload
+    return axios.request({
+        baseURL: `http://localhost:9292/api/users/${userId}/${type}`,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        method: 'GET'
+    })
+        .then(response => response)
+        .catch(error => { throw error })
+}

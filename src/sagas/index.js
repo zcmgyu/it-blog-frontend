@@ -11,7 +11,10 @@ import {
   GET_CURRENT_USER,
   FORGOT_PASSWORD,
   RESET_PASSWORD,
-  GET_POSTS_BY_AUTHOR_ID
+  GET_POSTS_BY_AUTHOR_ID,
+  GET_BOOKMARK,
+  GET_FOLLOWING,
+  GET_FOLLOWERS
 } from "../actiontypes/user";
 import { authenticateWorker, registerWorker } from "./auth";
 import {
@@ -24,7 +27,10 @@ import {
   getCurrentUserWorker,
   sendMailRequestWorker,
   resetPasswordWorker,
-  getPostsByAuthorIdWorker
+  getPostsByAuthorIdWorker,
+  getBookmarkWorker,
+  getFollowingWorker,
+  getFollowersWorker
 } from "./user";
 import { getCategoryWorker } from "./category";
 
@@ -52,6 +58,9 @@ export default function* rootSaga() {
     // POST
     takeEvery(GET_TOP_4_BY_CATE.REQUEST, getTop4PostByCategoryWorker),
     // USERS
-    takeEvery(GET_POSTS_BY_AUTHOR_ID.REQUEST, getPostsByAuthorIdWorker)
+    takeEvery(GET_POSTS_BY_AUTHOR_ID.REQUEST, getPostsByAuthorIdWorker),
+    takeEvery(GET_BOOKMARK.REQUEST, getBookmarkWorker),
+    takeEvery(GET_FOLLOWING.REQUEST, getFollowingWorker),
+    takeEvery(GET_FOLLOWERS.REQUEST, getFollowersWorker)
   ]);
 }

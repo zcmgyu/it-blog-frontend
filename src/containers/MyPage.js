@@ -4,10 +4,14 @@ import { connect } from 'react-redux'
 
 // MATERIAL UI
 import Tabs, { Tab } from "material-ui/Tabs";
-import { Route, Redirect, Link, withRouter } from "react-router-dom";
-import PostList from "../components/Post/PostList";
+import { Route, Link, withRouter } from "react-router-dom";
+import PostList from "../components/User/PostList";
 import compose from "recompose/compose";
 import Profile from "../components/User/Profile";
+import BookmarkList from "../components/User/BookmarkList";
+import FollowList from "../components/User/FollowList";
+import { type } from "os";
+
 
 // ACTIONS
 
@@ -23,6 +27,14 @@ const styles = {
   }
 };
 
+const FollowingList = (props) => (
+  <FollowList type="following" {...props}/>
+)
+
+const FollowersList = (props) => (
+  <FollowList type="followers" {...props}/>
+)
+
 class MyPage extends Component {
   state = {
     value: 0
@@ -32,30 +44,13 @@ class MyPage extends Component {
     this.setState({ value });
   };
 
-  componentWillMount() {
-    console.log("Component WILL Mount");
-  }
-
-  componentDidMount() {
-    console.log("Component DID Mount");
-  }
-
-//   componentWillUpdate(nextProps, nextState) {
-//     const { dispatch } = nextProps;
-//     switch (nextState.value) {
-//       case 0:
-//         break;
-
-//       default:
-//         break;
-//     }
-//   }
-
   render() {
-    const { classes, match } = this.props;
+    const { classes, match, profile } = this.props;
+    console.log("PROFILE")
+    console.log(profile)
     return (
       <div className={classes.container}>
-        <Profile />
+        <Profile profile={profile} />
         <div className={classes.content}>
           <Tabs
             value={this.state.value}
@@ -82,11 +77,10 @@ class MyPage extends Component {
             />
           </Tabs>
           <div className={classes.section}>
-            <Redirect from={`${match.url}`} to={`${match.url}/posts`} />
             <Route path={`${match.url}/posts`} component={PostList} />
-            <Route path={`${match.url}/bookmarked`} component={PostList} />
-            <Route path={`${match.url}/Following`} component={PostList} />
-            <Route path={`${match.url}/Followers`} component={PostList} />
+            <Route path={`${match.url}/bookmarked`} component={BookmarkList} />
+            <Route path={`${match.url}/following`} component={FollowingList} />
+            <Route path={`${match.url}/followers`} component={FollowersList} />
           </div>
         </div>
       </div>
@@ -94,4 +88,10 @@ class MyPage extends Component {
   }
 }
 
-export default compose(withStyles(styles), withRouter, connect())(MyPage);
+const mapStateToProps = state => {
+  return {
+    profile: state.user.current_user_info
+  }
+}
+
+export default compose(withStyles(styles), withRouter, connect(mapStateToProps))(MyPage);

@@ -18,10 +18,9 @@ class CreatePost extends Component {
         // Get short content
         const rawText = editorContext.getTextFromEditor(content)
         const removedFirstLine = rawText.substring(rawText.indexOf('\n') + 1)
-        const withoutBreaks = removedFirstLine.replace(/[\n\r]+/g, '\n');
-        const shortContent = withoutBreaks.trim().substring(0, 156);
+        const rawContent = removedFirstLine.replace(/[\n\r]+/g, '\n');
 
-        this.props.dispatch(saveDraft.request({content, shortContent}))
+        this.props.dispatch(saveDraft.request({content, rawContent}))
     }
 
 

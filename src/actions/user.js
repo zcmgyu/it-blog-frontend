@@ -3,7 +3,10 @@ import {
   GET_CURRENT_USER,
   FORGOT_PASSWORD,
   RESET_PASSWORD,
-  GET_POSTS_BY_AUTHOR_ID
+  GET_POSTS_BY_AUTHOR_ID,
+  GET_BOOKMARK,
+  GET_FOLLOWING,
+  GET_FOLLOWERS
 } from "../actiontypes/user";
 
 export const getCurrentUser = {
@@ -28,4 +31,24 @@ export const getPostsByAuthorId = {
   request: payload => action(GET_POSTS_BY_AUTHOR_ID.REQUEST, { payload }),
   success: response => action(GET_POSTS_BY_AUTHOR_ID.SUCCESS, { response }),
   failure: error => action(GET_POSTS_BY_AUTHOR_ID.FAILURE, { error })
+};
+
+
+export const getBookmark = {
+  request: () => action(GET_BOOKMARK.REQUEST),
+  success: response => action(GET_BOOKMARK.SUCCESS, { response }),
+  failure: error => action(GET_BOOKMARK.FAILURE, { error })
+};
+
+export const getFollow = {
+  following: {
+    request: payload => action(GET_FOLLOWING.REQUEST, {payload}),
+    success: response => action(GET_FOLLOWING.SUCCESS, { response }),
+    failure: error => action(GET_FOLLOWING.FAILURE, { error })
+  },
+  followers: {
+    request: payload => action(GET_FOLLOWERS.REQUEST, {payload}),
+    success: response => action(GET_FOLLOWERS.SUCCESS, { response }),
+    failure: error => action(GET_FOLLOWERS.FAILURE, { error })
+  }
 };

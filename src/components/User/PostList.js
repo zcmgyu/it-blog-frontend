@@ -12,15 +12,13 @@ class PostList extends React.Component {
 
   render() {
     const { posts } = this.props;
-    if (posts === null)
+    if (typeof posts === 'undefined' || !posts)
       return (
-        <Typography type="p" gutterBottom>
+        <Typography type="body2" gutterBottom>
           No posts
         </Typography>
       );
-
-    // return
-    return <div>{posts.map(post => <PostCard post={post} />)}</div>;
+    return <div>{posts.map(post => <PostCard key={post.id} post={post} />)}</div>;
   }
 }
 

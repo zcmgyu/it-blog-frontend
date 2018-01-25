@@ -1,17 +1,16 @@
 import axios from 'axios'
 
 export const createPost = (payload, headers) => {
-    const { content, category, tags, shortContent } = payload
+    const { content, category, tags, rawContent } = payload
     return axios.request({
         baseURL: 'http://localhost:9292/api/posts',
         method: 'POST',
         headers,
         data: {
-            // 'title': title,
-            'content': content,
-            'shortContent': shortContent,
+            content,
+            rawContent,
             'categoryId': category,
-            'tags': tags
+            tags
         }
     })
         .then(response => response)
@@ -21,7 +20,7 @@ export const createPost = (payload, headers) => {
 }
 
 export const updatePost = (payload, headers) => {
-    const { id, content, categoryId, tags, author, shortContent } = payload
+    const { id, content, categoryId, tags, author, rawContent } = payload
     return axios.request({
         baseURL: `http://localhost:9292/api/posts/${id}`,
         method: 'PUT',
@@ -29,7 +28,7 @@ export const updatePost = (payload, headers) => {
         data: {
             // 'title': title,
             content,
-            shortContent,
+            rawContent,
             categoryId,
             tags,
             author

@@ -1,4 +1,11 @@
-import { GET_CURRENT_USER, FORGOT_PASSWORD, GET_POSTS_BY_AUTHOR_ID } from '../actiontypes/user'
+import { 
+    GET_CURRENT_USER, 
+    FORGOT_PASSWORD, 
+    GET_POSTS_BY_AUTHOR_ID, 
+    GET_BOOKMARK,
+    GET_FOLLOWERS,
+    GET_FOLLOWING
+} from '../actiontypes/user'
 
 const initialState = {
     send_mail: {
@@ -50,6 +57,25 @@ const user = (state = initialState, action) => {
             return {
                 ...state,
                 posts_by_author: action.response.data.result.data
+            }
+        }
+        case GET_BOOKMARK.SUCCESS: {
+            return {
+                ...state,
+                bookmark: action.response.data.result.data
+            }
+        }
+        case GET_FOLLOWING.SUCCESS: {
+            console.log("GET_FOLLOWING.SUCCESS")
+            return {
+                ...state,
+                following: action.response.data.result.data
+            }
+        }
+        case GET_FOLLOWERS.SUCCESS: {
+            return {
+                ...state,
+                followers: action.response.data.result.data
             }
         }
         default: {

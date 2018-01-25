@@ -16,29 +16,14 @@ const auth = (state = initialState, action) => {
                 list_post: action.response.data.result.data
             }
         }
-
-        // case CREATE_POST.SUCCESS: {
-        // console.log('CREATE_POST.SUCCESS')
-        // case UPDATE_POST.SUCCESS: {
-        // return {
-        // ...state,
-        // content: action.response.data.result
-        // }
-        // }
-        // case CREATE_POST.FAILURE: {
-        // // case UPDATE_POST.FAILURE: {
-        //     return {
-        //         ...state
-        //     }
-        // }
         case ACT_TYPES.SAVE_DRAFT.REQUEST: {
-            const { content, shortContent } = action.payload
+            const { content, rawContent } = action.payload
             return {
                 ...state,
                 current_post: {
                     ...state.current_post,
                     content,
-                    shortContent
+                    rawContent
                 }
             }
         }
