@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { getFollow } from "../../actions/user";
 import Typography from "material-ui/Typography/Typography";
 import Paper from "material-ui/Paper";
-import * as ActionTypes from "../../actiontypes/user";
 import compose from "recompose/compose";
 import withStyles from "material-ui/styles/withStyles";
 

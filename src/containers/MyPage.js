@@ -10,7 +10,6 @@ import compose from "recompose/compose";
 import Profile from "../components/User/Profile";
 import BookmarkList from "../components/User/BookmarkList";
 import FollowList from "../components/User/FollowList";
-import { type } from "os";
 
 // ACTIONS
 

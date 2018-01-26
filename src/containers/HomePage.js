@@ -9,6 +9,7 @@ import { withRouter } from "react-router";
 import { getTop4ByCategory } from "../actions/post";
 import Loading from "../components/Loading";
 import { Link } from "react-router-dom";
+import { getBookmark } from "../actions/user";
 
 const styles = theme => ({
   textField: {
@@ -61,6 +62,7 @@ class HomePage extends Component {
   componentDidMount() {
     const { dispatch, match } = this.props;
     dispatch(getTop4ByCategory.request({ type: match.params.type }));
+    dispatch(getBookmark.request());
   }
 
   componentWillReceiveProps(nextProps) {
@@ -78,7 +80,7 @@ class HomePage extends Component {
   renderSection = () => {
     const { classes, listPost } = this.props;
     if (typeof listPost === "undefined") return <Loading />;
-
+    console.log(listPost)
     return listPost.map((group, index) => (
       <div key={index} className={classes.section}>
         <Typography type="display1" className={classes.sectionTitle}>

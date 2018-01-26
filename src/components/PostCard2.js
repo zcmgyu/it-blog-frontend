@@ -16,13 +16,13 @@ import IconButton from "material-ui/IconButton";
 import Typography from "material-ui/Typography";
 import Avatar from "material-ui/Avatar";
 import FavoriteIcon from "material-ui-icons/Favorite";
-import ShareIcon from "material-ui-icons/Share";
 import BookmarkIcon from "material-ui-icons/Bookmark";
 import { addThreeDots } from "../utils/stringUtil";
 import { push } from "react-router-redux";
 import ToggleIcon from "material-ui-toggle-icon";
 import SharingButton from "./SharingButton";
-import { bookmarkPost } from "../actions/post";
+import { bookmarkPost, favoritePost } from "../actions/post";
+
 const styles = theme => {
   return {
     card: {
@@ -67,48 +67,64 @@ const styles = theme => {
 class PostCard2 extends Component {
   constructor(props) {
     super(props);
+    console.log("##############")
+    console.log(props.post)
     this.state = {
       isSharing: false,
-      on: false
+      favorited: false,
+      bookmarked: false
     };
   }
 
   bookmark = () => {
     const { dispatch, post } = this.props;
-    const { id, transliterated } = post;
-    dispatch(bookmarkPost.request({ postId: id }));
+    this.setState({ bookmarked: !this.state.bookmarked })
+    dispatch(bookmarkPost.request({ postId: post.id }));
   };
+
+  favorite = () => {
+    const { dispatch, post } = this.props;
+    this.setState({ favorited: !this.state.favorited })
+    dispatch(favoritePost.request({ postId: post.id }));
+  }
 
   showPost = () => {
     const { id, transliterated } = this.props.post;
     this.props.dispatch(push(`/posts/${id}/${transliterated}`));
   };
 
-  componentWillMount() {
-    console.log("## CURRENT USER ##");
-    console.log(this.props.currentUser);
-    const { currentUser } = this.props;
-    if (currentUser) {
+  componentDidMount() {
+    const { currentUser, post, bookmark } = this.props;
+    const { favorite } = post;
+    if (favorite && currentUser && typeof currentUser.id !== "undefined") {
+      favorite.filter(user => (user.id === currentUser.id));
+      if (favorite.length > 0) {
+        this.setState({ favorited: true });
+      }
+    } else {
+      this.setState({ favorited: false });
+    }
+    console.log("bookmark")
+    console.log(bookmark)
+    console.log("post")
+    console.log(post)
+    const result = bookmark && post && bookmark.id === post.id
+    console.log("bookmark.id")
+    console.log(bookmark.id)
+    console.log("post.id")
+    console.log(post.id)
+    console.log("result")
+    console.log(result)
+    if (bookmark && post && bookmark.filter(bm => (bm.id === post.id)).length > 0) {
+      console.log("DEBUG TRUE")
+      this.setState({ bookmarked: true });
+    } else {
+      console.log("DEBUG FALSE")
+      this.setState({ bookmarked: false });
     }
   }
 
-  componentDidMount() {
-    const { currentUser, post } = this.props;
-    const { loved } = post;
-    console.log('currentUser')
-    console.log(currentUser)
-    if (typeof currentUser.id !== "undefined") {
-      loved.filter(user => {
-        user.id === currentUser.id;
-      });
-      if (loved.length > 0) {
-        console.log("RETURN TRUE");
-        return this.setState({ on: true });
-      }
-    }
-    console.log("RETURN FALSE");
-    return this.setState({ on: false });
-  }
+
 
   render() {
     const { classes, post } = this.props;
@@ -139,13 +155,13 @@ class PostCard2 extends Component {
             <CardMedia
               className={classes.cover}
               image={image || "https://i.imgur.com/U7pPkAd.png"}
-              title="Live from space album cover"
+              title="cover"
             />
           </div>
           <div className={classes.columnRight}>
             <CardHeader
               avatar={
-                <Avatar aria-label="Recipe" className={classes.avatar}>
+                <Avatar aria-label="avatar" className={classes.avatar}>
                   {avatarLetter}
                 </Avatar>
               }
@@ -167,19 +183,21 @@ class PostCard2 extends Component {
             </CardContent>
             <CardActions disableActionSpacing>
               <div className={classes.flexGrow} />
+
               <IconButton
-                onClick={() => this.setState({ on: !this.state.on })}
+                onClick={this.favorite}
                 aria-label="Add to favorites"
               >
                 <ToggleIcon
-                  on={this.state.on}
+                  on={this.state.favorited}
                   onIcon={<FavoriteIcon color="accent" />}
                   offIcon={<FavoriteIcon />}
                 />
               </IconButton>
+
               <IconButton aria-label="Bookmark" onClick={this.bookmark}>
                 <ToggleIcon
-                  on={this.state.on}
+                  on={this.state.bookmarked}
                   onIcon={<BookmarkIcon color="accent" />}
                   offIcon={<BookmarkIcon />}
                 />
@@ -200,7 +218,8 @@ PostCard2.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  currentUser: state.user.current_user_info
+  currentUser: state.user.current_user_info,
+  bookmark: state.user.bookmark
 });
 
 export default compose(

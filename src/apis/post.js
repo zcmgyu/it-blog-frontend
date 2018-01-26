@@ -82,3 +82,16 @@ export const bookmarkPost = (payload, headers) => {
             throw error
         })
 }
+
+export const favoritePost = (payload, headers) => {
+    const { postId } = payload
+    return axios.request({
+        baseURL: `http://localhost:9292/api/posts/${postId}/favorite`,
+        headers,
+        method: 'PUT'
+    })
+        .then(response => response)
+        .catch(function (error) {
+            throw error
+        })
+}

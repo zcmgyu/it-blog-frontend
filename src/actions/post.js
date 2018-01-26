@@ -36,8 +36,14 @@ export const saveDraft = {
 }
 
 export const bookmarkPost = {
-    request: payload => action(ACT_TYPES.BOOKMARK_POST.REQUEST, { payload }),
-    success: response => action(ACT_TYPES.BOOKMARK_POST.SUCCESS, { response }),
-    failure: error => action(ACT_TYPES.BOOKMARK_POST.FAILURE, { error }),
+    request: payload => action(ACT_TYPES.BOOKMARK.REQUEST, { payload }),
+    success: response => action(ACT_TYPES.BOOKMARK.SUCCESS, { response }),
+    failure: error => action(ACT_TYPES.BOOKMARK.FAILURE, { error }),
+}
+
+export const favoritePost = {
+    request: payload => action(ACT_TYPES.FAVORITE.REQUEST, { payload }),
+    success: response => action(ACT_TYPES.FAVORITE.SUCCESS, { response }),
+    failure: error => action(ACT_TYPES.FAVORITE.FAILURE, { error }),
 }
 

@@ -3,6 +3,7 @@ import * as API from '../apis/post'
 import { push } from 'react-router-redux'
 import { createPost, updatePost, getPost, cleanCurrentPost, getTop4ByCategory, bookmarkPost } from '../actions/post'
 import { authenticatedRequest } from './auth'
+import { favoritePost } from '../actions/post';
 
 // Worker
 export function* createPostWorker({payload}) {
@@ -29,7 +30,6 @@ export function* updatePostWorker({payload}) {
     }
 }
 
-
 // Worker
 export function* getPostWorker({payload}) {
     try {
@@ -40,7 +40,6 @@ export function* getPostWorker({payload}) {
         yield put(getPost.failure(error))
     }
 }
-
 
 // Worker
 export function* getTop4PostByCategoryWorker({payload}) {
@@ -59,5 +58,15 @@ export function* bookmarkPostWorker({payload}) {
         yield put(bookmarkPost.success(response))
     } catch (error) {
         yield put(bookmarkPost.failure(error))
+    }
+}
+
+// Bookmark post
+export function* favoritePostWorker({payload}) {
+    try {
+        const response = yield authenticatedRequest(API.favoritePost, payload)
+        yield put(favoritePost.success(response))
+    } catch (error) {
+        yield put(favoritePost.failure(error))
     }
 }
