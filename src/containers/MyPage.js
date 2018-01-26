@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
 // MATERIAL UI
 import Tabs, { Tab } from "material-ui/Tabs";
@@ -11,7 +11,6 @@ import Profile from "../components/User/Profile";
 import BookmarkList from "../components/User/BookmarkList";
 import FollowList from "../components/User/FollowList";
 import { type } from "os";
-
 
 // ACTIONS
 
@@ -27,13 +26,9 @@ const styles = {
   }
 };
 
-const FollowingList = (props) => (
-  <FollowList type="following" {...props}/>
-)
+const FollowingList = props => <FollowList type="following" {...props} />;
 
-const FollowersList = (props) => (
-  <FollowList type="followers" {...props}/>
-)
+const FollowersList = props => <FollowList type="followers" {...props} />;
 
 class MyPage extends Component {
   state = {
@@ -44,10 +39,28 @@ class MyPage extends Component {
     this.setState({ value });
   };
 
+  componentWillMount() {
+    switch (this.props.location.pathname) {
+      case "/my-page/posts":
+        this.setState({ value: 0 });
+        break;
+      case "/my-page/bookmarked":
+        this.setState({ value: 1 });
+        break;
+      case "/my-page/following":
+        this.setState({ value: 2 });
+        break;
+      case "/my-page/followers":
+        this.setState({ value: 3 });
+        break;
+      default:
+        this.setState({ value: 0 });
+        break;
+    }
+  }
+
   render() {
     const { classes, match, profile } = this.props;
-    console.log("PROFILE")
-    console.log(profile)
     return (
       <div className={classes.container}>
         <Profile profile={profile} />
@@ -91,7 +104,11 @@ class MyPage extends Component {
 const mapStateToProps = state => {
   return {
     profile: state.user.current_user_info
-  }
-}
+  };
+};
 
-export default compose(withStyles(styles), withRouter, connect(mapStateToProps))(MyPage);
+export default compose(
+  withStyles(styles),
+  withRouter,
+  connect(mapStateToProps)
+)(MyPage);

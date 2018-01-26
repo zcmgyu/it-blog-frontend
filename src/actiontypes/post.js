@@ -14,6 +14,7 @@ export const UPDATE_POST = createRequestTypes('UPDATE_POST')
 export const GET_POST = createRequestTypes('GET_POST')
 export const GET_TOP_4_BY_CATE = createRequestTypes('GET_TOP_4_BY_CATE')
 export const SAVE_DRAFT = createRequestTypes('SAVE_DRAFT')
+export const BOOKMARK_POST = createRequestTypes('BOOKMARK_POST')
 
 export const CLEAN_CURRENT_POST = 'CLEAN_CURRENT_POST'
 export const EDIT_POST_TRIGGER = 'EDIT_POST_TRIGGER'

@@ -7,8 +7,6 @@ import Typography from "material-ui/Typography";
 
 const Profile = (props) => {
   const { classes, profile } = props;
-  console.log("profile")
-  console.log(props)
   return (
     <div className={classes.profile}>
       <Avatar

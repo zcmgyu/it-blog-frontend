@@ -58,11 +58,7 @@ export function* getBookmarkWorker() {
 
 export function* getFollowingWorker({payload}) {
     try {
-        console.log("****`*`*``**")
-        console.log(payload)
         const response = yield call(API.getFollow, payload)
-        console.log("Response")
-        console.log(response)
         yield put(getFollow.following.success(response))
     } catch (error) {
         yield put(getFollow.following.failure(error))

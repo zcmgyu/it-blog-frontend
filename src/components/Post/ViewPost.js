@@ -26,10 +26,11 @@ class ViewPost extends Component {
 
   render() {
     const { isLoaded, currentPost, classes } = this.props;
+    const profile = currentPost.author;
     if (isLoaded) {
       return (
         <div className={classes.container}>
-          <Profile />
+          <Profile profile={profile} />
           <PostEditor
             config={{
               debug: true,
@@ -57,7 +58,4 @@ const mapStateToProps = state => ({
   isLoaded: state.post.is_loaded
 });
 
-export default compose(
-    withStyles(styles),
-    connect(mapStateToProps)
-)(ViewPost);
+export default compose(withStyles(styles), connect(mapStateToProps))(ViewPost);

@@ -7,14 +7,11 @@ import Typography from "material-ui/Typography/Typography";
 class BookmarkList extends React.Component {
     componentDidMount() {
         const { dispatch } = this.props;
-        console.log("COME HERE")
         dispatch(getBookmark.request());
     }
 
     render() {
         const { bookmark } = this.props;
-        console.log("DEBUG ++++++++++++++")
-        console.log(this.props)
         if (typeof bookmark === 'undefined' || !bookmark)
             return (
                 <Typography type="body2" gutterBottom>

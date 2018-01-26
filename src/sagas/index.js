@@ -4,7 +4,8 @@ import {
   CREATE_POST,
   UPDATE_POST,
   GET_POST,
-  GET_TOP_4_BY_CATE
+  GET_TOP_4_BY_CATE,
+  BOOKMARK_POST
 } from "../actiontypes/post";
 import { CATEGORY } from "../actiontypes/category";
 import {
@@ -21,7 +22,8 @@ import {
   createPostWorker,
   getPostWorker,
   updatePostWorker,
-  getTop4PostByCategoryWorker
+  getTop4PostByCategoryWorker,
+  bookmarkPostWorker
 } from "./post";
 import {
   getCurrentUserWorker,
@@ -57,6 +59,7 @@ export default function* rootSaga() {
     takeEvery(CATEGORY.REQUEST, getCategoryWorker),
     // POST
     takeEvery(GET_TOP_4_BY_CATE.REQUEST, getTop4PostByCategoryWorker),
+    takeEvery(BOOKMARK_POST.REQUEST, bookmarkPostWorker),
     // USERS
     takeEvery(GET_POSTS_BY_AUTHOR_ID.REQUEST, getPostsByAuthorIdWorker),
     takeEvery(GET_BOOKMARK.REQUEST, getBookmarkWorker),

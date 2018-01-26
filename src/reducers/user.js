@@ -66,7 +66,6 @@ const user = (state = initialState, action) => {
             }
         }
         case GET_FOLLOWING.SUCCESS: {
-            console.log("GET_FOLLOWING.SUCCESS")
             return {
                 ...state,
                 following: action.response.data.result.data

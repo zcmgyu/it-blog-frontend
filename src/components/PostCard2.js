@@ -17,10 +17,12 @@ import Typography from "material-ui/Typography";
 import Avatar from "material-ui/Avatar";
 import FavoriteIcon from "material-ui-icons/Favorite";
 import ShareIcon from "material-ui-icons/Share";
+import BookmarkIcon from "material-ui-icons/Bookmark";
 import { addThreeDots } from "../utils/stringUtil";
 import { push } from "react-router-redux";
 import ToggleIcon from "material-ui-toggle-icon";
-
+import SharingButton from "./SharingButton";
+import { bookmarkPost } from "../actions/post";
 const styles = theme => {
   return {
     card: {
@@ -55,7 +57,7 @@ const styles = theme => {
     },
     flexGrow: {
       flex: "1 1 auto"
-    },
+    }
   };
 };
 
@@ -71,14 +73,42 @@ class PostCard2 extends Component {
     };
   }
 
-  shareToSNS = () => {
-    this.setState({ isSharing: true });
+  bookmark = () => {
+    const { dispatch, post } = this.props;
+    const { id, transliterated } = post;
+    dispatch(bookmarkPost.request({ postId: id }));
   };
 
   showPost = () => {
     const { id, transliterated } = this.props.post;
     this.props.dispatch(push(`/posts/${id}/${transliterated}`));
   };
+
+  componentWillMount() {
+    console.log("## CURRENT USER ##");
+    console.log(this.props.currentUser);
+    const { currentUser } = this.props;
+    if (currentUser) {
+    }
+  }
+
+  componentDidMount() {
+    const { currentUser, post } = this.props;
+    const { loved } = post;
+    console.log('currentUser')
+    console.log(currentUser)
+    if (typeof currentUser.id !== "undefined") {
+      loved.filter(user => {
+        user.id === currentUser.id;
+      });
+      if (loved.length > 0) {
+        console.log("RETURN TRUE");
+        return this.setState({ on: true });
+      }
+    }
+    console.log("RETURN FALSE");
+    return this.setState({ on: false });
+  }
 
   render() {
     const { classes, post } = this.props;
@@ -137,16 +167,24 @@ class PostCard2 extends Component {
             </CardContent>
             <CardActions disableActionSpacing>
               <div className={classes.flexGrow} />
-              <IconButton onClick={() => this.setState({ on: !this.state.on })} aria-label="Add to favorites">
+              <IconButton
+                onClick={() => this.setState({ on: !this.state.on })}
+                aria-label="Add to favorites"
+              >
                 <ToggleIcon
                   on={this.state.on}
-                  onIcon={<FavoriteIcon color='accent' />}
+                  onIcon={<FavoriteIcon color="accent" />}
                   offIcon={<FavoriteIcon />}
                 />
               </IconButton>
-              <IconButton aria-label="Share" onClick={this.shareToSNS}>
-                <ShareIcon />
+              <IconButton aria-label="Bookmark" onClick={this.bookmark}>
+                <ToggleIcon
+                  on={this.state.on}
+                  onIcon={<BookmarkIcon color="accent" />}
+                  offIcon={<BookmarkIcon />}
+                />
               </IconButton>
+              <SharingButton />
             </CardActions>
           </div>
         </Card>
@@ -161,6 +199,11 @@ PostCard2.propTypes = {
   post: PropTypes.object.isRequired
 };
 
-export default compose(withStyles(styles, { withTheme: true }), connect())(
-  PostCard2
-);
+const mapStateToProps = state => ({
+  currentUser: state.user.current_user_info
+});
+
+export default compose(
+  withStyles(styles, { withTheme: true }),
+  connect(mapStateToProps)
+)(PostCard2);

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const createPost = (payload, headers) => {
-    const { content, category, tags, rawContent } = payload
+    const { content, categoryId, tags, rawContent } = payload
     return axios.request({
         baseURL: 'http://localhost:9292/api/posts',
         method: 'POST',
@@ -9,7 +9,7 @@ export const createPost = (payload, headers) => {
         data: {
             content,
             rawContent,
-            'categoryId': category,
+            categoryId,
             tags
         }
     })
@@ -40,7 +40,7 @@ export const updatePost = (payload, headers) => {
 
 }
 
-export const getPost = (payload, headers) => {
+export const getPost = (payload) => {
     const { postId } = payload
     return axios.request({
         baseURL: `http://localhost:9292/api/posts/${postId}`,
@@ -63,6 +63,19 @@ export const getTop4PostByCategory = (payload) => {
         headers: {
             'Content-Type': 'application/json',
         }
+    })
+        .then(response => response)
+        .catch(function (error) {
+            throw error
+        })
+}
+
+export const bookmarkPost = (payload, headers) => {
+    const { postId } = payload
+    return axios.request({
+        baseURL: `http://localhost:9292/api/posts/${postId}/bookmark`,
+        headers,
+        method: 'PUT'
     })
         .then(response => response)
         .catch(function (error) {

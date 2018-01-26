@@ -15,6 +15,7 @@ import IconButton from "material-ui/IconButton";
 import Typography from "material-ui/Typography";
 import red from "material-ui/colors/red";
 import FavoriteIcon from "material-ui-icons/Favorite";
+import BookmarkIcon from "material-ui-icons/Bookmark";
 import ExpandMoreIcon from "material-ui-icons/ExpandMore";
 import SharingButton from "./SharingButton";
 import ToggleIcon from "material-ui-toggle-icon";
@@ -122,6 +123,9 @@ class PostCard extends React.Component {
                 onIcon={<FavoriteIcon color="accent" />}
                 offIcon={<FavoriteIcon />}
               />
+            </IconButton>
+            <IconButton>
+              <BookmarkIcon />
             </IconButton>
             <SharingButton />
             <div className={classes.flexGrow} />

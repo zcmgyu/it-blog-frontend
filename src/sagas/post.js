@@ -1,7 +1,7 @@
 import { put, call } from 'redux-saga/effects'
 import * as API from '../apis/post'
 import { push } from 'react-router-redux'
-import { createPost, updatePost, getPost, cleanCurrentPost, getTop4ByCategory } from '../actions/post'
+import { createPost, updatePost, getPost, cleanCurrentPost, getTop4ByCategory, bookmarkPost } from '../actions/post'
 import { authenticatedRequest } from './auth'
 
 // Worker
@@ -49,5 +49,15 @@ export function* getTop4PostByCategoryWorker({payload}) {
         yield put(getTop4ByCategory.success(response))
     } catch (error) {
         yield put(getTop4ByCategory.failure(error))
+    }
+}
+
+// Bookmark post
+export function* bookmarkPostWorker({payload}) {
+    try {
+        const response = yield authenticatedRequest(API.bookmarkPost, payload)
+        yield put(bookmarkPost.success(response))
+    } catch (error) {
+        yield put(bookmarkPost.failure(error))
     }
 }

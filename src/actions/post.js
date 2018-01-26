@@ -35,3 +35,9 @@ export const saveDraft = {
     failure: error => action(ACT_TYPES.SAVE_DRAFT.FAILURE, { error }),
 }
 
+export const bookmarkPost = {
+    request: payload => action(ACT_TYPES.BOOKMARK_POST.REQUEST, { payload }),
+    success: response => action(ACT_TYPES.BOOKMARK_POST.SUCCESS, { response }),
+    failure: error => action(ACT_TYPES.BOOKMARK_POST.FAILURE, { error }),
+}
+
