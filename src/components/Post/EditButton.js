@@ -23,22 +23,20 @@ const EditButton = props => {
   };
 
   const { author } = currentPost;
-  const authorId = author ? author.id : null
+//   const authorId = author ? author.id : null;
 
-  
-    if (authorId === currentUser.id) {
-      return (
-        <Button
-          className={classes.button}
-          onClick={handleClick}
-          component={Link}
-          to={editPath}
-        >
-          Edit
-        </Button>
-      );
-    }
-  
+  if (currentUser && author && author.id === currentUser.id) {
+    return (
+      <Button
+        className={classes.button}
+        onClick={handleClick}
+        component={Link}
+        to={editPath}
+      >
+        Edit
+      </Button>
+    );
+  }
   return null;
 };
 

@@ -23,12 +23,12 @@ const Edit = (props) => {
     if (isLoaded && authorId === userId) {
         return (
             <div>
-                <h1>EDIT</h1>
                 <PostEditor
                     config={{
                         upload_url: "http://localhost:9292/uploads/new",
                         debug: true,
                         read_only: false,
+                        api_key: "86c28a410a104c8bb58848733c82f840",
                         data_storage: {
                             interval: 250,
                             url: "/store",
@@ -43,7 +43,6 @@ const Edit = (props) => {
     }
     dispatch(getPost.request({ postId }))
     return (null)
-    // return (<h1>EDIT</h1>)
 }
 
 const mapStateToProps = (state) => (

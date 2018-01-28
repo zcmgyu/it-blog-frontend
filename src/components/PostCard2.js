@@ -22,6 +22,8 @@ import { push } from "react-router-redux";
 import ToggleIcon from "material-ui-toggle-icon";
 import SharingButton from "./SharingButton";
 import { bookmarkPost, favoritePost } from "../actions/post";
+import { userIsAuthenticatedRedir } from "../HOCs/auth";
+import { generateAvatarLetter } from "../utils/stringUtil";
 
 const styles = theme => {
   return {
@@ -67,8 +69,8 @@ const styles = theme => {
 class PostCard2 extends Component {
   constructor(props) {
     super(props);
-    console.log("##############")
-    console.log(props.post)
+    console.log("##############");
+    console.log(props.post);
     this.state = {
       isSharing: false,
       favorited: false,
@@ -78,15 +80,15 @@ class PostCard2 extends Component {
 
   bookmark = () => {
     const { dispatch, post } = this.props;
-    this.setState({ bookmarked: !this.state.bookmarked })
+    this.setState({ bookmarked: !this.state.bookmarked });
     dispatch(bookmarkPost.request({ postId: post.id }));
   };
 
   favorite = () => {
     const { dispatch, post } = this.props;
-    this.setState({ favorited: !this.state.favorited })
+    this.setState({ favorited: !this.state.favorited });
     dispatch(favoritePost.request({ postId: post.id }));
-  }
+  };
 
   showPost = () => {
     const { id, transliterated } = this.props.post;
@@ -97,34 +99,24 @@ class PostCard2 extends Component {
     const { currentUser, post, bookmark } = this.props;
     const { favorite } = post;
     if (favorite && currentUser && typeof currentUser.id !== "undefined") {
-      favorite.filter(user => (user.id === currentUser.id));
+      favorite.filter(user => user.id === currentUser.id);
       if (favorite.length > 0) {
         this.setState({ favorited: true });
       }
     } else {
       this.setState({ favorited: false });
     }
-    console.log("bookmark")
-    console.log(bookmark)
-    console.log("post")
-    console.log(post)
-    const result = bookmark && post && bookmark.id === post.id
-    console.log("bookmark.id")
-    console.log(bookmark.id)
-    console.log("post.id")
-    console.log(post.id)
-    console.log("result")
-    console.log(result)
-    if (bookmark && post && bookmark.filter(bm => (bm.id === post.id)).length > 0) {
-      console.log("DEBUG TRUE")
+    const result = bookmark && post && bookmark.id === post.id;
+    if (
+      bookmark &&
+      post &&
+      bookmark.filter(bm => bm.id === post.id).length > 0
+    ) {
       this.setState({ bookmarked: true });
     } else {
-      console.log("DEBUG FALSE")
       this.setState({ bookmarked: false });
     }
   }
-
-
 
   render() {
     const { classes, post } = this.props;
@@ -138,15 +130,10 @@ class PostCard2 extends Component {
       author
     } = post;
     const { name } = author;
-    let avatarLetter;
-    if (name.indexOf(" ") < 0) {
-      avatarLetter = name.slice(0, 2);
-    } else {
-      avatarLetter =
-        name.slice(0, name.indexOf(" ")).charAt(0) +
-        name.slice(name.lastIndexOf(" ") + 1).charAt(0);
-    }
-    avatarLetter = avatarLetter.toUpperCase();
+
+    const avatarLetter = generateAvatarLetter(name);
+
+    const shareUrl = `http://localhost:3000/posts/${id}/${transliterated}`;
 
     return (
       <div>
@@ -183,11 +170,7 @@ class PostCard2 extends Component {
             </CardContent>
             <CardActions disableActionSpacing>
               <div className={classes.flexGrow} />
-
-              <IconButton
-                onClick={this.favorite}
-                aria-label="Add to favorites"
-              >
+              <IconButton onClick={this.favorite} aria-label="Add to favorites">
                 <ToggleIcon
                   on={this.state.favorited}
                   onIcon={<FavoriteIcon color="accent" />}
@@ -202,7 +185,7 @@ class PostCard2 extends Component {
                   offIcon={<BookmarkIcon />}
                 />
               </IconButton>
-              <SharingButton />
+              <SharingButton shareUrl={shareUrl} title={title} />
             </CardActions>
           </div>
         </Card>

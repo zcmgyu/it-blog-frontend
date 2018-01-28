@@ -5,6 +5,7 @@ import post from './post'
 import user from './user'
 import error from './error'
 import category from './category'
+import search from './search'
 import { routerReducer } from 'react-router-redux'
 import { reducer as reduxFormReducer } from 'redux-form'
 
@@ -16,7 +17,8 @@ const rootReducers = combineReducers({
     dialog,
     post,
     user,
-    category
+    category,
+    search
 })
 
 export default rootReducers

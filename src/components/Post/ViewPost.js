@@ -34,7 +34,8 @@ class ViewPost extends Component {
           <PostEditor
             config={{
               debug: true,
-              read_only: true
+              read_only: true,
+              api_key: "86c28a410a104c8bb58848733c82f840",
             }}
             content={currentPost.content}
           />

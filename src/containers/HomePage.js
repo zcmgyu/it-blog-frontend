@@ -60,9 +60,9 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, match } = this.props;
+    const { dispatch, match, isAuthenticated } = this.props;
     dispatch(getTop4ByCategory.request({ type: match.params.type }));
-    dispatch(getBookmark.request());
+    if (isAuthenticated) dispatch(getBookmark.request());
   }
 
   componentWillReceiveProps(nextProps) {
@@ -80,7 +80,6 @@ class HomePage extends Component {
   renderSection = () => {
     const { classes, listPost } = this.props;
     if (typeof listPost === "undefined") return <Loading />;
-    console.log(listPost)
     return listPost.map((group, index) => (
       <div key={index} className={classes.section}>
         <Typography type="display1" className={classes.sectionTitle}>
@@ -111,7 +110,8 @@ class HomePage extends Component {
 // <CardGrid tab={this.state.tab} {...props} />
 
 const mapStateToProps = state => ({
-  listPost: state.post.list_post
+  listPost: state.post.list_post,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default compose(

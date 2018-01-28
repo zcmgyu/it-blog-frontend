@@ -69,13 +69,30 @@ export const getBookmark = (headers) => {
 
 // Get Following & Followers
 export const getFollow = (payload) => {
+    console.log("INSIDE FOLLOW")
+    console.log(payload)
     const { userId, type } = payload
+    
     return axios.request({
         baseURL: `http://localhost:9292/api/users/${userId}/${type}`,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
         method: 'GET'
+    })
+        .then(response => response)
+        .catch(error => { throw error })
+}
+
+export const follow = (payload, headers) => {
+    console.log("INSIDE FOLLOW")
+    console.log(payload)
+    const { userId } = payload
+    
+    return axios.request({
+        baseURL: `http://localhost:9292/api/users/${userId}/follow`,
+        headers,
+        method: 'PUT'
     })
         .then(response => response)
         .catch(error => { throw error })

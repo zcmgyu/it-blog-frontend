@@ -7,6 +7,7 @@ import Typography from "material-ui/Typography/Typography";
 class BookmarkList extends React.Component {
     componentDidMount() {
         const { dispatch } = this.props;
+        
         dispatch(getBookmark.request());
     }
 
@@ -24,7 +25,8 @@ class BookmarkList extends React.Component {
 
 
 const mapStateToProps = state => ({
-    bookmark: state.user.bookmark
+    bookmark: state.user.bookmark,
+    
 });
 
 export default connect(mapStateToProps)(BookmarkList);

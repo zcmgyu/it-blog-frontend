@@ -62,7 +62,6 @@ class PublishModal extends Component {
         const { content, rawContent } = currentPost
         const tags = this.chips.state.chips
         currentPost = { ...currentPost, categoryId, tags }
-        console.log(currentPost)
         if (name === 'Update') {
             dispatch(updatePost.request(currentPost))
         } else {

@@ -6,7 +6,8 @@ import {
   GET_POSTS_BY_AUTHOR_ID,
   GET_BOOKMARK,
   GET_FOLLOWING,
-  GET_FOLLOWERS
+  GET_FOLLOWERS,
+  FOLLOW
 } from "../actiontypes/user";
 
 export const getCurrentUser = {
@@ -33,7 +34,6 @@ export const getPostsByAuthorId = {
   failure: error => action(GET_POSTS_BY_AUTHOR_ID.FAILURE, { error })
 };
 
-
 export const getBookmark = {
   request: () => action(GET_BOOKMARK.REQUEST),
   success: response => action(GET_BOOKMARK.SUCCESS, { response }),
@@ -42,13 +42,19 @@ export const getBookmark = {
 
 export const getFollow = {
   following: {
-    request: payload => action(GET_FOLLOWING.REQUEST, {payload}),
+    request: payload => action(GET_FOLLOWING.REQUEST, { payload }),
     success: response => action(GET_FOLLOWING.SUCCESS, { response }),
     failure: error => action(GET_FOLLOWING.FAILURE, { error })
   },
   followers: {
-    request: payload => action(GET_FOLLOWERS.REQUEST, {payload}),
+    request: payload => action(GET_FOLLOWERS.REQUEST, { payload }),
     success: response => action(GET_FOLLOWERS.SUCCESS, { response }),
     failure: error => action(GET_FOLLOWERS.FAILURE, { error })
   }
 };
+
+export const putFollow = {
+    request: payload => action(FOLLOW.REQUEST, { payload }),
+    success: response => action(FOLLOW.SUCCESS, { response }),
+    failure: error => action(FOLLOW.FAILURE, { error })
+}

@@ -55,8 +55,6 @@ const styles = theme => ({
 
 
 class SharingButton extends Component {
-
-
     constructor(props) {
         super(props)
         this.state = {
@@ -77,9 +75,9 @@ class SharingButton extends Component {
     }
 
     render() {
-        const shareUrl = 'http://github.com'
-        const title = 'GitHub'
-        const { classes } = this.props
+        // const shareUrl = 'http://github.com'
+        // const title = 'GitHub'
+        const { classes, shareUrl, title } = this.props
         const { drawer, copied } = this.state
         return (
             <div>

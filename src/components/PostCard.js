@@ -18,6 +18,7 @@ import SharingButton from "./SharingButton";
 import ToggleIcon from "material-ui-toggle-icon";
 import { addThreeDots } from "../utils/stringUtil";
 import { Link } from "react-router-dom";
+import { generateAvatarLetter } from "../utils/stringUtil";
 
 const styles = theme => ({
   card: {
@@ -67,15 +68,10 @@ class PostCard extends React.Component {
       author
     } = post;
     const { name } = author;
-    let avatarLetter;
-    if (name.indexOf(" ") < 0) {
-      avatarLetter = name.slice(0, 2);
-    } else {
-      avatarLetter =
-        name.slice(0, name.indexOf(" ")).charAt(0) +
-        name.slice(name.lastIndexOf(" ") + 1).charAt(0);
-    }
-    avatarLetter = avatarLetter.toUpperCase();
+
+    const avatarLetter = generateAvatarLetter(name);
+
+    const shareUrl = `http://localhost:3000/posts/${id}/${transliterated}`;
 
     return (
       <div>
@@ -124,7 +120,7 @@ class PostCard extends React.Component {
             <IconButton>
               <BookmarkIcon />
             </IconButton>
-            <SharingButton />
+            <SharingButton shareUrl={shareUrl} title={title} />
             <div className={classes.flexGrow} />
           </CardActions>
         </Card>

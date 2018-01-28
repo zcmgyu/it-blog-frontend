@@ -26,12 +26,12 @@ class CreatePost extends Component {
     render() {
         return (
             <div>
-                <h1>CREATE</h1>
                 <PostEditor
                     config={{
                         upload_url: "http://localhost:9292/uploads/new",
                         debug: true,
                         read_only: false,
+                        api_key: "86c28a410a104c8bb58848733c82f840",
                         data_storage: {
                             interval: 250,
                             url: "/store",

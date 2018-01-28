@@ -13,10 +13,10 @@ class FollowList extends React.Component {
 
     switch (type) {
       case "following":
-        dispatch(getFollow.following.request({ userId, type }));
+        dispatch(getFollow.following.request({ userId, type: "following" }));
         break;
       case "followers":
-        dispatch(getFollow.followers.request({ userId, type }));
+        dispatch(getFollow.followers.request({ userId, type: "followers" }));
         break;
       default:
         break;
@@ -44,7 +44,7 @@ class FollowList extends React.Component {
             {following.map(profile => {
               return (
                 <Paper key={profile.id} className={classes.paper} elevation={4}>
-                  <Profile  profile={profile} />;
+                  <Profile profile={profile} />
                 </Paper>
               );
             })}
@@ -63,9 +63,9 @@ class FollowList extends React.Component {
           );
         return (
           <div>
-            {followers.map(profile => {
+            {followers.map((profile, index) => {
               return (
-                <Paper key={profile.id} className={classes.paper} elevation={4}>
+                <Paper key={index} className={classes.paper} elevation={4}>
                   <Profile profile={profile} />
                 </Paper>
               );

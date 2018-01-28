@@ -16,7 +16,8 @@ import {
   GET_POSTS_BY_AUTHOR_ID,
   GET_BOOKMARK,
   GET_FOLLOWING,
-  GET_FOLLOWERS
+  GET_FOLLOWERS,
+  FOLLOW
 } from "../actiontypes/user";
 import { authenticateWorker, registerWorker } from "./auth";
 import {
@@ -34,9 +35,13 @@ import {
   getPostsByAuthorIdWorker,
   getBookmarkWorker,
   getFollowingWorker,
-  getFollowersWorker
+  getFollowersWorker,
+  followWorker
 } from "./user";
 import { getCategoryWorker } from "./category";
+import { SEARCH } from "../actiontypes/search";
+import { searchWorker } from "./search";
+import { takeLatest } from "redux-saga";
 
 // Root Sagas Watcher
 export default function* rootSaga() {
@@ -66,7 +71,10 @@ export default function* rootSaga() {
     // USERS
     takeEvery(GET_POSTS_BY_AUTHOR_ID.REQUEST, getPostsByAuthorIdWorker),
     takeEvery(GET_BOOKMARK.REQUEST, getBookmarkWorker),
-    takeEvery(GET_FOLLOWING.REQUEST, getFollowingWorker),
-    takeEvery(GET_FOLLOWERS.REQUEST, getFollowersWorker)
+    takeLatest(GET_FOLLOWING.REQUEST, getFollowingWorker),
+    takeLatest(GET_FOLLOWERS.REQUEST, getFollowersWorker),
+    takeEvery(FOLLOW.REQUEST, followWorker),
+    // SEARCH
+    takeEvery(SEARCH.REQUEST, searchWorker)
   ]);
 }

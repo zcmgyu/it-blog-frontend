@@ -12,3 +12,4 @@ export const GET_BOOKMARK = createRequestTypes("GET_BOOKMARK");
 
 export const GET_FOLLOWING = createRequestTypes("GET_FOLLOWING");
 export const GET_FOLLOWERS = createRequestTypes("GET_FOLLOWERS");
+export const FOLLOW = createRequestTypes("FOLLOW");
