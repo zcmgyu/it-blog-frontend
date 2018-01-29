@@ -63,9 +63,9 @@ class FollowList extends React.Component {
           );
         return (
           <div>
-            {followers.map((profile, index) => {
+            {followers.map(profile => {
               return (
-                <Paper key={index} className={classes.paper} elevation={4}>
+                <Paper key={profile.id} className={classes.paper} elevation={4}>
                   <Profile profile={profile} />
                 </Paper>
               );

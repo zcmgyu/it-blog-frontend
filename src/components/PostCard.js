@@ -19,6 +19,12 @@ import ToggleIcon from "material-ui-toggle-icon";
 import { addThreeDots } from "../utils/stringUtil";
 import { Link } from "react-router-dom";
 import { generateAvatarLetter } from "../utils/stringUtil";
+import PostAction from "../components/Post/PostAction"
+import { bookmarkPost, favoritePost } from "../actions/post";
+import { push } from "react-router-redux";
+import { connect } from 'react-redux'
+import compose from "recompose/compose";
+
 
 const styles = theme => ({
   card: {
@@ -50,11 +56,51 @@ const styles = theme => ({
 });
 
 class PostCard extends React.Component {
-  state = { expanded: false, on: false };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isSharing: false,
+      favorited: false,
+      bookmarked: false
+    };
+  }
 
-  handleExpandClick = () => {
-    this.setState({ expanded: !this.state.expanded });
+  bookmark = () => {
+    const { dispatch, post } = this.props;
+    this.setState({ bookmarked: !this.state.bookmarked });
+    dispatch(bookmarkPost.request({ postId: post.id }));
   };
+
+  favorite = () => {
+    const { dispatch, post } = this.props;
+    this.setState({ favorited: !this.state.favorited });
+    dispatch(favoritePost.request({ postId: post.id }));
+  };
+
+  showPost = () => {
+    const { id, transliterated } = this.props.post;
+    this.props.dispatch(push(`/posts/${id}/${transliterated}`));
+  };
+
+  componentDidMount() {
+    const { currentUser, post, bookmark } = this.props;
+    const { favorite } = post;
+    if (favorite && currentUser && typeof currentUser.id !== "undefined" && favorite.filter(user => user.id === currentUser.id).length > 0) {
+      this.setState({ favorited: true });
+    } else {
+      this.setState({ favorited: false });
+    }
+    const result = bookmark && post && bookmark.id === post.id;
+    if (
+      bookmark &&
+      post &&
+      bookmark.filter(bm => bm.id === post.id).length > 0
+    ) {
+      this.setState({ bookmarked: true });
+    } else {
+      this.setState({ bookmarked: false });
+    }
+  }
 
   render() {
     const { classes, post } = this.props;
@@ -107,21 +153,7 @@ class PostCard extends React.Component {
             </Typography>
           </CardContent>
           <CardActions disableActionSpacing>
-            <IconButton
-              onClick={() => this.setState({ on: !this.state.on })}
-              aria-label="Add to favorites"
-            >
-              <ToggleIcon
-                on={this.state.on}
-                onIcon={<FavoriteIcon color="accent" />}
-                offIcon={<FavoriteIcon />}
-              />
-            </IconButton>
-            <IconButton>
-              <BookmarkIcon />
-            </IconButton>
-            <SharingButton shareUrl={shareUrl} title={title} />
-            <div className={classes.flexGrow} />
+            <PostAction favorite={this.favorite} bookmark={this.bookmark} favorited={this.state.favorited} bookmarked={this.state.bookmarked} shareUrl={shareUrl} title={title} />
           </CardActions>
         </Card>
       </div>
@@ -129,8 +161,14 @@ class PostCard extends React.Component {
   }
 }
 
+
 PostCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(PostCard);
+const mapStateToProps = state => ({
+  currentUser: state.user.current_user_info,
+  bookmark: state.user.bookmark
+})
+
+export default compose(withStyles(styles), connect(mapStateToProps))(PostCard);

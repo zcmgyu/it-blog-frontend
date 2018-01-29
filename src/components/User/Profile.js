@@ -8,6 +8,7 @@ import compose from "recompose/compose";
 import { connect } from "react-redux";
 import { getFollow, putFollow } from "../../actions/user";
 import { generateAvatarLetter } from "../../utils/stringUtil";
+import FollowButton from "../FollowButton";
 
 class Profile extends Component {
   state = { isFollowing: false };
@@ -19,32 +20,18 @@ class Profile extends Component {
   };
 
   componentDidMount() {
-    console.log("COMPONENT DID MOUNT")
     const { dispatch, userId, following } = this.props
-    console.log("following")
-    console.log(following)
     dispatch(getFollow.following.request({ userId, type: "following" }))
   }
 
   renderFollowBtn = () => {
     const { following, profile, userId } = this.props
-    console.log("following")
-    console.log(following)
     if (userId === profile.id) {
         return null;       
     }
-    if (!following) {
-      return <Button onClick={this.handleFollow}>Follow</Button>
-    }
     const isFollowing = following.filter(user => user.id === profile.id).length > 0
-    console.log("IS FOLLOWING")
-    console.log(isFollowing)
-    console.log("FOLLOWING")
-    console.log(following)
     return (
-      <Button onClick={this.handleFollow}>
-        {isFollowing ? "Following" : "Follow"}
-      </Button>
+      <FollowButton following={isFollowing} userId={profile.id}></FollowButton>
     )
   };
 

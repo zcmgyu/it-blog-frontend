@@ -81,11 +81,11 @@ class HomePage extends Component {
     const { classes, listPost } = this.props;
     if (typeof listPost === "undefined") return <Loading />;
     return listPost.map((group, index) => (
-      <div key={index} className={classes.section}>
+      <div key={group.id} className={classes.section}>
         <Typography type="display1" className={classes.sectionTitle}>
           {group.category}
         </Typography>
-        {group.top4.map((post, index) => <PostCard2 key={index} post={post} />)}
+        {group.top4.map((post, index) => <PostCard2 key={post.id} post={post} />)}
       </div>
     ));
   };

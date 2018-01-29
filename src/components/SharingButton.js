@@ -75,12 +75,11 @@ class SharingButton extends Component {
     }
 
     render() {
-        // const shareUrl = 'http://github.com'
         // const title = 'GitHub'
         const { classes, shareUrl, title } = this.props
         const { drawer, copied } = this.state
         return (
-            <div>
+            <span>
                 <IconButton aria-label="Share" onClick={this.toggleDrawer(true)}>
                     <ShareIcon />
                 </IconButton>
@@ -139,7 +138,6 @@ class SharingButton extends Component {
                                     </EmailShareButton>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </Drawer>
@@ -168,7 +166,7 @@ class SharingButton extends Component {
                         </IconButton>,
                     ]}
                 />
-            </div>
+            </span>
         )
     }
 }

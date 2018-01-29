@@ -57,7 +57,6 @@ export function* getBookmarkWorker() {
 }
 
 export function* getFollowingWorker({ payload }) {
-  console.log("getFollowingWorker");
   try {
     const response = yield call(API.getFollow, payload);
     yield put(getFollow.following.success(response));

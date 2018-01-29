@@ -41,7 +41,7 @@ import {
 import { getCategoryWorker } from "./category";
 import { SEARCH } from "../actiontypes/search";
 import { searchWorker } from "./search";
-import { takeLatest } from "redux-saga";
+import { takeLatest } from "redux-saga/effects";
 
 // Root Sagas Watcher
 export default function* rootSaga() {

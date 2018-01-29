@@ -24,44 +24,9 @@ import SharingButton from "./SharingButton";
 import { bookmarkPost, favoritePost } from "../actions/post";
 import { userIsAuthenticatedRedir } from "../HOCs/auth";
 import { generateAvatarLetter } from "../utils/stringUtil";
+import PostAction from "../components/Post/PostAction"
 
-const styles = theme => {
-  return {
-    card: {
-      width: theme.spacing.unit * 60,
-      height: theme.spacing.unit * 40,
-      display: "flex",
-      margin: theme.spacing.unit * 1
-    },
-    columnLeft: {
-      flexGrow: 1,
-      display: "flex"
-    },
-    cover: {
-      flexGrow: 1
-    },
-    shortPost: {
-      height: "10px",
-      flexGrow: 1,
-      paddingTop: "0px"
-    },
-    title: {
-      paddingTop: "0px",
-      textDecoration: "none"
-    },
-    content: {
-      paddingTop: theme.spacing.unit * 2
-    },
-    columnRight: {
-      flexBasis: "60%",
-      display: "flex",
-      flexDirection: "column"
-    },
-    flexGrow: {
-      flex: "1 1 auto"
-    }
-  };
-};
+
 
 // const title = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dignissim purus vitae ipsum interdum, quis tristique eros imperdiet."
 // const shortContent = "Suspendisse aliquam egestas risus, et volutpat eros laoreet in. Nullam ultrices euismod ornare. Integer in nibh a velit aliquam venenatis id sit amet nunc. Donec id rhoncus augue. Aliquam venenatis purus a arcu varius vehicula. Sed et turpis elementum, commodo sem eget, consectetur ante. Suspendisse potenti. Suspendisse lacinia lectus risus, at dictum lorem bibendum ac. Sed fringilla lacinia odio nec rutrum. Morbi nisl lorem, rhoncus nec ligula a, malesuada ultrices mi. Integer finibus quam at purus finibus auctor. Praesent molestie nunc ut dolor ultrices interdum. Fusce ut placerat augue. Nunc scelerisque ut dolor non vulputate. Vivamus dolor mi, egestas eu felis nec, consequat vestibulum sem. Quisque iaculis vestibulum feugiat."
@@ -69,8 +34,6 @@ const styles = theme => {
 class PostCard2 extends Component {
   constructor(props) {
     super(props);
-    console.log("##############");
-    console.log(props.post);
     this.state = {
       isSharing: false,
       favorited: false,
@@ -98,11 +61,11 @@ class PostCard2 extends Component {
   componentDidMount() {
     const { currentUser, post, bookmark } = this.props;
     const { favorite } = post;
-    if (favorite && currentUser && typeof currentUser.id !== "undefined") {
-      favorite.filter(user => user.id === currentUser.id);
-      if (favorite.length > 0) {
-        this.setState({ favorited: true });
-      }
+    console.log("POST TITLE: ")
+    console.log(post.title)
+    console.log()
+    if (favorite && currentUser && typeof currentUser.id !== "undefined" && favorite.filter(user => user.id === currentUser.id).length > 0) {
+      this.setState({ favorited: true });
     } else {
       this.setState({ favorited: false });
     }
@@ -169,23 +132,7 @@ class PostCard2 extends Component {
               </Typography>
             </CardContent>
             <CardActions disableActionSpacing>
-              <div className={classes.flexGrow} />
-              <IconButton onClick={this.favorite} aria-label="Add to favorites">
-                <ToggleIcon
-                  on={this.state.favorited}
-                  onIcon={<FavoriteIcon color="accent" />}
-                  offIcon={<FavoriteIcon />}
-                />
-              </IconButton>
-
-              <IconButton aria-label="Bookmark" onClick={this.bookmark}>
-                <ToggleIcon
-                  on={this.state.bookmarked}
-                  onIcon={<BookmarkIcon color="accent" />}
-                  offIcon={<BookmarkIcon />}
-                />
-              </IconButton>
-              <SharingButton shareUrl={shareUrl} title={title} />
+              <PostAction  favorite={this.favorite} bookmark={this.bookmark} favorited={this.state.favorited} bookmarked={this.state.bookmarked} shareUrl={shareUrl} title={title} />
             </CardActions>
           </div>
         </Card>
@@ -193,6 +140,62 @@ class PostCard2 extends Component {
     );
   }
 }
+
+// <div className={classes.flexGrow} />
+// <IconButton onClick={this.favorite} aria-label="Add to favorites">
+//   <ToggleIcon
+//     on={this.state.favorited}
+//     onIcon={<FavoriteIcon color="accent" />}
+//     offIcon={<FavoriteIcon />}
+//   />
+// </IconButton>
+
+// <IconButton aria-label="Bookmark" onClick={this.bookmark}>
+//   <ToggleIcon
+//     on={this.state.bookmarked}
+//     onIcon={<BookmarkIcon color="accent" />}
+//     offIcon={<BookmarkIcon />}
+//   />
+// </IconButton>
+// <SharingButton shareUrl={shareUrl} title={title} />
+
+const styles = theme => {
+  return {
+    card: {
+      width: theme.spacing.unit * 60,
+      height: theme.spacing.unit * 40,
+      display: "flex",
+      margin: theme.spacing.unit * 1
+    },
+    columnLeft: {
+      flexGrow: 1,
+      display: "flex"
+    },
+    cover: {
+      flexGrow: 1
+    },
+    shortPost: {
+      height: "10px",
+      flexGrow: 1,
+      paddingTop: "0px"
+    },
+    title: {
+      paddingTop: "0px",
+      textDecoration: "none"
+    },
+    content: {
+      paddingTop: theme.spacing.unit * 2
+    },
+    columnRight: {
+      flexBasis: "60%",
+      display: "flex",
+      flexDirection: "column"
+    },
+    flexGrow: {
+      flex: "1 1 auto"
+    }
+  };
+};
 
 PostCard2.propTypes = {
   classes: PropTypes.object.isRequired,

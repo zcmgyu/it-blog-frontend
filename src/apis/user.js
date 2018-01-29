@@ -69,8 +69,6 @@ export const getBookmark = (headers) => {
 
 // Get Following & Followers
 export const getFollow = (payload) => {
-    console.log("INSIDE FOLLOW")
-    console.log(payload)
     const { userId, type } = payload
     
     return axios.request({
