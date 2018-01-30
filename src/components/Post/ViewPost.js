@@ -26,6 +26,9 @@ class ViewPost extends Component {
 
   render() {
     const { isLoaded, currentPost, classes } = this.props;
+    if (!currentPost) {
+      return null;
+    }
     const profile = currentPost.author;
     if (isLoaded) {
       return (
@@ -35,7 +38,7 @@ class ViewPost extends Component {
             config={{
               debug: true,
               read_only: true,
-              api_key: "86c28a410a104c8bb58848733c82f840",
+              api_key: "86c28a410a104c8bb58848733c82f840"
             }}
             content={currentPost.content}
           />

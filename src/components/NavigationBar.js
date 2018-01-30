@@ -4,18 +4,19 @@ import compose from "recompose/compose";
 import { withStyles } from "material-ui/styles";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-
 import AppBar from "material-ui/AppBar";
 import Toolbar from "material-ui/Toolbar";
 import Typography from "material-ui/Typography";
 import Button from "material-ui/Button";
 import Notification from "./Nofitication";
 import Avatar from "material-ui/Avatar";
-import { Route, Switch, Link, withRouter } from "react-router-dom";
+import { Route, Link, withRouter } from "react-router-dom";
 import { push } from "react-router-redux";
 // Actions
 import { toggleLoginDialog } from "../actions/dialog";
 import { search as searchAct } from "../actions/search";
+import { bookmarkPost, favoritePost } from "../actions/post";
+import { generateAvatarLetter } from "../utils/stringUtil";
 
 // Components
 import PopoverMenu from "./PopoverMenu";
@@ -25,6 +26,7 @@ import Publish from "./Post/Publish";
 // REDUX-FORM
 import { Field, reduxForm } from "redux-form";
 import { renderTextField } from "./ReduxForm";
+import PostAction from "./Post/PostAction";
 
 const styles = theme => ({
   root: {
@@ -59,17 +61,98 @@ const styles = theme => ({
 });
 
 class NavigationBar extends Component {
-  //   handleChange = event => {
-  //     this.setState({ [event.target.name]: event.target.value });
-  //   };
+  state = {
+    isSharing: false,
+    favorited: false,
+    bookmarked: false
+  };
+
+  bookmark = () => {
+    const { dispatch, currentPost } = this.props;
+    this.setState({ bookmarked: !this.state.bookmarked });
+    dispatch(bookmarkPost.request({ postId: currentPost.id }));
+  };
+
+  favorite = () => {
+    const { dispatch, currentPost } = this.props;
+    this.setState({ favorited: !this.state.favorited });
+    dispatch(favoritePost.request({ postId: currentPost.id }));
+  };
 
   handleSearch = ({ search }) => {
     this.props.dispatch(searchAct.request({ search }));
     this.props.dispatch(push(`/search?q=${search}`));
   };
 
+  renderAction = () => {
+    const { currentPost } = this.props;
+
+    if (!currentPost) {
+      return null;
+    }
+    const { id, title, author } = currentPost;
+
+    if (!author) {
+      return null;
+    }
+    const transliterated = title.replace(/\s+/g, "-");
+
+    const shareUrl = `http://localhost:3000/posts/${id}/${transliterated}`;
+    return (
+      <PostAction
+        favorite={this.favorite}
+        bookmark={this.bookmark}
+        favorited={this.state.favorited}
+        bookmarked={this.state.bookmarked}
+        shareUrl={shareUrl}
+        title={title}
+      />
+    );
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.currentPost === nextProps.currentPost) {
+      return false;
+    }
+    const { currentUser, currentPost, bookmark } = nextProps;
+    const { favorite } = currentPost;
+    if (!currentUser) {
+      return false;
+    }
+    if (
+      favorite &&
+      currentUser &&
+      typeof currentUser.id !== "undefined" &&
+      favorite.filter(user => user.id === currentUser.id).length > 0
+    ) {
+      this.setState({ favorited: true });
+    } else {
+      this.setState({ favorited: false });
+    }
+    if (
+      bookmark &&
+      currentPost &&
+      bookmark.filter(bm => bm.id === currentPost.id).length > 0
+    ) {
+      this.setState({ bookmarked: true });
+    } else {
+      this.setState({ bookmarked: false });
+    }
+  }
+
   render() {
-    const { classes, title, isAuthenticated, handleSubmit } = this.props;
+    const {
+      classes,
+      navTitle,
+      isAuthenticated,
+      handleSubmit,
+      currentUser
+    } = this.props;
+    const { name, image } = currentUser || {name: "Invalid", image: ""};
+    console.log(currentUser)
+    console.log("NAME NAME")
+    console.log(name)
+    const avatarLetter = generateAvatarLetter(name);
     return (
       <div className={classes.root}>
         <AppBar
@@ -85,22 +168,25 @@ class NavigationBar extends Component {
               component={Link}
               to="/"
             >
-              {title}
+              {navTitle}
             </Typography>
-            <Switch>
-              <Route
-                path="/posts/create"
-                render={() => <Publish name="Publish" />}
-              />
-              <Route
-                path="/posts/:postId/:transliterated/edit"
-                render={() => <Publish name="Update" />}
-              />
-              <Route
-                path="/posts/:postId/:transliterated"
-                component={EditButton}
-              />
-            </Switch>
+            <Route
+              path="/posts/create"
+              render={() => <Publish name="Publish" />}
+            />
+
+            <Route
+              path="/posts/:postId/:transliterated/edit"
+              render={() => <Publish name="Update" />}
+            />
+            <Route
+              path="/posts/:postId/:transliterated"
+              render={() => this.renderAction()}
+            />
+            <Route
+              path="/posts/:postId/:transliterated"
+              component={EditButton}
+            />
             <form onSubmit={handleSubmit(this.handleSearch)}>
               <Field
                 name="search"
@@ -113,11 +199,17 @@ class NavigationBar extends Component {
             <Notification />
             {isAuthenticated ? (
               <PopoverMenu>
-                <Avatar
-                  alt="Remy Sharp"
-                  src="https://cdn-images-1.medium.com/fit/c/100/100/0*bh4kZqN3bPPuk15J.jpg"
-                  className={classes.avatar}
-                />
+                {image ? (
+                  <Avatar
+                    alt="Remy Sharp"
+                    src="https://cdn-images-1.medium.com/fit/c/100/100/0*bh4kZqN3bPPuk15J.jpg"
+                    className={classes.avatar}
+                  />
+                ) : (
+                  <Avatar alt="Avatar" className={classes.avatar}>
+                    {avatarLetter}
+                  </Avatar>
+                )}
               </PopoverMenu>
             ) : (
               <Button color="inherit" component={Link} to="/sign-in">
@@ -132,13 +224,16 @@ class NavigationBar extends Component {
 }
 NavigationBar.propTypes = {
   classes: PropTypes.object.isRequired,
-  title: PropTypes.string.isRequired
+  navTitle: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => ({
   loginDialogState: state.dialog.loginDialogState,
   isAuthenticated: state.auth.isAuthenticated,
-  isPost: state.post.isPost
+  isPost: state.post.isPost,
+  bookmark: state.user.bookmark,
+  currentPost: state.post.current_post,
+  currentUser: state.user.current_user_info
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -156,5 +251,5 @@ export default compose(
   reduxForm({
     form: "search-form"
   }),
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps)
 )(NavigationBar);

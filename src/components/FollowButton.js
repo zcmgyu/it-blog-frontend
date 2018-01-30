@@ -6,7 +6,6 @@ import compose from 'recompose/compose';
 import { connect } from 'react-redux'
 import { putFollow } from '../actions/user';
 
-
 const styles = (themes) => ({
     button: {
         marginLeft: themes.spacing.unit * 2
@@ -20,7 +19,7 @@ class Follow extends Component {
 
     handleFollowClick = () => {
         const { dispatch, userId } = this.props
-        dispatch(putFollow.request({ userId: this.props.userId }));
+        dispatch(putFollow.request({ userId }));
         this.setState({
             following: !this.state.following
         });

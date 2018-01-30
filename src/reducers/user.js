@@ -10,7 +10,8 @@ import {
 const initialState = {
     send_mail: {
         loading: false
-    }
+    },
+    current_user_info: null
 }
 
 const user = (state = initialState, action) => {

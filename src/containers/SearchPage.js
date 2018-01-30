@@ -4,8 +4,6 @@ import { withStyles } from "material-ui/styles";
 import Typography from "material-ui/Typography";
 import Chip from "material-ui/Chip";
 import Tabs, { Tab } from "material-ui/Tabs";
-import TextField from "material-ui/TextField";
-import Author from "../components/Author";
 import { renderTextField } from "../components/ReduxForm";
 import compose from "recompose/compose";
 import { reduxForm, Field } from "redux-form";
@@ -13,8 +11,6 @@ import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { push } from "react-router-redux";
 import { search as searchAct } from "../actions/search";
-import PostCard from "../components/PostCard";
-import Loading from "../components/Loading";
 import SearchList from "../components/Search/SearchList";
 import AuthorList from "../components/Search/AuthorList";
 
@@ -45,7 +41,7 @@ class SearchPage extends Component {
   };
 
   render() {
-    const { classes, handleSubmit, result } = this.props;
+    const { classes, handleSubmit } = this.props;
     return (
       <div className={classes.container}>
         <div className={classes.wrapper}>

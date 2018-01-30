@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { withStyles } from "material-ui/styles";
 import Avatar from "material-ui/Avatar";
 import Typography from "material-ui/Typography";
-import Button from "material-ui/Button/Button";
-import { userIsAuthenticatedRedir } from "../../HOCs/auth";
 import compose from "recompose/compose";
 import { connect } from "react-redux";
 import { getFollow, putFollow } from "../../actions/user";
@@ -20,19 +18,20 @@ class Profile extends Component {
   };
 
   componentDidMount() {
-    const { dispatch, userId, following } = this.props
-    dispatch(getFollow.following.request({ userId, type: "following" }))
+    const { dispatch, userId } = this.props;
+    dispatch(getFollow.following.request({ userId, type: "following" }));
   }
 
   renderFollowBtn = () => {
-    const { following, profile, userId } = this.props
+    const { following, profile, userId } = this.props;
     if (userId === profile.id) {
-        return null;       
+      return null;
     }
-    const isFollowing = following.filter(user => user.id === profile.id).length > 0
-    return (
-      <FollowButton following={isFollowing} userId={profile.id}></FollowButton>
-    )
+    if (following) {
+      const isFollowing =
+        following.filter(user => user.id === profile.id).length > 0;
+      return <FollowButton following={isFollowing} userId={profile.id} />;
+    }
   };
 
   render() {
@@ -91,7 +90,7 @@ const styles = theme => ({
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  userId: state.user.current_user_info.id,
+  userId: state.user.current_user_info ? state.user.current_user_info.id : null,
   following: state.user.following
 });
 

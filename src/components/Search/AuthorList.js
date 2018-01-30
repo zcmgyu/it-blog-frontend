@@ -1,15 +1,9 @@
 import React from "react";
-import PostCard from "../PostCard";
 import { connect } from "react-redux";
-import { getPostsByAuthorId } from "../../actions/user";
 import Typography from "material-ui/Typography/Typography";
 import Author from "../Author";
 
 class PostList extends React.Component {
-  componentDidMount() {
-    const { dispatch, authorId } = this.props;
-  }
-
   render() {
     const { authors } = this.props;
     if (typeof authors === "undefined" || !authors || authors.length === 0)

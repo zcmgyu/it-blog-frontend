@@ -29,7 +29,7 @@ class App extends Component {
         return (
             <ConnectedRouter history={history}>
                 <div>
-                    <NavigationBar title="IT Blog" />
+                    <NavigationBar navTitle="IT Blog" />
                     <RootRouter />
                     <PushNotification />
                 </div>

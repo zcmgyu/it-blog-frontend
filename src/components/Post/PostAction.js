@@ -1,8 +1,6 @@
 import React from 'react'
-import withStyles from 'material-ui/styles/withStyles';
-import { connect } from 'react-redux'
-import compose from "recompose/compose"
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 // Material UI
 import FavoriteIcon from "material-ui-icons/Favorite";
 import BookmarkIcon from "material-ui-icons/Bookmark";
@@ -11,7 +9,7 @@ import ToggleIcon from "material-ui-toggle-icon";
 import SharingButton from "../SharingButton";
 
 const PostAction = (props) => {
-    const { favorite, bookmark, favorited, bookmarked, shareUrl, title, classes } = props
+    const { favorite, bookmark, favorited, bookmarked, shareUrl, title } = props
     return (
         <div>
             <IconButton onClick={favorite} aria-label="Add to favorites">
@@ -34,14 +32,6 @@ const PostAction = (props) => {
     )
 }
 
-const styles = theme => {
-    return {
-      flexGrow: {
-        flex: "1 1 auto"
-      }
-    };
-  };
-
 PostAction.propTypes = {
     favorited: PropTypes.bool.isRequired,
     bookmarked: PropTypes.bool.isRequired,
@@ -51,6 +41,4 @@ PostAction.propTypes = {
     title: PropTypes.string.isRequired
 }
 
-export default compose(
-    connect()
-)(PostAction)
+export default connect()(PostAction)

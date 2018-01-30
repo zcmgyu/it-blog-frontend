@@ -4,7 +4,6 @@ import { getCurrentUser, forgotPassword, getFollow, putFollow } from "../actions
 import { authenticatedRequest } from "./auth";
 import { push } from "react-router-redux";
 import { getPostsByAuthorId, getBookmark } from "../actions/user";
-import { follow } from "../apis/user";
 
 // Worker
 export function* getCurrentUserWorker() {

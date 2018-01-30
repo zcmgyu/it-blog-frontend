@@ -9,13 +9,8 @@ import Card, {
   CardActions
 } from "material-ui/Card";
 import Avatar from "material-ui/Avatar";
-import IconButton from "material-ui/IconButton";
 import Typography from "material-ui/Typography";
 import red from "material-ui/colors/red";
-import FavoriteIcon from "material-ui-icons/Favorite";
-import BookmarkIcon from "material-ui-icons/Bookmark";
-import SharingButton from "./SharingButton";
-import ToggleIcon from "material-ui-toggle-icon";
 import { addThreeDots } from "../utils/stringUtil";
 import { Link } from "react-router-dom";
 import { generateAvatarLetter } from "../utils/stringUtil";
@@ -90,7 +85,6 @@ class PostCard extends React.Component {
     } else {
       this.setState({ favorited: false });
     }
-    const result = bookmark && post && bookmark.id === post.id;
     if (
       bookmark &&
       post &&

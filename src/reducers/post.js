@@ -3,9 +3,10 @@
 import * as ACT_TYPES from '../actiontypes/post'
 
 const initialState = {
-    current_post: {
-        content: null
-    }
+    // current_post: {
+        // content: null
+    // }
+    current_post: null
 }
 
 const auth = (state = initialState, action) => {

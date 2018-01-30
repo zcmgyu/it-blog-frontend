@@ -22,8 +22,11 @@ const EditButton = props => {
     props.dispatch(editPostTrigger());
   };
 
+  if (!currentPost) {
+      return null;
+  }
+
   const { author } = currentPost;
-//   const authorId = author ? author.id : null;
 
   if (currentUser && author && author.id === currentUser.id) {
     return (
