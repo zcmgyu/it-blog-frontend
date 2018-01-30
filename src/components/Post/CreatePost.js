@@ -28,7 +28,7 @@ class CreatePost extends Component {
             <div>
                 <PostEditor
                     config={{
-                        upload_url: "http://localhost:9292/uploads/new",
+                        upload_url: "/uploads/new",
                         debug: true,
                         read_only: false,
                         api_key: "86c28a410a104c8bb58848733c82f840",

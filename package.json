@@ -24,7 +24,7 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.6",
     "react-share": "^1.18.0",
-    "react-stomp": "^1.1.0",
+    "react-stomp": "^2.1.1",
     "react-tap-event-plugin": "^3.0.2",
     "recompose": "^0.25.0",
     "redux": "^3.7.2",
@@ -43,5 +43,6 @@
     "heroloku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "test": "jest",
     "eject": "react-scripts eject"
-  }
+  },
+  "proxy": "http://localhost:9292"
 }

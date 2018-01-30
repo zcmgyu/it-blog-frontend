@@ -4,7 +4,7 @@ import axios from 'axios'
 export const search = (payload) => {
     const { search } = payload
     return axios.request({
-        baseURL: `http://localhost:9292/api/search`,
+        baseURL: `/api/search`,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },

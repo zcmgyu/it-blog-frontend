@@ -7,7 +7,10 @@ import {
   GET_BOOKMARK,
   GET_FOLLOWING,
   GET_FOLLOWERS,
-  FOLLOW
+  FOLLOW,
+  RESET_BOOKMARK,
+  RESET_FOLLOWING,
+  GET_NOTIFICATIONS
 } from "../actiontypes/user";
 
 export const getCurrentUser = {
@@ -58,3 +61,21 @@ export const putFollow = {
     success: response => action(FOLLOW.SUCCESS, { response }),
     failure: error => action(FOLLOW.FAILURE, { error })
 }
+
+export const resetBookmark = {
+  request: () => action(RESET_BOOKMARK.REQUEST),
+  success: response => action(RESET_BOOKMARK.SUCCESS, { response }),
+  failure: error => action(RESET_BOOKMARK.FAILURE, { error })
+};
+
+export const resetFollowing = {
+  request: () => action(RESET_FOLLOWING.REQUEST),
+  success: response => action(RESET_FOLLOWING.SUCCESS, { response }),
+  failure: error => action(RESET_FOLLOWING.FAILURE, { error })
+};
+
+export const getNotifications = {
+  request: () => action(GET_NOTIFICATIONS.REQUEST),
+  success: response => action(GET_NOTIFICATIONS.SUCCESS, { response }),
+  failure: error => action(GET_NOTIFICATIONS.FAILURE, { error })
+};

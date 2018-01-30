@@ -8,15 +8,13 @@ import { ConnectedRouter } from 'react-router-redux'
 import history from '../store/history'
 import PushNotification from '../components/PushNotification'
 
-// import 'typeface-roboto'
-
-
 class App extends Component {
     constructor(props) {
         super(props)
         this.initReactGA()
+        this.state = {
+        }
     }
-    
 
     initReactGA = () => {
         ReactGA.initialize('UA-111506394-2')

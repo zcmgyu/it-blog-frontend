@@ -3,7 +3,7 @@ import axios from 'axios'
 export const getCurrentUser = (payload, headers) => {
     const { user_id } = payload
     return axios.request({
-        baseURL: `http://localhost:9292/api/users/${user_id}`,
+        baseURL: `/api/users/${user_id}`,
         headers,
         method: 'GET'
     })
@@ -17,7 +17,7 @@ export const getCurrentUser = (payload, headers) => {
 export const sendMail = (payload) => {
     const { email } = payload
     return axios.request({
-        baseURL: `http://localhost:9292/api/forgot_password`,
+        baseURL: `/api/forgot_password`,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -31,7 +31,7 @@ export const sendMail = (payload) => {
 export const resetPassword = (payload) => {
     const { password, token } = payload
     return axios.request({
-        baseURL: `http://localhost:9292/api/forgot_password/reset`,
+        baseURL: `/api/forgot_password/reset`,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -46,7 +46,7 @@ export const resetPassword = (payload) => {
 export const getPostsByAuthorId = (payload) => {
     const { authorId } = payload
     return axios.request({
-        baseURL: `http://localhost:9292/api/users/${authorId}/posts`,
+        baseURL: `/api/users/${authorId}/posts`,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -59,7 +59,7 @@ export const getPostsByAuthorId = (payload) => {
 // Get bookmarks
 export const getBookmark = (headers) => {
     return axios.request({
-        baseURL: `http://localhost:9292/api/users/self/bookmark`,
+        baseURL: `/api/users/self/bookmark`,
         headers,
         method: 'GET'
     })
@@ -72,7 +72,7 @@ export const getFollow = (payload) => {
     const { userId, type } = payload
     
     return axios.request({
-        baseURL: `http://localhost:9292/api/users/${userId}/${type}`,
+        baseURL: `/api/users/${userId}/${type}`,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -83,14 +83,23 @@ export const getFollow = (payload) => {
 }
 
 export const follow = (payload, headers) => {
-    console.log("INSIDE FOLLOW")
-    console.log(payload)
     const { userId } = payload
     
     return axios.request({
-        baseURL: `http://localhost:9292/api/users/${userId}/follow`,
+        baseURL: `/api/users/${userId}/follow`,
         headers,
         method: 'PUT'
+    })
+        .then(response => response)
+        .catch(error => { throw error })
+}
+
+// Get post
+export const getNotifications = (headers) => {
+    return axios.request({
+        baseURL: `/api/notifications`,
+        headers,
+        method: 'GET'
     })
         .then(response => response)
         .catch(error => { throw error })

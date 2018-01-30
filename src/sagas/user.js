@@ -1,9 +1,10 @@
 import { put, call } from "redux-saga/effects";
 import * as API from "../apis/user";
-import { getCurrentUser, forgotPassword, getFollow, putFollow } from "../actions/user";
+import { getCurrentUser, forgotPassword, getFollow, putFollow, getNotifications } from "../actions/user";
 import { authenticatedRequest } from "./auth";
 import { push } from "react-router-redux";
 import { getPostsByAuthorId, getBookmark } from "../actions/user";
+import { follow } from "../apis/user";
 
 // Worker
 export function* getCurrentUserWorker() {
@@ -79,5 +80,15 @@ export function* followWorker({ payload }) {
     yield put(putFollow.success(response));
   } catch (error) {
     yield put(putFollow.failure(error));
+  }
+}
+
+
+export function* getNotificationsWorker() {
+  try {
+    const response = yield authenticatedRequest(API.getNotifications);
+    yield put(getNotifications.success(response));
+  } catch (error) {
+    yield put(getNotifications.failure(error));
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { remove_auth } from "../actions/authenticate"
-import { getCurrentUser } from '../actions/user'
+import { getCurrentUser, resetBookmark, resetFollowing  } from '../actions/user'
 import { removeAuth } from '../utils/localStorage'
 
 class Logout extends Component {
@@ -11,7 +11,9 @@ class Logout extends Component {
         const { dispatch } = this.props
         dispatch(getCurrentUser.failure())
         dispatch(remove_auth.request())
-        dispatch(push('/'))
+        dispatch(resetBookmark.request())
+        dispatch(resetFollowing.request())
+        dispatch(push('/home/trend'))
     }
     render() {
         return (

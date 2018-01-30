@@ -148,10 +148,7 @@ class NavigationBar extends Component {
       handleSubmit,
       currentUser
     } = this.props;
-    const { name, image } = currentUser || {name: "Invalid", image: ""};
-    console.log(currentUser)
-    console.log("NAME NAME")
-    console.log(name)
+    const { name, image } = currentUser || { name: "Invalid", image: "" };
     const avatarLetter = generateAvatarLetter(name);
     return (
       <div className={classes.root}>
@@ -176,14 +173,17 @@ class NavigationBar extends Component {
             />
 
             <Route
+              exact
               path="/posts/:postId/:transliterated/edit"
               render={() => <Publish name="Update" />}
             />
             <Route
+              exact
               path="/posts/:postId/:transliterated"
               render={() => this.renderAction()}
             />
             <Route
+              exact
               path="/posts/:postId/:transliterated"
               component={EditButton}
             />
@@ -206,16 +206,16 @@ class NavigationBar extends Component {
                     className={classes.avatar}
                   />
                 ) : (
-                  <Avatar alt="Avatar" className={classes.avatar}>
-                    {avatarLetter}
-                  </Avatar>
-                )}
+                    <Avatar alt="Avatar" className={classes.avatar}>
+                      {avatarLetter}
+                    </Avatar>
+                  )}
               </PopoverMenu>
             ) : (
-              <Button color="inherit" component={Link} to="/sign-in">
-                Sign In
+                <Button color="inherit" component={Link} to="/sign-in">
+                  Sign In
               </Button>
-            )}
+              )}
           </Toolbar>
         </AppBar>
       </div>

@@ -30,7 +30,7 @@ class PostPage extends Component {
         return (
             <PostEditor
                 config={{
-                    upload_url: "http://localhost:9292/uploads/new",
+                    upload_url: "/uploads/new",
                     debug: true,
                     read_only: false,
                     data_storage: {
@@ -47,7 +47,7 @@ class PostPage extends Component {
         return (
             <PostEditor
                 config={{
-                    upload_url: "http://localhost:9292/uploads/new",
+                    upload_url: "/uploads/new",
                     debug: true,
                     read_only: false,
                     data_storage: {
@@ -84,7 +84,7 @@ class PostPage extends Component {
 
 // content !== null || !this.props.read_only ?
 // <PostEditor config={{
-//     upload_url: "http://localhost:9292/uploads/new",
+//     upload_url: "/uploads/new",
 //     debug: true,
 //     read_only: this.props.read_only,
 //     data_storage: {

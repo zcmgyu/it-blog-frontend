@@ -4,7 +4,10 @@ import {
     GET_POSTS_BY_AUTHOR_ID, 
     GET_BOOKMARK,
     GET_FOLLOWERS,
-    GET_FOLLOWING
+    GET_FOLLOWING,
+    RESET_BOOKMARK,
+    RESET_FOLLOWING,
+    GET_NOTIFICATIONS
 } from '../actiontypes/user'
 
 const initialState = {
@@ -66,16 +69,34 @@ const user = (state = initialState, action) => {
                 bookmark: action.response.data.result.data
             }
         }
+        case RESET_BOOKMARK.REQUEST: {
+            return {
+                ...state,
+                bookmark: []
+            }
+        }
         case GET_FOLLOWING.SUCCESS: {
             return {
                 ...state,
                 following: action.response.data.result.data
             }
         }
+        case RESET_FOLLOWING.REQUEST: {
+            return {
+                ...state,
+                following: []
+            }
+        }
         case GET_FOLLOWERS.SUCCESS: {
             return {
                 ...state,
                 followers: action.response.data.result.data
+            }
+        }
+        case GET_NOTIFICATIONS.SUCCESS: {
+            return {
+                ...state,
+                notifications: action.response.data.result.data
             }
         }
         default: {

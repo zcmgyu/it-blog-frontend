@@ -17,7 +17,8 @@ import {
   GET_BOOKMARK,
   GET_FOLLOWING,
   GET_FOLLOWERS,
-  FOLLOW
+  FOLLOW,
+  GET_NOTIFICATIONS
 } from "../actiontypes/user";
 import { authenticateWorker, registerWorker } from "./auth";
 import {
@@ -36,7 +37,8 @@ import {
   getBookmarkWorker,
   getFollowingWorker,
   getFollowersWorker,
-  followWorker
+  followWorker,
+  getNotificationsWorker
 } from "./user";
 import { getCategoryWorker } from "./category";
 import { SEARCH } from "../actiontypes/search";
@@ -74,6 +76,7 @@ export default function* rootSaga() {
     takeLatest(GET_FOLLOWING.REQUEST, getFollowingWorker),
     takeLatest(GET_FOLLOWERS.REQUEST, getFollowersWorker),
     takeEvery(FOLLOW.REQUEST, followWorker),
+    takeLatest(GET_NOTIFICATIONS.REQUEST, getNotificationsWorker),
     // SEARCH
     takeEvery(SEARCH.REQUEST, searchWorker)
   ]);
